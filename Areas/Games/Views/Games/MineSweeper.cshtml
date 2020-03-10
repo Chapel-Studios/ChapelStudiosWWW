@@ -1,0 +1,121 @@
+﻿@model ChapelStudiosWWW.Areas.Games.Models.MineSweeperViewModel
+@{
+    string version = Model.BuildType;
+    ViewData["Title"] = "MineSweeper";
+}
+
+@section Scripts {
+    <link rel="stylesheet" type="text/css" href="~/css/Games/MineSweeper/p5-minesweeper.css" asp-append-version="true">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/addons/p5.sound.min.js"></script>
+    <script type="text/javascript" src="~/js/Games/MineSweeper/P5/cell.js"></script>
+    <script type="text/javascript" src="~/js/Games/MineSweeper/P5/playinfo.js"></script>
+    <script type="text/javascript" src="~/js/Games/MineSweeper/P5/gameboard.js"></script>
+    <script type="text/javascript">
+        function rdm(max, min = 0) {
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+
+        // P5 Global Variables for Functions
+        var setup, mouseReleased, draw, preload;
+        var NSJ = NSJ || {};
+
+        ; (function () {
+            // Page Specific Variables
+            const CELL_WIDTH = 30;
+            const CANVAS_SIZE = [600, 600];
+            const HANDLES = [
+                "MinesOption"
+                , "ResetBtn"
+                , "TimerDisplay"
+                , "FlaggedDisplay"
+                , "RevealedDisplay"
+                , "MinesDisplay"
+                , "VolumeSlider"
+                , "ScoreBoard"
+                , "Win%"
+            ];
+            NSJ.MineSweeper = new GameBoard(...CANVAS_SIZE, CELL_WIDTH, ...HANDLES);
+
+            // P5 Function Definitions
+            preload = function () {
+                NSJ.MineSweeper.Assets.Sounds.Lose = loadSound("../Assets/Audio/mk-soul.wav");
+                NSJ.MineSweeper.Assets.Sounds.Win = loadSound("../Assets/Audio/FFVI-VictoryFanfare.mp3");
+            }
+
+            setup = function () {
+                let canvas = createCanvas(...CANVAS_SIZE);
+                canvas.parent('GameBoardDiv');
+                NSJ.MineSweeper.Initialize();
+                //setInterval(NSJ.MineSweeper.UpdateTimer.bind(NSJ.MineSweeper), 2);
+            }
+
+            mousePressed = function () {
+                if (mouseX <= CANVAS_SIZE[0] && mouseX > -1
+                    && mouseY <= CANVAS_SIZE[1] && mouseY > -1
+                ) {
+                    NSJ.MineSweeper.ClickStart(mouseX, mouseY);
+                }
+            }
+
+            mouseReleased = function () {
+                if (mouseX <= CANVAS_SIZE[0] && mouseX > -1
+                    && mouseY <= CANVAS_SIZE[1] && mouseY > -1
+                ) {
+                    NSJ.MineSweeper.ClickEnd(mouseX, mouseY, mouseButton);
+                }
+            }
+
+            draw = function () {
+                background(255);
+                NSJ.MineSweeper.Show();
+            }
+
+            // Onload Instructions
+            // document.addEventListener("DOMContentLoaded", function() {
+
+            // });
+        }());
+    </script>
+}
+
+<div class="game">
+    <div id="GameBoardDiv" oncontextmenu="return false;">
+    </div>
+    <div class="sidebar">
+        <div id="GameData">
+            <div class="timerBox">
+                <div class="label">Elapsed:</div>
+                <div id="TimerDisplay" type="text"></div>
+            </div>
+            <div class="flagInfo">
+                <div class="display-set">
+                    Flagged Tiles:
+                    <div id="FlaggedDisplay" class="counter"></div>
+                </div>
+                <div class="display-set">
+                    Exposed Tiles:
+                    <div class="counter" id="RevealedDisplay"></div>
+                </div>
+                <div class="display-set">
+                    Unflagged Mines:
+                    <div class="counter" id="MinesDisplay"></div>
+                </div>
+            </div>
+        </div>
+        <div class="stats">
+            <div id="Win%"></div>
+            <ul id="ScoreBoard"></ul>
+        </div>
+        <div id="Controls">
+            <input id="MinesOption" type="number" min=1 max=100 step=1></input>
+            <div id="ResetBtn" class="button">
+                Reset
+            </div>
+            <div>
+                Volume:
+                <input type="range" min="1" max="100" class="slider" id="VolumeSlider">
+            </div>
+        </div>
+    </div>
+</div>

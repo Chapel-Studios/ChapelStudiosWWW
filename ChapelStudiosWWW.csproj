@@ -1,9 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-ChapelStudiosWWW-803E52BE-427C-4C46-93C0-4D15620413F3</UserSecretsId>
+    <StartupObject>ChapelStudiosWWW.Program</StartupObject>
+    <Authors>ChapelStudios</Authors>
+    <Product>ChapelStudios</Product>
+    <AssemblyVersion>0.0.2.0</AssemblyVersion>
+    <FileVersion>0.0.2.0</FileVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Styles\Core.scss" />
+  </ItemGroup>
 
 
   <ItemGroup>
@@ -13,15 +22,12 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <Folder Include="Areas\Games\Controllers\" />
     <Folder Include="Areas\Games\Data\" />
-    <Folder Include="Areas\Games\Models\" />
-    <Folder Include="Areas\Games\Views\" />
   </ItemGroup>
 
 </Project>

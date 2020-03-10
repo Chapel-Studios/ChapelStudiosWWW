@@ -1,0 +1,77 @@
+﻿body {
+    margin: 0;
+}
+
+.game {
+    margin: 5vw 8vw 2vw;
+    display: flex;
+    background-color: skyblue;
+    justify-content: flex-start;
+}
+
+#GameBoardDiv {
+    flex-grow: 0;
+    margin: 3vw;
+}
+
+.sidebar {
+    flex-grow: 0;
+    margin: 3vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: silver;
+
+    & > * {
+        margin: 1vw 1vw 0 0;
+        width: 75%;
+        max-width: 15vw;
+        font-size: 1.25rem;
+        text-align: center;
+    }
+}
+
+
+.timerBox {
+    display: flex;
+    flex-direction: column;
+
+    & > * {
+        width: 100%;
+    }
+}
+
+#MinesOption {
+    background-color: (111,111,111);
+    padding: .15rem;
+}
+
+.button {
+    font-weight: 400;
+    text-align: center;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid black;
+    padding: .25rem .75rem;
+    font-size: 2rem;
+    border-radius: .3rem;
+    position: relative;
+
+    &:hover {
+        border-color: rgb(125,125,125);
+        background-color: rgba(175,175,175,0.25);
+        box-shadow: rgba(0,0,0,1) 0 1px 0;
+    }
+
+    &:active {
+        top: 3px;
+        background-color: rgba(150,150,150,0.25);
+    }
+}
+
+@media(max-width: 600px) {
+    .game {
+        flex-direction: column-reverse;
+    }
+}

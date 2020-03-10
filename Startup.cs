@@ -60,6 +60,11 @@ namespace ChapelStudiosWWW
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                    name: "Games",
+                    pattern: "{controller=Index}/{action=Index}/{id?}",
+                    areaName: "Games");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
