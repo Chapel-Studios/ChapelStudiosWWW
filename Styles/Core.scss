@@ -1,5 +1,28 @@
-﻿body, html {
+﻿// Colour
+$PrimaryColour: #552244; // Maroon
+$HighlightColour: #696d69; // Olive
+$HighlightColour-2: #696d69; // light blue
+$ForegroundColour: #AAAAC4; // Silver
+$SecondaryColour: #526760; // Forrest
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Arvo|Roboto&display=swap');
+$TitleFont: 'Arvo', serif;
+$StandardFont: 'Roboto', sans-serif;
+
+@import "_nav";
+
+body, html {
     margin: 0;
     padding: 0;
+    background-color: $ForegroundColour;
 }
 
+.container {
+    max-width: 85vw;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    color: $HighlightColour-2
+}

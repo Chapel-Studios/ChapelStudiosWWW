@@ -23,7 +23,7 @@ module.exports = function (grunt) {
                     {
                         expand: true, // Recursive
                         cwd: "Styles", // The startup directory
-                        src: ["**/*.scss", "**/*.css"], // Source files
+                        src: ["**/*.scss", "**/*.css", "!**/_*.scss"], // Source files
                         dest: "wwwroot/css", // Destination
                         ext: ".css" // File extension
                     }
