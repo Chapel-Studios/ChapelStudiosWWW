@@ -1,28 +1,31 @@
-﻿// Colour
-$PrimaryColour: #552244; // Maroon
-$HighlightColour: #696d69; // Olive
-$HighlightColour-2: #696d69; // light blue
-$ForegroundColour: #AAAAC4; // Silver
-$SecondaryColour: #526760; // Forrest
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Arvo|Roboto&display=swap');
-$TitleFont: 'Arvo', serif;
-$StandardFont: 'Roboto', sans-serif;
+﻿@import '_colours';
+
+@import '_typography';
+
 
 @import "_nav";
 
 body, html {
     margin: 0;
     padding: 0;
-    background-color: $ForegroundColour;
+    background-color: $BackdropColour;
+    font-size: 14px;
 }
 
 .container {
     max-width: 85vw;
     margin: 0 auto;
+    background-color: #FFF;
+    padding: 3vw;
+    box-sizing: border-box;
 }
 
 a {
     text-decoration: none;
-    color: $HighlightColour-2
+    color: $LinkColour
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
 }

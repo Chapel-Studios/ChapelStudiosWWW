@@ -65,6 +65,11 @@ namespace ChapelStudiosWWW
                     pattern: "{controller=Index}/{action=Index}/{id?}",
                     areaName: "Games");
 
+                endpoints.MapAreaControllerRoute(
+                    name: "ResumeBuilder",
+                    pattern: "{controller=Resumes}/{action=Index}/{id?}",
+                    areaName: "ResumeBuilder");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
