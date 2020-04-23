@@ -2,7 +2,102 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@section Head {
+    <link rel="stylesheet" href="~/css/Home/index.css" asp-append-version="true" />
+}
+
+<section id="Section_One">
+    <div style="background-image: url(/Assets/Images/Home/ControllerIcon.png);" class="accent"></div>
+    <div class="section_text">
+        <h1 class="section_title">Game Design</h1>
+        <p>Chapel Studios was founded on a dream of designing engaging games with interactive plots. By allowing players to choose how and where they interact with our games we create environments that feel immersive and personal. </p>
+        <a href="" class="section_tag">Click Here to Learn More</a>
+    </div>
+</section>
+<section id="Section_Two">
+    <div class="section_text">
+        <h1 class="section_title">Web Development</h1>
+        <p>Chapel Studios' first project was a site for a gaming cafe back in 1999. Since then we have continued to stay in the industry in working on the cutting edge.</p>
+        <ul class="library-logos">
+            <li><img src="~/Assets/Images/Home/microsoft-sql-server.svg" alt="SQL" class="library-logo"></li>
+            <li><img src="~/Assets/Images/Home/c--4.svg" alt="C# 8" class="library-logo"></li>
+            <li><img src="~/Assets/Images/Home/microsoft-net.png" alt=".Net Framework" class="library-logo scaled"></li>
+            <li>
+                <a href="http://www.w3.org/html/logo/">
+                    <img class="library-logo" src="~/Assets/Images/Home/html-5.svg" alt="HTML5 Powered" title="HTML5 Powered">
+                </a>
+            </li>
+            <li><img src="~/Assets/Images/Home/css-3.svg" alt="CSS 3" class="library-logo"></li>
+            <li><img src="~/Assets/Images/Home/logo-javascript.svg" alt="JS" class="library-logo scaled"></li>
+            <!-- @* <li><img src="~/Assets/Images/Home/jquery-2.svg" alt="jQuery" class="library-logo"></li>*@ -->
+            <li><img src="~/Assets/Images/Home/vue-js-1.svg" alt="Vue.js" class="library-logo scaled"></li>
+        </ul>
+        <a href="" class="section_tag">Contact Us for More Information About Development Services</a>
+        <a href="https://github.com/Chapel-Studios/ChapelStudiosWWW" class="section_tag">Click Here to See How I Built This Site</a>
+    </div>
+</section>
+<section id="Section_Three">
+    <div class="notice construction"></div>
+    <div class="section_text">
+        <h1 class="section_title">Home Software</h1>
+        <p>Our <i>Infinity Budgetor</i> program is designed to help those on limited budgets manage their resources through an automated scheduling system that monitors both incoming and outgoing transactions.</p>
+        <a href="https://github.com/Chapel-Studios/InfinityBudgetor" class="section_tag">Visit the <i>Infinity Budgetor</i> Project on Github</a>
+    </div>
+</section>
+<section id="Section_Four">
+    <div class="accent" style="background-image: url(/Assets/Images/Icons/WorldBuildingIcon.png);"></div>
+    <div class="section_text">
+        <h1 class="section_title">World Building</h1>
+        <p>Immersion is more than slick gameplay and interactivity, it's about well-built worlds.</p>
+        <p>At Chapel Studios we strive to build in-depth history into all aspects of our content, from environmental aspects to the characters you interact with along your journeys.</p>
+    </div>
+</section>
+<section id="Section_Five">
+    <div class="notice warning hiatus"></div>
+    <div class="section_text">
+        <h1 class="section_title">Twitch Gaming</h1>
+        <p>In our downtime you can normally catch us streaming on <a href="https://www.twitch.tv/rev_jake">Twitch.tv</a> in the evenings or catch up in our archives if you've missed us.</p>
+    </div>
+    <div class="card_container twitch_games">
+        <div class="card twitch_game">
+            <div style="background-image: url(/Assets/Images/Home/assassins-creed-1.svg);background-color: white;background-size: 75%;background-position-y: 50%;" alt="Assassin's Creed" class="card_photo"></div>
+            <h1 class="card_title">Assassin's Creed</h1>
+            <p class="card_description">Edge of your seat tension as you stalk your prey all while avoiding the cold steel of those who would kill you. Come watch and suggest interesting kill combos!</p>
+        </div>
+        <div class="card twitch_game">
+            <div style="background-image: url(/Assets/Images/Home/mortal_kombat_x_keyart.png);" alt="MKX" class="card_photo"></div>
+            <h1 class="card_title">Mortal Kombat X</h1>
+            <p class="card_description">Jake was amazing on the SEGA back in the day, does that carry over half a life time later? Ass-whoopings are abound either way!</p>
+        </div>
+        <div class="card twitch_game">
+            <div style="background-image: url(/Assets/Images/Home/HotS_box_art.jpg);background-size: 103%;background-position: 55% 30%;" alt="Heroes of the Storm" class="card_photo"></div>
+            <h1 class="card_title" style="font-size: 1.3em;">Heroes of the Storm</h1>
+            <p class="card_description">The Lost Vikings gameplay! Three heroes in one! Come watch Jake tab through vikings with confusing fury while carrying games, ya-sure-you-betcha!</p>
+        </div>
+    </div>
+</section>
+<section id="Section_Six"">
+    <div class="accent" style="background-image: url(/Assets/Images/Home/ChapelStudiosYouTube.png);"></div>
+    <div class="notice warning hiatus"></div>
+    <div class="section_text">
+        <h1 class="section_title">Chapel Studios on YouTube</h1>
+        <p>Come in and catch a video on movie or gaming news and stay for one of Rev's Rants!</p>
+    </div>
+</section>
+<section id="Section_Seven">
+    <div class="notice covid">
+        <p>While we normally appreciate the charity of those who can afford, there are others far more in need right now. Please consider donating to a charity that is helping fight the COVID-19 pandemic instead.</p>
+        <div class="links">
+            <a class="btn" href="https://www.directrelief.org/emergency/coronavirus-outbreak/">Direct Relief</a>
+            <a class="btn" href="https://www.feedingamerica.org/">Feeding America</a>
+            <a class="btn" href="https://www.nokidhungry.org/coronavirus">No Kid Hungry</a>
+            <a class="btn" href="https://www.charitynavigator.org/index.cfm?bay=content.view&cpid=7779">Charity Navigator: COVID-19</a>
+        </div>
+    </div>
+    <div class="accent" style="background-image: url(/Assets/Images/Home/patreon-1.svg);background-size: auto 60%;"></div>
+    <div class="section_text">
+        <h1 class="section_title">Patreon</h1>
+        <p>Just want to make a donation to the chapel? Feel free though there are no bonuses for doing so currently.</p>
+        <p class="legalese">*Donating to the Chapel Studios Patreon may or may not save your soul, as these things are probably not related.</p>
+    </div>
+</section>

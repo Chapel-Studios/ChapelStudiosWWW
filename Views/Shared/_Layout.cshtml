@@ -10,153 +10,34 @@
     @RenderSection("Head", false)
 </head>
 <body>
-
     <header>
         <nav>
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Chapel Studios</a>
-                @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <a class="brand" asp-area="" asp-controller="Home" asp-action="Index"></a>
+                <label for="navbar-checkbox" class="navbar-toggler"><span></span></label>
+                <input id="navbar-checkbox" type="checkbox" />
+                @*<button class="navbar-toggler" type="button" data-toggle="collapsed" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"
+                >
+                    <span></span>
                 </button>*@
-                <div class="navbar-collapse collapse">
-                    <ul class="nav-main">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Games" asp-controller="Games">Games</a>
-                            <ul class="nav-menu">
-                                <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="Games" asp-controller="Games" asp-action="MineSweeper">Minesweeper</a>
-                                        <ul class="nav-menu">
-                                            <li class="nav-item">
-                                                    <a>Test Item</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                    <a>Test Item</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                    <a class="nav-link text-dark" asp-area="Games" asp-controller="Games" asp-action="MineSweeper" asp-route-id="P5">P5.js</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                    <a>Test Item</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                    <a>Test Item</a>
-                                            </li>
-                                        </ul>
-                                </li>
-                                <li class="nav-item">
-                                        <a>Test Item</a>
-                                </li>
-                                <li class="nav-item">
-                                        <a>Test Item</a>
-                                </li>
-                                <li class="nav-item">
-                                        <a>Test Item</a>
-                                </li>
-                                <li class="nav-item">
-                                        <a>Test Item</a>
-                                        <ul class="nav-menu">
-                                            <li class="nav-item">
-                                                    <a>Test Item</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                    <a>Test Item</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                    <a>Test Item</a>
-                                            </li>
-                                        </ul>
-                                </li>
-                            </ul>
-                            @*<ul class="nav-menu">
-                                <li class="nav-item">
-                                    <div class="mask">
-                                        <a class="nav-link text-dark" asp-area="Games" asp-controller="Games" asp-action="MineSweeper">Minesweeper</a>
-                                        <ul class="nav-menu">
-                                            <li class="nav-item">
-                                                <div class="mask">
-                                                    <a>Test Item</a>
-                                                </div>
-                                            </li>
-                                            <li class="nav-item">
-                                                <div class="mask">
-                                                    <a>Test Item</a>
-                                                </div>
-                                            </li>
-                                            <li class="nav-item">
-                                                <div class="mask">
-                                                    <a class="nav-link text-dark" asp-area="Games" asp-controller="Games" asp-action="MineSweeper" asp-route-id="P5">P5.js</a>
-                                                </div>
-                                            </li>
-                                            <li class="nav-item">
-                                                <div class="mask">
-                                                    <a>Test Item</a>
-                                                </div>
-                                            </li>
-                                            <li class="nav-item">
-                                                <div class="mask">
-                                                    <a>Test Item</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <div class="mask">
-                                        <a>Test Item</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <div class="mask">
-                                        <a>Test Item</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <div class="mask">
-                                        <a>Test Item</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <div class="mask">
-                                        <a>Test Item</a>
-                                        <ul class="nav-menu">
-                                            <li class="nav-item">
-                                                <div class="mask">
-                                                    <a>Test Item</a>
-                                                </div>
-                                            </li>
-                                            <li class="nav-item">
-                                                <div class="mask">
-                                                    <a>Test Item</a>
-                                                </div>
-                                            </li>
-                                            <li class="nav-item">
-                                                <div class="mask">
-                                                    <a>Test Item</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>*@
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="ResumeBuilder" asp-controller="Resumes" asp-action="Index">Resume</a>
-                        </li>
-                    </ul>
+                <div class="navbar-collapse">
+                    <partial name="_Navigation" />
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer>
         <div class="container">
+            <div class="brand"></div>
             @RenderSection("Footer", false)
             <div class="copyright">
                 &copy; 2020 - Chapel Studios &amp; Jake Blackwell<br />
@@ -167,7 +48,6 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

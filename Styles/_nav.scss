@@ -1,11 +1,10 @@
 ﻿@import '_colours';
 @import '_typography';
+@import '_DataVariables';
 
 nav {
     background-color: $PrimaryBackground;
-    height: 13vh;
-    min-height: 50px;
-    max-height: 200px;
+    height: 75px;
 
     .container {
         width: 90vw;
@@ -24,22 +23,59 @@ nav {
     }
 }
 
-.navbar-brand {
-    margin: auto 23px;
-    order: -99;
-    font-size: 2.2rem;
-    font-weight: bold;
-    font-family: $TitleFont;
-    color: $MainTextColour;
+.navbar-collapse {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    height: 100vh;
+    width: 100%;
+    display: none;
+    background: rgba(4,4,4,0.6);
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: start;
 }
 
-.navbar-collapse {
-    width: 100%;
+.navbar-toggler {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 25px;
+    right: 25px;
     display: flex;
-    justify-content: flex-end;
+    align-content: center;
+    align-items: center;
 
-    .collapse {
-        display: none;
+    span {
+        display: inline-block;
+        width: 100%;
+        height: 4px;
+        position: relative;
+        border-radius: 5px;
+        background: $MainTextColour;
+
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0px;
+            width: 100%;
+            height: 4px;
+            border-radius: 5px;
+            background: $MainTextColour;
+        }
+
+        &::after {
+            top: 10px;
+        }
+    }
+}
+
+#navbar-checkbox {
+    display: none;
+
+    &:checked + .navbar-collapse {
+        display: flex;
     }
 }
 
@@ -54,10 +90,28 @@ nav {
     & > .nav-item {
         margin: 10px 5px;
         border: none;
-    }
 
-    a {
-        padding: 8px;
+        & > a {
+            padding: 8px;
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 7%;
+                left: 50%;
+                width: 0%;
+                height: 4px;
+                background-color: $MainTextColour;
+                border-radius: 17px;
+                transition: width ease 500ms, left ease 500ms;
+            }
+        }
+
+        &:hover > a::before {
+            left: 15%;
+            width: 70%;
+        }
     }
 }
 
@@ -79,7 +133,7 @@ nav {
             & > .nav-menu > .nav-item {
                 transform-origin: left center;
 
-                @for $i from 1 through 6 {
+                @for $i from 1 through $MaxNavItemCount {
                     &:nth-child(#{$i}) {
                         transform-origin: (10% * ($i - 1)) center;
                         animation-name: menuItems_right;
@@ -128,7 +182,7 @@ nav {
             display: flex;
             opacity: 0;
 
-            @for $i from 1 through 20 {
+            @for $i from 1 through $MaxNavItemCount {
                 &:nth-child(#{$i}) {
                     animation-name: menuItems;
                     animation-duration: 400ms - (($i - 1) * 10);
@@ -159,6 +213,32 @@ nav {
         display: inline-flex;
         background: none;
     }
+}
+
+@media (min-width: 600px) {
+    nav {
+        height: 125px;
+
+        & .container {
+            flex-direction: row;
+        }
+    }
+
+    .navbar-collapse {
+        display: flex;
+        position: initial;
+        background: none;
+        height: initial;
+        left: unset;
+        top: unset;
+        justify-content: flex-end;
+        flex-direction: initial;
+    }
+
+    .navbar-toggler {
+        display: none;
+    }
+
 }
 
 @keyframes menuItems {

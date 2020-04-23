@@ -8,6 +8,8 @@ module.exports = function (grunt) {
     //const sass = require('node_modules/node-sass');
     //require('load-grunt-tasks')(grunt);
     // Project configuration.
+
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -37,28 +39,28 @@ module.exports = function (grunt) {
                 ]
             }
         }
-        , terser: {
-            options: {
-                output: {
-                    preamble: '// Written by Rev. J. Lee Blackwell; Please Don\'t steal my code.'
-                }
-            }
-            , dist: {
-                files: [{
-                    expand: true,
-                    cwd: "JS",
-                    src: ["**/*.js"],
-                    dest: "wwwroot/js",
-                }]
-            }
-        }
+        //, terser: {
+        //    options: {
+        //        output: {
+        //            preamble: '// Written by Rev. J. Lee Blackwell; Please Don\'t steal my code.'
+        //        }
+        //    }
+        //    , dist: {
+        //        files: [{
+        //            expand: true,
+        //            cwd: "JS",
+        //            src: ["**/*.js"],
+        //            dest: "wwwroot/js",
+        //        }]
+        //    }
+        //}
     });
 
     // Load the plugin
     grunt.loadNpmTasks('grunt-sass');
-    grunt.loadNpmTasks('grunt-terser');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
+    //grunt.loadNpmTasks('grunt-terser');
+    //grunt.loadNpmTasks('grunt-contrib-uglify');
 
     // Default task(s).
-    grunt.registerTask('default', ['sass', 'terser']);
+    grunt.registerTask('default', ['sass']);
 };

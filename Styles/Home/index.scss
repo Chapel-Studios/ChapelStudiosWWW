@@ -1,0 +1,214 @@
+﻿@import '../_colours';
+@import '../_typography';
+
+section {
+    display: grid;
+    place-content: stretch;
+    place-items: stretch;
+    background-color: $TertiaryBackground;
+    background-position: 85% 33%;
+    background-repeat: no-repeat;
+    background-size: auto 73%;
+
+    &:nth-child(3n-1) {
+        background-color: $SecondaryBackground;
+        text-align: center;
+
+        .section_text {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+
+            p {
+                width: 65%;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+        }
+    }
+
+    &:nth-child(3n) {
+        background-color: $PrimaryBackground;
+        background-position: 15% 33%;
+
+        .section_text {
+            width: 45%;
+            padding: 0 5%;
+            margin-left: 40%;
+            margin-right: 5%;
+        }
+
+        .section_title {
+            margin: 0 2em 0.5em auto;
+            width: fit-content;
+        }
+    }
+}
+
+.section_title {
+    margin: 0 5vw 0.5em;
+    font-size: 2.3em;
+    font-family: $TitleFont;
+    color: $HighlightTextColour;
+}
+
+.section_text {
+    width: 45%;
+    padding: 0 5%;
+    margin: 0 30% 5vh 15%;
+    color: $MainTextColour;
+}
+
+.section_tag {
+    background-color: $HighlightBackground;
+    color: $HighlightTextColour;
+    padding: 1vh 2vw;
+    margin: 3vh auto 0;
+    display: block;
+    width: -moz-fit-content;
+    width: fit-content;
+    white-space: nowrap;
+    border-radius: 12px
+}
+
+.library-logos {
+    display: inline-flex;
+    position: relative;
+
+    li:first-child .library-logo {
+        margin-left: 0;
+    }
+}
+
+.library-logo {
+    height: 100px;
+    margin-left: 1vw;
+    margin-top: 2vh;
+
+    &.scaled {
+        transform: scale(0.9);
+    }
+}
+
+.notice {
+    min-height: 90px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    text-align: center;
+    border-top: 10px solid;
+    border-bottom: 10px solid;
+    font-size: 1.2rem;
+    z-index: 25;
+
+    &.warning {
+        @include AlertProto($WarningBGColour, $WarningTextColour, $WarningBorderColour);
+        text-transform: capitalize;
+    }
+
+    &.construction {
+        border: none;
+        background-color: $ConstructionYellow;
+        transform: translate(-43%, -14%) rotate(-24deg) translateX(130px);
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 0px;
+            height: 82px;
+            width: 100%;
+            background-color: $ConstructionYellow;
+            background-image: linear-gradient(135deg, $ConstructionYellow 25%, $ConstructionBlack 25%, $ConstructionBlack 50%, $ConstructionYellow 50%, $ConstructionYellow 75%, $ConstructionBlack 75%, $ConstructionBlack 100%);
+            background-size: 33.94px 33.94px;
+            border-top: 2px solid $ConstructionBlack;
+            border-bottom: 2px solid $ConstructionBlack;
+        }
+
+        &::after {
+            content: 'Under Construction';
+            background: #0f0f0f;
+            color: #f5eb5f;
+            font-size: 2rem;
+            margin: auto;
+            padding: .5em;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+        }
+    }
+
+    &.hiatus {
+        height: 125px;
+
+        &::after {
+            content: 'This Service is Currently on a Hiatus. \A Check Back Later for More of This Great Content!';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5em;
+            white-space: pre;
+            line-height: 1.6em;
+            text-transform: capitalize;
+        }
+    }
+
+    &.covid {
+        @include AlertProto($ERBGColour, $ERTextColour, $ERBorderColour);
+        font-size: 1.6rem;
+        top: unset;
+        transform: none;
+        bottom: 38px;
+
+        p {
+            text-align: center;
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+
+        .links {
+            display: grid;
+            //grid-auto-flow: column dense;
+            grid-template-columns: repeat(auto-fit, minmax(25px, max-content));
+            justify-items: center;
+            justify-content: center;
+            margin: 0 2em 1em;
+            grid-gap: 3em;
+        }
+
+        a {
+            color: $ERTextColour;
+            font-size: 0.8em;
+            background: #fff;
+            padding: .5em 1em;
+            margin-top: 0;
+            //white-space: nowrap;
+            box-sizing: border-box;
+            height: 100%;
+
+            &:active, &:visited {
+                color: $ERBorderColour;
+            }
+        }
+    }
+}
+
+.twitch_games {
+    width: 75%;
+    margin-bottom: 0;
+
+    .card.twitch_game {
+        font-size: 0.9rem;
+
+        .card_photo {
+            height: 250px;
+            width: 205px;
+            place-self: center;
+            margin-top: 15px;
+        }
+    }
+}

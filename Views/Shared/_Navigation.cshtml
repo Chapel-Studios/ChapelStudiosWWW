@@ -1,0 +1,58 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+<ul class="nav-main">
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Games" asp-controller="Games">Games</a>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Games" asp-controller="Games" asp-action="MineSweeper">Minesweeper</a>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Games" asp-controller="Games" asp-action="MineSweeper" asp-route-id="P5">P5.js</a>
+                    </li>
+                </ul>
+            </li>
+            @*
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Games" asp-controller="Games" asp-action="Index">Test Item</a>
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Games" asp-controller="Games" asp-action="Index">Test Item</a>
+                        </li>
+                    </ul>
+                </li>
+            *@
+        </ul>
+    </li>
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-area="ResumeBuilder" asp-controller="Resumes" asp-action="Index">Resum&eacute;</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="ResumeBuilder" asp-controller="Resumes" asp-action="Edit">Edit</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="ResumeBuilder" asp-controller="Resumes" asp-action="View">View</a>
+                </li>
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Home" asp-action="About">About</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="History">History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="ResumeBuilder" asp-controller="Resumes" asp-action="Index">Jake Blackwell</a>
+                </li>
+            </ul>
+        </li>
+    }
+</ul>

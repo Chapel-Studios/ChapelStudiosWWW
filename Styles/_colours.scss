@@ -1,19 +1,58 @@
 ﻿//Text
-$MainTextColour: #AAAAC4; // Silver ?  Lavender?
-$HighlightTextColour: rgba(255, 255, 255, 0.65); // grey
+$MainTextColour: #AAAAC4; // Silver
+$HeaderTextColour: rgba(55, 55, 55, 0.85); // Grey
+$HighlightTextColour: rgba(0, 0, 0, 0.75); // SoftBlack
 
 // Background
-$BackdropColour: #AAAAC4; // Silver ?  Lavender?
+$BackdropColour: #C9C9DC; // Silver ?  Lavender?
 $PrimaryBackground: #552244; // Maroon
 $SecondaryBackground: #696d69; // Olive
 $TertiaryBackground: #526760; // Forrest
-$HighlightBackground: #696d69; // light blue
+$HighlightBackground: #9DDFEA; // light blue
 
-$LinkColour: #696d69; // light blue
-$HighlightLink: #552244; // Maroon
+$LinkColour: #9DDFEA; // light blue
+$HighlightLink: #526760; // Forrest
 
-/*$PrimaryColour: #552244; // Maroon
-$HighlightColour: #696d69; // Olive
-$HighlightColour-2: #696d69; // light blue
-$ForegroundColour: #AAAAC4; // Silver
-$SecondaryColour: #526760; // Forrest*/
+/*
+    Colours:
+    #552244; // Maroon
+    #696d69; // Olive
+    #9DDFEA; // light blue
+    #AAAAC4; // Silver
+    #C9C9DC; // Silver ?  Lavender?
+    #526760; // Forrest
+    rgba(55, 55, 55, 0.85); // Grey
+    rgba(0, 0, 0, 0.75); // SoftBlack
+*/
+
+$SoftBlack: rgba(0, 0, 0, 0.75);
+
+
+// Alerts
+@mixin AlertProto($bg, $text, $border) {
+    background: $bg;
+    color: $text;
+    border-color: $border;
+}
+/*
+$InfoTextColour: #;
+*/
+$WarningBGColour: #FDF8E4;
+$WarningTextColour: #8F6834;
+$WarningBorderColour: #ffeeba;
+$FailureBGColour: #f8d7da;
+$FailureTextColour: #721c24;
+$FailureBorderClour: #f5c6cb;
+$SuccessBGColour: #d4edda;
+$SuccessTextColour: #155724;
+$SuccessBorderColour: #c3e6cb;
+
+
+// Construction
+$ConstructionYellow: #F5EB5F;
+$ConstructionBlack: #0F0F0F;
+
+// Health ER
+$ERBGColour: #d7d7d8;
+$ERTextColour: #ed1b2e;
+$ERBorderColour: #7f181b;

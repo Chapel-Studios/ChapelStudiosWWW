@@ -60,6 +60,11 @@ namespace ChapelStudiosWWW
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+
                 endpoints.MapAreaControllerRoute(
                     name: "Games",
                     pattern: "{controller=Index}/{action=Index}/{id?}",
@@ -69,11 +74,6 @@ namespace ChapelStudiosWWW
                     name: "ResumeBuilder",
                     pattern: "{controller=Resumes}/{action=Index}/{id?}",
                     areaName: "ResumeBuilder");
-
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
             });
         }
     }
