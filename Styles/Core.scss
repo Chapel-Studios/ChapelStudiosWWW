@@ -19,12 +19,15 @@ body {
     font-size: 17px;
     font-family: $StandardFont;
     color: $MainTextColour;
+
+    &.lock-scroll {
+        overflow: hidden;
+    }
 }
 
 .container {
     width: 100%;
     //background-color: #FFF;
-    box-sizing: border-box;
     margin: 0 auto;
 }
 
@@ -44,7 +47,7 @@ main {
 
 section {
     min-height: 300px;
-    padding: 14vh 3vw;
+    padding: 4vh 3vw;
     position: relative;
     overflow: hidden;
 
@@ -82,25 +85,35 @@ a {
     color: $LinkColour;
 
     &:hover {
-
+        text-decoration: underline;
     }
 }
 
 .brand {
     position: relative;
-    background: url(/assets/images/icons/smalllogo.jpg) no-repeat left / contain;
     font-size: 1.75rem;
     font-weight: bold;
     font-family: $TitleFont;
     color: $MainTextColour;
-    margin: 9px 0px;
+    padding: 9px 0px;
     height: 3em;
     width: 100%;
+    box-sizing: border-box;
+    margin-right: 50px;
+    z-index: 2;
+
+    &::before {
+        content: '';
+        background: url(/assets/images/icons/smalllogo.jpg) no-repeat left / contain;
+        height: 100%;
+        width: 100%;
+        display: block;
+    }
 
     &::after {
         content: 'Chapel Studios';
         top: 50%;
-        left: 2.5em;
+        left: 2em;
         position: absolute;
         transform: translateY(-50%);
     }
@@ -181,7 +194,65 @@ a {
 
 footer {
     background: $PrimaryBackground;
-    display: flex;
+    min-height: 100px;
+    padding: 2vh 3vw;
+
+    .container {
+        width: 90vw;
+        display: grid;
+        grid-template: "brand sitemap" auto "copyright copyright" auto / 1fr 1fr;
+    }
+
+    .brand {
+        grid-area: brand;
+    }
+
+    .sitemap {
+        grid-area: sitemap;
+        justify-self: right;
+        margin-right: 1em;
+        text-align: end;
+
+        a {
+            color: $MainTextColour;
+            line-height: 1.5em;
+        }
+
+        button {
+            background: none !important;
+            border: none;
+            padding: 0 !important;
+            cursor: pointer;
+            color: $MainTextColour;
+            line-height: 1.5em;
+            font-family: $StandardFont;
+            font-size: 1rem;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .copyright {
+        grid-area: copyright;
+        margin-top: 2em;
+        padding: 0 5%;
+        font-size: 0.75rem;
+        justify-self: center;
+    }
+}
+
+@media (max-height: 500px) {
+    header {
+        position: relative;
+    }
+}
+
+@media (max-width: 599px) {
+    .card_container {
+        display: none;
+    }
 }
 
 @media (min-width: 600px) {
@@ -190,8 +261,23 @@ footer {
         max-width: 85vw;
     }
 
+    section {
+        padding: 14vh 3vw;
+    }
+
     .brand {
-        width: 7.5em;
+        width: calc(4.5em + 250px);
         font-size: 2.2rem;
+
+        &::after {
+            left: 2.5em;
+        }
+    }
+
+    footer {
+
+        copyright {
+
+        }
     }
 }
