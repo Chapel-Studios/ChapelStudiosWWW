@@ -55,6 +55,8 @@ nav {
         
         & ~ .navbar-collapse {
             left: 0;
+            overflow-y: auto;
+            scroll-behavior: smooth;
         }
     }
 }
@@ -89,6 +91,7 @@ nav {
             background: $MainTextColour;
             transform-origin: center;
             transition: top 0.3s ease-in, transform 0.5s ease-out;
+            transform: rotate(0deg);
             //animation: hamburger_spin 0.75s ease 0s reverse;
         }
 
