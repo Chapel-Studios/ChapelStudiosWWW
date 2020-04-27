@@ -4,10 +4,5 @@ obj/
 .vs/
 
 wwwroot/*
-#!wwwroot/**/
 !wwwroot/Assets/
-
-
-#!wwwroot/*/
-
 !wwwroot/favicon.ico
