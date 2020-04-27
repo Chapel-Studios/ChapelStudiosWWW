@@ -1,6 +1,13 @@
 bin/
 node_modules/
-wwwroot/
 obj/
 .vs/
-!wwwroot/Assets/**
+
+wwwroot/*
+#!wwwroot/**/
+!wwwroot/Assets/
+
+
+#!wwwroot/*/
+
+!wwwroot/favicon.ico
