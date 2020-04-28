@@ -151,9 +151,10 @@ a {
 .card_container {
     width: 90%;
     display: grid;
-    grid: minmax(450px, max-content) / auto-flow dense minmax(200px, 400px);
-    grid-gap: 25px;
-    place-content: start space-evenly;
+    grid-auto-flow: row;
+    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
     place-items: stretch center;
     margin: 3vh auto;
 
@@ -161,28 +162,31 @@ a {
     }
 
     .card {
-        width: 250px;
+        width: 100%;
         display: grid;
-        grid-template-rows: minmax(100px, max-content) minmax(50px, max-content) minmax(150px, auto);
+        grid-template: 
+            "photo title" minmax(30px, max-content) 
+            "photo desc" minmax(120px, auto) 
+            / minmax(50px, 3fr) minmax(0px, 4fr);
         font-size: 1.2rem;
         background: $BackdropColour;
 
         .card_photo {
-            height: 300px;
-            width: 100%;
-            background-position: top center;
-            background-size: 100% auto;
-            background-repeat: no-repeat;
+            grid-area: photo;
+            place-self: stretch;
         }
 
         .card_title {
+            grid-area: title;
             font-size: 1.5em;
             color: $HighlightTextColour;
             padding: 0.35em 0.85em;
-            align-self: center;
+            place-self: center;
+            text-align: center;
         }
 
         .card_description {
+            grid-area: desc;
             color: $MainTextColour;
             background: $PrimaryBackground;
             width: 100%;
@@ -199,9 +203,9 @@ footer {
     padding: 2vh 3vw;
 
     .container {
-        width: 90vw;
+        width: 85vw;
         display: grid;
-        grid-template: "brand sitemap" auto "copyright copyright" auto / 1fr 1fr;
+        grid-template: "brand sitemap" auto "copyright copyright" auto / minmax(0px, 1fr) 150px;
     }
 
     .brand {
@@ -279,6 +283,25 @@ footer {
 
         copyright {
 
+        }
+    }
+}
+
+@media (min-width: 1100px) {
+    .card_container {
+        grid-auto-flow: column;
+
+        .card {
+            width: 250px;
+            grid-template: 
+                "photo" minmax(100px, max-content) 
+                "title" minmax(50px, max-content) 
+                "desc" minmax(150px, auto) 
+                / minmax(0px, 1fr);
+
+            .card_photo {
+                height: 300px;
+            }
         }
     }
 }

@@ -5,7 +5,11 @@ section {
     display: grid;
 
     &:nth-child(3n-2) {
-        grid-template: "accent title" auto "text text" 1fr "tag tag" auto / minmax(0, 1fr) 4fr;
+        grid-template: 
+            "accent title" auto 
+            "text text" 1fr 
+            "tag tag" auto 
+            / minmax(0, 1fr) 4fr;
         background-color: $TertiaryBackground;
     }
 
@@ -22,18 +26,6 @@ section {
             justify-self: center;
             margin: unset;
         }
-
-        .section_text {
-            //width: 100%;
-            //margin: 0;
-            //padding: 0;
-            /*p {
-                width: 65%;
-                margin-left: auto;
-                margin-right: auto;
-                text-align: center;
-            }*/
-        }
     }
 
     &:nth-child(3n) {
@@ -41,21 +33,11 @@ section {
         grid-template: none;
         grid-template-columns: minmax(0, 1fr);
 
-        & > * {
-            grid-area: unset;
-        }
-
         .section_title {
             justify-self: center;
             margin: unset;
             text-align: center;
         }
-        /*.section_text {
-            width: 45%;
-            padding: 0 5%;
-            margin-left: 40%;
-            margin-right: 5%;
-        }*/
     }
 }
 
@@ -73,9 +55,7 @@ section {
 .section_title {
     grid-area: title;
     justify-self: start;
-    //margin: 0 5vw 0.5em;
     margin-left: 0.5em;
-    //font-size: 2.3em;
     font-size: 2em;
     font-family: $TitleFont;
     color: $HighlightTextColour;
@@ -83,9 +63,7 @@ section {
 
 .section_text {
     grid-area: text;
-    //width: 45%;
     padding: 0 5%;
-    //margin: 0 30% 5vh 15%;
     color: $MainTextColour;
 }
 
@@ -94,13 +72,11 @@ section {
     background-color: $HighlightBackground;
     color: $HighlightTextColour;
     padding: 1vh 2vw;
-    //margin: 3vh auto 0;
     margin: 1em auto 0;
     display: block;
     width: -moz-fit-content;
     width: fit-content;
     max-width: 85%;
-    //white-space: nowrap;
     border-radius: 12px;
     text-align: center;
 }
@@ -132,22 +108,15 @@ section {
 }
 
 .notice {
-    //min-height: 90px;
-    //width: 100%;
     width: 100vw;
     height: auto;
     position: relative;
     left: -3vw;
     margin-top: -3vh;
     margin-bottom: 15px;
-    //position: absolute;
-    //top: 50%;
-    //left: 0;
-    //transform: translateY(-50%);
     text-align: center;
     border-top: 5px solid;
     border-bottom: 5px solid;
-    //font-size: 1.2rem;
     font-size: 1rem;
     z-index: 25;
 
@@ -160,7 +129,7 @@ section {
         border: none;
         background-color: $ConstructionYellow;
         height: calc(2em + 8px);
-        //transform: translate(-43%, -14%) rotate(-24deg) translateX(130px);
+
         &::before {
             content: '';
             position: absolute;
@@ -189,15 +158,13 @@ section {
 
     &.hiatus {
         min-height: 40px;
-        //height: 125px;
-        //font-size: 0.9rem;
+
         &::after {
             content: 'This Service is Currently on a Hiatus. \A Check Back Later for More of This Great Content!';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            //font-size: 1.5em;
             font-size: 0.9em;
             white-space: pre;
             line-height: 1.6em;
@@ -207,10 +174,7 @@ section {
 
     &.covid {
         @include AlertProto($ERBGColour, $ERTextColour, $ERBorderColour);
-        //font-size: 1.6rem;
-        //top: unset;
-        //transform: none;
-        //bottom: 38px;
+
         p {
             text-align: center;
             margin-left: 15%;
@@ -219,13 +183,10 @@ section {
 
         .links {
             display: grid;
-            //grid-auto-flow: column dense;
-            //grid-template-columns: repeat(auto-fit, minmax(25px, max-content));
-            //justify-items: center;
             justify-content: center;
-            margin: 0 3vw 1em;
+            margin-bottom: 1em;
             grid-gap: 0.5em;
-            //grid-auto-flow: column;
+            padding: 0 3vw;
 
             .btn {
                 background: #fff;
@@ -249,7 +210,6 @@ section {
         a {
             color: $ERTextColour;
             font-size: 0.8em;
-            //white-space: nowrap;
 
             &:active, &:visited {
                 color: $ERBorderColour;
@@ -259,17 +219,19 @@ section {
 }
 
 .twitch_games {
-    width: 75%;
+    width: 100%;
     margin-bottom: 0;
 
-    .card.twitch_game {
+    .twitch_game {
         font-size: 0.9rem;
 
         .card_photo {
-            height: 250px;
-            width: 205px;
-            place-self: center;
-            margin-top: 15px;
+            height: 85%;
+            width: 100%;
+            place-self: center center;
+            background-position: top center;
+            background-size: 100% auto;
+            background-repeat: no-repeat;
         }
     }
 }
@@ -278,23 +240,142 @@ section {
     display: none;
 }
 
+@media (max-width: 599px) {
+    section:nth-child(3n) > * {
+        grid-area: unset;
+    }
+}
 
 @media (min-width: 600px) {
+    section {
+        &:nth-child(3n-2) {
+            grid-template: "title accent" auto "text accent" 1fr "tag accent" auto / minmax(0, 3fr) 1fr;
+
+            .section_title {
+                justify-self: end;
+                margin-left: 0;
+                margin-right: 1.5em;
+            }
+        }
+
+        &:nth-child(3n-1) {
+
+            .section_title {
+                text-align: center;
+                width: 75%;
+            }
+
+            .section_text {
+                width: 90%;
+                margin: auto;
+
+                p {
+                    text-align: center;
+                }
+            }
+        }
+
+        &:nth-child(3n) {
+            grid-template: "accent title" auto "accent text" 1fr "accent tag" auto / 1fr minmax(0, 3fr);
+
+            .section_title {
+                justify-self: start;
+                margin-left: 1.5em;
+            }
+        }
+    }
+
+    .section_title {
+        font-size: 2.3em;
+    }
+
+    .section_accent {
+        height: 100%;
+        width: 100%;
+        background-position: top left;
+        background-size: contain;
+    }
+    
     .library-logo {
         height: 85px;
     }
 
+    .notice {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        min-height: 90px;
+        width: 100%;
+        font-size: 1.4rem;
+
+        &.construction {
+            transform: translate(-50%, -50%) rotate(-35deg) translateX(158px);
+            min-height: unset;
+            height: calc(3em + 12px);
+
+            &::before {
+                height: 3em;
+                top: 3px;
+                border-top-width: 3px;
+                border-bottom-width: 3px;
+            }
+        }
+
+        &.hiatus {
+            height: 125px;
+            font-size: 0.9rem;
+            transform: none;
+            top: unset;
+            bottom: 10%;
+
+            &::after {
+                font-size: 1.5em;
+            }
+        }
+
+        &.covid {
+            font-size: 1.1rem;
+            top: unset;
+            transform: none;
+            bottom: 0;
+
+            .links {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            a {
+                white-space: nowrap;
+            }
+        }
+    }
+
     #youtube .section_accent {
-        display: unset;
+        display: inline;
     }
 }
 
-@media (min-width: 1000px) {
+@media(max-width: 1099px) {
+    .card_container .card:nth-child(2n+1):last-child {
+        grid-column: 1 / span 2;
+        width: 50%;
+    }
+}
+
+@media (min-width: 900px) {
     .library-logos .break {
-        display: none;
+        display: inline;
     }
 
     .library-logo {
         height: 100px;
+    }
+}
+@media (min-width: 1100px) {
+    .twitch_games .twitch_game .card_photo {
+        height: 250px;
+        width: 205px;
+        margin-top: 15px;
     }
 }
