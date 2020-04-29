@@ -204,7 +204,7 @@ nav {
     }
 
     .nav-link {
-        padding: 7px 5px;
+        padding: 7px 10px;
         display: inline-block;
     }
 }
@@ -330,12 +330,17 @@ nav {
 
             .nav-menu .nav-item {
                 background: $SecondaryBackground;
+
+                .nav-link {
+                    padding-left: 13px;
+                }
             }
 
             .nav-item {
                 display: none;
                 position: relative;
                 margin: 0;
+                border-radius: 8px;
 
                 &::after {
                     content: '';
@@ -346,8 +351,14 @@ nav {
                     left: 0;
                     z-index: -1;
                     box-shadow: 0px 2px 12px -4px rgba(255,255,255,0.55);
+                    border-radius: 8px;
                 }
             }
+        }
+
+        .nav-link {
+            white-space: nowrap;
+            text-align: center;
         }
     }
 
@@ -361,6 +372,20 @@ nav {
 
         .nav-item {
             background-color: $SecondaryBackground;
+
+            & > .nav-menu > .nav-item:first-child::before {
+                content: '';
+                position: absolute;
+                background-color: #526760;
+                height: 100%;
+                width: 0px;
+                top: 0;
+                left: -8px;
+                clip-path: polygon(0% -5%, 14px -5%, 25px 50%, 14px 105%, 0% 105%);
+                box-shadow: 0px 2px 12px -4px rgba(255,255,255,0.55);
+                transform-origin: left center;
+                transition: width ease-in 0.3s;
+            }
 
             &:hover > .nav-menu > .nav-item {
                 transform-origin: left center;
@@ -377,14 +402,7 @@ nav {
                 }
 
                 &:first-child::before {
-                    content: '';
-                    position: absolute;
-                    background-color: #526760;
-                    height: 100%;
                     width: 25px;
-                    top: 0;
-                    left: -4%;
-                    clip-path: polygon(0% -5%, 25% -5%, 50% 50%, 25% 105%, 0% 105%);
                 }
             }
         }
