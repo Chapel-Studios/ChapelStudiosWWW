@@ -407,6 +407,10 @@ section {
         }
     }
 
+    section:nth-child(3n-1) .section_text {
+        width: 65%;
+    }
+    
     section:nth-child(3n) {
 
         .section_accent {
