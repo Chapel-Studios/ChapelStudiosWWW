@@ -265,7 +265,10 @@ nav {
         top: unset;
         left: unset;
         height: 100%;
-        grid-template: "nav-main nav-login" 100% / 4fr minmax(110px, auto);
+        grid-template: 
+            ". nav-login" 1fr 
+            "nav-main nav-main" auto
+            / 4fr minmax(110px, auto);
         background: none;
     }
 
@@ -273,7 +276,7 @@ nav {
         display: grid;
         justify-self: center;
         align-self: end;
-        grid-template: ". ." auto;
+        grid-auto-flow: column;
 
         & > .nav-item {
             border: none;
@@ -444,17 +447,21 @@ nav {
         grid-template-columns: minmax(0px, 1fr);
         overflow: auto;
         width: auto;
+        font-size: 0.8rem;
+        grid-auto-flow: column;
+        margin-top: 1.5em;
+
+        &.logged-in .nav-item > * {
+            padding-right: 1em;
+            padding-left: 1em;
+        }
 
         & .nav-item {
             background: none;
 
             &:first-child {
-                border-right: none;
-                border-radius: 0;
-            }
-
-            &:last-child {
-                border-radius: 0;
+                border-bottom: none;
+                border-right: 2px solid $TertiaryBackground;
             }
         }
     }
@@ -465,6 +472,10 @@ nav {
         & > .nav-item {
             font-size: 1.5rem;
         }
+    }
+
+    .login {
+        font-size: 1rem;
     }
 }
 

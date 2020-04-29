@@ -343,6 +343,14 @@ section {
             .links {
                 display: flex;
                 flex-wrap: wrap;
+
+                li {
+                    margin-left: 5px;
+
+                    &:first-child {
+                        margin-left: 0;
+                    }
+                }
             }
 
             a {

@@ -125,6 +125,7 @@ a {
     border-radius: 25px;
     padding: 5px 10px;
     position: relative;
+    transition: top ease .4s;
 
     &::before {
         content: '';
