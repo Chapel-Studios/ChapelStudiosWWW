@@ -84,7 +84,6 @@ section {
 .library-logos {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
     justify-content: space-evenly;
 
     .break {
@@ -228,7 +227,8 @@ section {
         .card_photo {
             height: 85%;
             width: 100%;
-            place-self: center center;
+            justify-self: center;
+            align-self: center;
             background-position: top center;
             background-size: 100% auto;
             background-repeat: no-repeat;
@@ -238,6 +238,20 @@ section {
 
 #youtube .section_accent {
     display: none;
+}
+
+@supports (-ms-ime-align: auto) {
+    .library-logos {
+        justify-content: space-around;
+    }
+
+    .nav-menu .nav-item:hover > .nav-menu > :first-child.nav-item::before {
+        height: 0.5em;
+        width: 20px;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
 }
 
 @media (max-width: 599px) {
@@ -364,7 +378,7 @@ section {
     }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 935px) {
     .library-logos .break {
         display: none;
     }

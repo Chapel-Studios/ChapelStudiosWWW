@@ -153,7 +153,8 @@ a {
     justify-content: space-between;
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
-    place-items: stretch center;
+    align-items: stretch;
+    justify-items: center;
     margin: 3vh auto;
 
     .header {
@@ -171,7 +172,8 @@ a {
 
         .card_photo {
             grid-area: photo;
-            place-self: stretch;
+            justify-self: stretch;
+            align-self: stretch;
         }
 
         .card_title {
