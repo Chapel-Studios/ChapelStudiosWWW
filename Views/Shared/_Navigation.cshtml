@@ -1,6 +1,11 @@
 ﻿
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
+@{ 
+    var showAboutMenu = !SignInManager.IsSignedIn(User)
+        || (ViewContext.RouteData.Values["controller"].ToString() == "Home"
+            && ViewContext.RouteData.Values["action"].ToString() == "Index");
+}
 
 <ul class="nav-main">
     <li class="nav-item">
@@ -41,7 +46,7 @@
             </ul>
         </li>
     }
-    else
+    @if (showAboutMenu)
     {
         <li class="nav-item">
             <a class="nav-link" asp-controller="Home" asp-action="About">About</a>
