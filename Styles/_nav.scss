@@ -8,6 +8,10 @@ nav {
 
     a {
         color: $MainTextColour;
+
+        &:hover {
+            text-decoration: none;
+        }
     }
 
     .container {
@@ -117,19 +121,16 @@ nav {
         transition: transform ease-in-out .3s;
 
         &:first-child {
-            border-radius: 20px 0 0 20px;
             z-index: 1;
             transform-origin: right center;
         }
 
         &:last-child {
-            border-radius: 0 20px 20px 0;
             transform-origin: left center;
         }
 
         &:hover, &:active, &:focus {
             background: $MainTextColour;
-            transform: scale(85%);
 
             a {
                 color: $PrimaryBackground;
@@ -233,6 +234,22 @@ nav {
     }
 }
 
+@media (max-width: 699px) {
+    .login .nav-item {
+        &:first-child {
+            border-radius: 20px 0 0 20px;
+        }
+
+        &:last-child {
+            border-radius: 0 20px 20px 0;
+        }
+
+        &:hover, &:active, &:focus {
+            transform: scale(85%);
+        }
+    }
+}
+
 @media (min-width: 700px) {
     nav {
         height: 125px;
@@ -248,7 +265,7 @@ nav {
         top: unset;
         left: unset;
         height: 100%;
-        grid-template: "nav-main nav-login" 100% / 4fr 110px;
+        grid-template: "nav-main nav-login" 100% / 4fr minmax(110px, auto);
         background: none;
     }
 
@@ -261,6 +278,7 @@ nav {
         & > .nav-item {
             border: none;
             border-radius: 0px !important;
+            font-size: 1.2rem;
 
             & > a {
                 padding: 8px;
@@ -316,6 +334,19 @@ nav {
 
             .nav-item {
                 display: none;
+                position: relative;
+                margin: 0;
+
+                &::after {
+                    content: '';
+                    height: 100%;
+                    width: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: -1;
+                    box-shadow: 0px 2px 12px -4px rgba(255,255,255,0.55);
+                }
             }
         }
     }
@@ -392,7 +423,9 @@ nav {
     }
 
     .login {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0px, 1fr);
+        overflow: auto;
+        width: auto;
 
         & .nav-item {
             background: none;
@@ -405,6 +438,14 @@ nav {
             &:last-child {
                 border-radius: 0;
             }
+        }
+    }
+}
+
+@media (min-width: 1100px) {
+    .nav-main {
+        & > .nav-item {
+            font-size: 1.5rem;
         }
     }
 }

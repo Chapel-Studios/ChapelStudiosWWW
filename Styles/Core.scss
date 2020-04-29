@@ -2,7 +2,6 @@
 @import '_colours';
 @import '_typography';
 
-
 @import "_nav";
 
 body, html, ul, button, section, h1, p {
@@ -277,15 +276,16 @@ footer {
         }
     }
 
-    footer {
-
-        copyright {
-
-        }
+    footer .sitemap {
+        margin-right: 0;
     }
 }
 
 @media (min-width: 1100px) {
+    .container { 
+        max-width: 80vw;
+    }
+
     .card_container {
         grid-auto-flow: column;
 
