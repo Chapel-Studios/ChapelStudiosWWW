@@ -1,19 +1,19 @@
 ﻿@import '../_colours';
 @import '../_typography';
 
+main {
+    grid-auto-rows: 0px minmax(38vh, auto);
+}
+
 section {
     display: grid;
 
-    &:nth-child(3n-2) {
-        grid-template: 
-            "accent title" auto 
-            "text text" 1fr 
-            "tag tag" auto 
-            / minmax(0, 1fr) 4fr;
+    &:nth-of-type(3n-2) {
+        grid-template: "accent title" auto "text text" 1fr "tag tag" auto / minmax(0, 1fr) 4fr;
         background-color: $TertiaryBackground;
     }
 
-    &:nth-child(3n-1) {
+    &:nth-of-type(3n-1) {
         background-color: $SecondaryBackground;
         grid-template: none;
         grid-template-columns: minmax(0, 1fr);
@@ -28,7 +28,7 @@ section {
         }
     }
 
-    &:nth-child(3n) {
+    &:nth-of-type(3n) {
         background-color: $PrimaryBackground;
         grid-template: none;
         grid-template-columns: minmax(0, 1fr);
@@ -39,6 +39,12 @@ section {
             text-align: center;
         }
     }
+}
+
+a.anchor {
+    display: initial;
+    top: -125px;
+    height: 0px;
 }
 
 .section_accent {
@@ -236,7 +242,7 @@ section {
     }
 }
 
-#youtube .section_accent {
+#youtube + section .section_accent {
     display: none;
 }
 
@@ -255,14 +261,14 @@ section {
 }
 
 @media (max-width: 599px) {
-    section:nth-child(3n) > * {
+    section:nth-of-type(3n) > * {
         grid-area: unset;
     }
 }
 
 @media (min-width: 600px) {
     section {
-        &:nth-child(3n-2) {
+        &:nth-of-type(3n-2) {
             grid-template: "title accent" auto "text accent" 1fr "tag accent" auto / minmax(0, 3fr) 1fr;
 
             .section_title {
@@ -272,7 +278,7 @@ section {
             }
         }
 
-        &:nth-child(3n-1) {
+        &:nth-of-type(3n-1) {
 
             .section_title {
                 text-align: center;
@@ -289,7 +295,7 @@ section {
             }
         }
 
-        &:nth-child(3n) {
+        &:nth-of-type(3n) {
             grid-template: "accent title" auto "accent text" 1fr "accent tag" auto / 1fr minmax(0, 3fr);
 
             .section_title {
@@ -373,7 +379,7 @@ section {
         }
     }
 
-    #youtube .section_accent {
+    #youtube + section .section_accent {
         display: inline;
     }
 }
@@ -396,8 +402,8 @@ section {
 }
 
 @media (min-width: 1100px) {
-    section:nth-child(3n-2) {
-        
+    section:nth-of-type(3n-2) {
+
         .section_title {
             margin-right: 5em;
         }
@@ -407,11 +413,11 @@ section {
         }
     }
 
-    section:nth-child(3n-1) .section_text {
+    section:nth-of-type(3n-1) .section_text {
         width: 65%;
     }
-    
-    section:nth-child(3n) {
+
+    section:nth-of-type(3n) {
 
         .section_accent {
             background-position-x: center;
