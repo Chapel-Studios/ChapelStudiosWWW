@@ -2,7 +2,7 @@
 
 namespace ChapelStudiosWWW.Data.Migrations
 {
-    public partial class resume : Migration
+    public partial class ResumeTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

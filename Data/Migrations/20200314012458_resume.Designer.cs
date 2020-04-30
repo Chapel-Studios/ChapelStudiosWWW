@@ -11,7 +11,7 @@ namespace ChapelStudiosWWW.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20200314012458_resume")]
-    partial class resume
+    partial class ResumeTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
