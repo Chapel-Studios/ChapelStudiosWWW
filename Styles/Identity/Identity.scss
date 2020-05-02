@@ -1,0 +1,14 @@
+﻿main {
+    grid-template: "header" auto "form" auto;
+    justify-items: center;
+}
+
+.header {
+    grid-area: header;
+    font-size: 2rem;
+    margin-top: .75em;
+}
+
+form {
+    grid-area: form;
+}
