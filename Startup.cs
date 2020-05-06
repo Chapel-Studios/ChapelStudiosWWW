@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using ChapelStudiosWWW.Services;
 using ChapelStudiosWWW.Services.Models;
+using ChapelStudiosWWW.Services.Contracts;
 
 namespace ChapelStudiosWWW
 {
@@ -31,6 +32,7 @@ namespace ChapelStudiosWWW
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddTransient<IEmailSender, GridEmailSender>();
+            services.AddTransient<IEmailService, GridEmailSender>(); // ToDo: look into combining these during identity overhaul;
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddControllersWithViews();

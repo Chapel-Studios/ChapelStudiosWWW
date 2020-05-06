@@ -1,0 +1,48 @@
+﻿@page "/Contact"
+@model ChapelStudiosWWW.Pages.ContactModel
+@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <h1>Leave us a note</h1>
+    <p>Fill out the form below and we'll try to respond as soon as possible.</p>
+</div>
+@if (!string.IsNullOrEmpty(Model.ResponseMessage))
+{
+    <div class="response">@Model.ResponseMessage</div>
+}
+else
+{
+    <form asp-page="Contact" method="post" id="ContactPageForm">
+        <div>
+            <label asp-for="Message.Name">Name</label>
+            <input asp-for="Message.Name" />
+            <p class="help-block"></p>
+        </div>
+        <div>
+            <label asp-for="Message.Phone">Phone</label>
+            <input asp-for="Message.Phone" />
+            <p class="help-block"></p>
+        </div>
+        <div>
+            <label asp-for="Message.Email">Email</label>
+            <input asp-for="Message.Email" />
+            <p class="help-block"></p>
+        </div>
+        <div>
+            <label asp-for="Message.Category"></label>
+            <select asp-for="Message.Category">
+                <option>General Inquiry</option>
+                <option>Game Design Services</option>
+                <option>Web Development Services</option>
+                <option>World Building Services</option>
+            </select>
+        </div>
+        <div>
+            <textarea rows="10" cols="100" class="form-control" asp-for="Message.Message"></textarea>
+        </div>
+        <button class="btn" type="submit">Pass Us A Note!</button>
+    </form>
+}
+
