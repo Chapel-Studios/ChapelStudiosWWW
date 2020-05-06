@@ -35,9 +35,14 @@ namespace ChapelStudiosWWW
             services.AddTransient<IEmailService, GridEmailSender>(); // ToDo: look into combining these during identity overhaul;
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
-            services.AddControllersWithViews();
-            services.AddRazorPages();
-            
+            var views = services.AddControllersWithViews();
+            var pages = services.AddRazorPages();
+
+#if (DEBUG)
+            views.AddRazorRuntimeCompilation();
+            pages.AddRazorRuntimeCompilation();
+#endif
+
             services.AddAuthentication()
                 .AddMicrosoftAccount(microsoftOptions =>
                 {
@@ -80,6 +85,7 @@ namespace ChapelStudiosWWW
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
 
                 endpoints.MapAreaControllerRoute(
