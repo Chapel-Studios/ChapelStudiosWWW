@@ -4,7 +4,8 @@ namespace ChapelStudiosWWW.Models.Home
 {
     public class ContactPageMessage
     {
-        [StringLength(5)]
+        [MinLength(5)]
+        [StringLength(500)]
         [Display(Name = "What would you like to discuss?")]
         public string Message { get; set; }
         [Required]
