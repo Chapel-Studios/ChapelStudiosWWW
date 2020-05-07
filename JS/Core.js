@@ -23,6 +23,8 @@
             ToTopBtn.classList.add("active");
         }
     }
+    // Run immediately to ensure is set on page reload
+    checkScrollPos();
 
     let eventStyle = window.addEventListener ? "addEventListener" : "attachEvent";
     let AddEvent = window[eventStyle];
