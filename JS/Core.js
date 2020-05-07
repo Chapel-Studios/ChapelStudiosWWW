@@ -16,7 +16,7 @@
 
     function checkScrollPos() {
         let currentPos = document.documentElement.scrollTop || document.body.scrollTop;
-        if (currentPos !== 0) {
+        if (currentPos === 0) {
             ToTopBtn.classList.remove("active");
         }
         else {
