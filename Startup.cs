@@ -6,6 +6,10 @@ using ChapelStudiosWWW.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using ChapelStudiosWWW.Services;
+using ChapelStudiosWWW.Services.Models;
+using ChapelStudiosWWW.Services.Contracts;
 
 namespace ChapelStudiosWWW
 {
@@ -26,8 +30,19 @@ namespace ChapelStudiosWWW
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+
+            services.AddTransient<IEmailSender, GridEmailSender>();
+            services.AddTransient<IEmailService, GridEmailSender>(); // ToDo: look into combining these during identity overhaul;
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+
+            var views = services.AddControllersWithViews();
+            var pages = services.AddRazorPages();
+
+#if (DEBUG)
+            views.AddRazorRuntimeCompilation();
+            pages.AddRazorRuntimeCompilation();
+#endif
+
             services.AddAuthentication()
                 .AddMicrosoftAccount(microsoftOptions =>
                 {
@@ -70,6 +85,7 @@ namespace ChapelStudiosWWW
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
 
                 endpoints.MapAreaControllerRoute(

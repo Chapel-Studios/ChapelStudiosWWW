@@ -1,10 +1,18 @@
 ﻿
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
-@{ 
-    var showAboutMenu = !SignInManager.IsSignedIn(User)
-        || (ViewContext.RouteData.Values["controller"].ToString() == "Home"
-            && ViewContext.RouteData.Values["action"].ToString() == "Index");
+@{
+    bool isOnHomePage = false;
+    if (ViewContext.RouteData.Values["page"] != null)
+    {
+        isOnHomePage = ViewContext.RouteData.Values["page"].ToString() == "Index";
+    }
+    else if (ViewContext.RouteData.Values["controller"] != null)
+    {
+        isOnHomePage = (ViewContext.RouteData.Values["controller"].ToString() == "Home"
+                        && ViewContext.RouteData.Values["action"].ToString() == "Index");
+    }
+    bool showAboutMenu = !SignInManager.IsSignedIn(User) || isOnHomePage;
 }
 
 <ul class="nav-main">
@@ -83,4 +91,7 @@
             </ul>
         </li>
     }
+    <li class="nav-item">
+        <a class="nav-link" asp-page="/Home/Contact">Contact Us</a>
+    </li>
 </ul>
