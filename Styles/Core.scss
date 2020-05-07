@@ -207,17 +207,19 @@ a {
 }
 
 .to-top-btn {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     background: rgba(255,255,255,0.2);
     position: fixed;
     bottom: 75px;
-    right: calc(3.25vw - 10px);
-    display: none;
+    right: 0.5em;
     border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+    z-index: 900;
 
     &.active {
-        display: inline-block;
+        opacity: 100;
     }
 
     &::before {
@@ -227,7 +229,6 @@ a {
         top: 60%;
         left: 50%;
         position: absolute;
-        //transform: rotate(-45deg);
         transform: translate(-50%, -50%) rotate(-45deg);
         border-right: 10px solid rgba(0,0,0,0.2);
         border-top: 10px solid rgba(0,0,0,0.2);
@@ -254,7 +255,7 @@ footer {
     .sitemap {
         grid-area: sitemap;
         justify-self: right;
-        margin-right: 1em;
+        margin-right: calc(1em + 50px - 7.5vw);
         text-align: end;
 
         a {
@@ -316,6 +317,12 @@ footer {
         &::after {
             left: 2.5em;
         }
+    }
+
+    .to-top-btn {
+        height: 60px;
+        width: 60px;
+        right: calc(3.25vw - 10px);
     }
 
     footer .sitemap {
