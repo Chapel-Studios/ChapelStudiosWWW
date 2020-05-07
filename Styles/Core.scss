@@ -41,6 +41,7 @@ header {
 
 main {
     display: grid;
+    padding-top: 4vh;
 }
 
 section {
@@ -130,9 +131,10 @@ a {
     color: $HighlightLink;
     Background: $HighlightBackground;
     border-radius: 25px;
-    padding: 5px 10px;
+    padding: 0.5em 1em;
     position: relative;
     transition: top ease .4s;
+    cursor: pointer;
 
     &::before {
         content: '';
