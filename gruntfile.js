@@ -42,6 +42,7 @@ module.exports = function (grunt) {
         , terser: {
             options: {
                 output: {
+                    beautify: true,
                     preamble: '// Written by Rev. J. Lee Blackwell; Please Don\'t steal my code.'
                 }
             }
