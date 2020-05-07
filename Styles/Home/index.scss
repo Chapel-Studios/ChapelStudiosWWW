@@ -30,6 +30,7 @@ section {
         .section_title {
             justify-self: center;
             margin: unset;
+            text-align: center;
         }
     }
 
@@ -297,7 +298,6 @@ a.anchor {
         &:nth-of-type(3n-1) {
 
             .section_title {
-                text-align: center;
                 width: 75%;
             }
 
