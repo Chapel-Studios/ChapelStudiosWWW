@@ -89,6 +89,34 @@
     }
 }
 
+.error {
+    display: none;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1em 2em;
+    border: solid 2px $FailureBorderClour;
+    background: $FailureBGColour;
+    color: $FailureTextColour;
+    
+    &.validation-summary-errors {
+        display: block;
+    }
+
+    ul {
+        list-style: inside;
+    }
+}
+
+.response {
+    font-size: 1.6em;
+    justify-self: end;
+    color: $HighlightTextColour;
+    max-width: 400px;
+    width: 100%;
+    align-self: center;
+    text-align: center;
+}
+
 @media (min-width: 800px) {
     .contact-page {
         grid-template: "banner banner" minmax(30vh, auto) "form copyBox" 1fr / 50% 50%;
@@ -114,7 +142,7 @@
 }
 
 @media (min-width: 1100px) {
-    #ContactPageForm {
+    #ContactPageForm, .response {
         width: 450px;
         margin-right: calc(5vw - 50px);
     }
