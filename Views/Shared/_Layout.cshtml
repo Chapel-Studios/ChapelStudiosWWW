@@ -47,8 +47,12 @@
             </div>
         </div>
     </footer>
-
-    <script src="~/js/core.js" asp-append-version="true"></script>
+    <environment include="Development">
+        <script src="~/js/core.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="Production">
+        <script src="~/js/core.min.js" asp-append-version="true"></script>
+    </environment>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

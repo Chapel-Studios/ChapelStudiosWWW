@@ -80,5 +80,10 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/js/Home/contact.js" asp-append-version="true"></script>
+    <environment include="Development">
+        <script src="~/js/Home/contact.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="Production">
+        <script src="~/js/Home/contact.min.js" asp-append-version="true"></script>
+    </environment>
 }

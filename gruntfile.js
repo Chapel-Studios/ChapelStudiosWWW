@@ -1,12 +1,8 @@
-/// <binding BeforeBuild='default' />
+/// <binding BeforeBuild='Debug, JustMin' ProjectOpened='Watch' />
 
 const sass = require('node-sass');
-//require('load-grunt-tasks')(grunt);
 
 module.exports = function (grunt) {
-    //'use strict';
-    //const sass = require('node_modules/node-sass');
-    //require('load-grunt-tasks')(grunt);
     // Project configuration.
 
 
@@ -29,39 +25,54 @@ module.exports = function (grunt) {
                         dest: "wwwroot/css", // Destination
                         ext: ".css" // File extension
                     }
-                    //, {
-                    //    expand: true, // Recursive
-                    //    cwd: "Areas", // The startup directory
-                    //    src: ["**/*.scss"], // Source files
-                    //    dest: "wwwroot/css", // Destination
-                    //    ext: ".css" // File extension
-                    //}
                 ]
             }
         }
         , terser: {
             options: {
                 output: {
-                    beautify: true,
                     preamble: '// Written by Rev. J. Lee Blackwell; Please Don\'t steal my code.'
                 }
-            }
-            , dist: {
-                files: [{
+            },
+            debug: {
+                options: {
+                    compress: false,
+                    mangle: false,
+                    output: {
+                        beautify: true,
+                    }
+                }
+                , files: [{
                     expand: true,
                     cwd: "JS",
                     src: ["**/*.js"],
                     dest: "wwwroot/js",
                 }]
             }
+            , release: {
+                files: [{
+                    expand: true,
+                    cwd: "JS",
+                    src: ["**/*.js"],
+                    dest: "wwwroot/js",
+                    ext: ".min.js"
+                }]
+            }
+        }
+        , watch: {
+            files: ["JS/*.js", "Styles/*.scss"],
+            tasks: "debug"
         }
     });
 
     // Load the plugin
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-terser');
-    //grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task(s).
-    grunt.registerTask('default', ['sass', 'terser']);
+    grunt.registerTask('Debug', ['sass', 'terser:debug']);
+    grunt.registerTask('JustMin', ['terser:release']);
+    grunt.registerTask('Release', ['sass', 'terser:release']);
+    grunt.registerTask('Watch', ['watch']);
 };
