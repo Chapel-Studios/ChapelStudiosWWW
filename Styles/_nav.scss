@@ -119,6 +119,7 @@ nav {
         padding: 0.5em;
         box-sizing: border-box;
         transition: transform ease-in-out .3s;
+        display: table;
 
         &:first-child {
             z-index: 1;
@@ -135,6 +136,11 @@ nav {
             a {
                 color: $PrimaryBackground;
             }
+        }
+
+        .nav-link {
+            vertical-align: middle;
+            display: table-cell;
         }
     }
 
@@ -461,12 +467,17 @@ nav {
             padding-left: 1em;
         }
 
-        & .nav-item {
+        .nav-item {
             background: none;
+            display: initial;
 
             &:first-child {
                 border-bottom: none;
                 border-right: 2px solid $TertiaryBackground;
+            }
+
+            .nav-link {
+                display: initial;
             }
         }
     }
