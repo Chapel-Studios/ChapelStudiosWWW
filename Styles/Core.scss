@@ -206,6 +206,36 @@ a {
     }
 }
 
+.to-top-btn {
+    width: 60px;
+    height: 60px;
+    background: rgba(255,255,255,0.2);
+    position: fixed;
+    bottom: 75px;
+    right: calc(3.25vw - 10px);
+    display: none;
+    border-radius: 50%;
+
+    &.active {
+        display: inline-block;
+    }
+
+    &::before {
+        content: '';
+        height: 50%;
+        width: 50%;
+        top: 60%;
+        left: 50%;
+        position: absolute;
+        //transform: rotate(-45deg);
+        transform: translate(-50%, -50%) rotate(-45deg);
+        border-right: 10px solid rgba(0,0,0,0.2);
+        border-top: 10px solid rgba(0,0,0,0.2);
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+}
+
 footer {
     background: $PrimaryBackground;
     min-height: 100px;

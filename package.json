@@ -22,9 +22,9 @@
     "grunt-terser": "^1.0.0",
     "node-sass": "^4.13.1",
     "terser-webpack-plugin": "^2.3.5",
-    "webpack": "^4.42.1"
-  },
-  "dependencies": {
+    "webpack": "^4.42.1",
+    "grunt-contrib-watch": "^1.1.0",
     "load-grunt-tasks": "^5.1.0"
-  }
+  },
+  "dependencies": {}
 }
