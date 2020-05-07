@@ -15,11 +15,16 @@
     align-content: end;
     font-size: 1.2rem;
     color: $HeaderTextColour;
-    margin-bottom: 3em;
+    padding: 0 2em;
 
     h1 {
-        text-transform: full-width uppercase;
+        text-transform: uppercase;
         white-space: nowrap;
+        text-align: justify;
+        text-align-last: justify;
+        text-justify: inter-character;
+        padding: 1em;
+        line-height: 1.5em;
     }
 }
 
@@ -124,9 +129,14 @@
 
     .banner {
         font-size: 1.5rem;
+        margin-bottom: 1.5em;
 
-        h1 br {
-            display: none;
+        h1 {
+            padding: 0;
+
+            br {
+                display: none;
+            }
         }
     }
 
@@ -151,5 +161,4 @@
         width: 350px;
         display: block;
     }
-
 }
