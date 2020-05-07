@@ -37,25 +37,28 @@
         });
     });
 
-    // Add behaviour to all anchor links on page
+    // Manage anchor links behaviour (on page only)
     function filterPath(string) {
         return string
             .replace(/^\//, '')
             .replace(/(index|default).[a-zA-Z]{3,4}$/, '')
             .replace(/\/$/, '');
     }
+
     let locationPath = filterPath(location.pathname);
+
     document.querySelectorAll('a[href*="#"]').forEach(link => {
         let thisPath = filterPath(link.pathname) || locationPath;
-        let hash = link.hash;
-        let hashName = hash.replace(/#/, '');
-        if (hashName) {
-            let targetEl = document.getElementById(hashName);
 
-            if (targetEl) {
-                if (locationPath == thisPath
-                    && (location.hostname == link.hostname || !link.hostname)
-                ) {
+        if ((location.hostname == link.hostname || !link.hostname)
+            && (locationPath == thisPath)
+        ) {
+            let hashName = link.hash.replace(/#/, '');
+
+            if (hashName) {
+                let targetEl = document.getElementById(hashName);
+
+                if (targetEl) {
                     link.addEventListener('click', () => {
                         event.preventDefault();
                         targetEl.scrollIntoView({
@@ -66,12 +69,12 @@
                     });
                 }
             }
-        }
-        else {
-            // Disable links with no href
-            link.addEventListener('click', () => {
-                event.preventDefault();
-            });
+            else {
+                // Disable links with no actual destination
+                link.addEventListener('click', () => {
+                    event.preventDefault();
+                });
+            }
         }
         
     });
