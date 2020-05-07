@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using ChapelStudiosWWW.Attributes;
 using ChapelStudiosWWW.Models.Home;
 using ChapelStudiosWWW.Services.Contracts;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -22,10 +23,13 @@ namespace ChapelStudiosWWW.Pages
         }
 
         private IEmailService _emailService;
-
+        
         [BindProperty]
+        [FormContainsEmailOrPhone]
         public ContactPageMessage Message { get; set; }
         public string ResponseMessage { get; private set; }
+
+
         public void OnGet()
         {
             Message = new ContactPageMessage();
@@ -33,14 +37,16 @@ namespace ChapelStudiosWWW.Pages
 
         public void OnPost()
         {
-            if (ModelState.IsValid && (!string.IsNullOrEmpty(Message.Phone) || !string.IsNullOrEmpty(Message.Email)))
+            if (!string.IsNullOrEmpty(Message.Phone) || !string.IsNullOrEmpty(Message.Email))
             {
-                var msg = $"Name: {Message.Name}<br />Email: {Message.Email}<br />Phone: {Message.Phone}<br />Message:<br />{Message.Message}";
-                _emailService.SendFromContactPage("Contact Request: " + Message.Category, msg);
+                if (ModelState.IsValid)
+                {
+                    var msg = $"Name: {Message.Name}<br />Email: {Message.Email}<br />Phone: {Message.Phone}<br />Message:<br />{Message.Message}";
+                    _emailService.SendFromContactPage("Contact Request: " + Message.Category, msg);
 
-                ResponseMessage = "Thanks for taking the time to contact us.";
+                    ResponseMessage = "Thanks for taking the time to contact us.";
+                }
             }
-            
         }
     }
 }

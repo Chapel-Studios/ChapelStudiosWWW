@@ -1,48 +1,84 @@
 ﻿@page "/Contact"
 @model ChapelStudiosWWW.Pages.ContactModel
 @{
+    string[] Categories = new string[]
+    {
+        "General Inquiry",
+        "Game Design Services",
+        "Web Development Services",
+        "World Building Services"
+    };
     ViewData["Title"] = "Contact";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div>
-    <h1>Leave us a note</h1>
-    <p>Fill out the form below and we'll try to respond as soon as possible.</p>
-</div>
-@if (!string.IsNullOrEmpty(Model.ResponseMessage))
-{
-    <div class="response">@Model.ResponseMessage</div>
-}
-else
-{
-    <form asp-page="Contact" method="post" id="ContactPageForm">
-        <div>
-            <label asp-for="Message.Name">Name</label>
-            <input asp-for="Message.Name" />
-            <p class="help-block"></p>
-        </div>
-        <div>
-            <label asp-for="Message.Phone">Phone</label>
-            <input asp-for="Message.Phone" />
-            <p class="help-block"></p>
-        </div>
-        <div>
-            <label asp-for="Message.Email">Email</label>
-            <input asp-for="Message.Email" />
-            <p class="help-block"></p>
-        </div>
-        <div>
-            <label asp-for="Message.Category"></label>
-            <select asp-for="Message.Category">
-                <option>General Inquiry</option>
-                <option>Game Design Services</option>
-                <option>Web Development Services</option>
-                <option>World Building Services</option>
-            </select>
-        </div>
-        <div>
-            <textarea rows="10" cols="100" class="form-control" asp-for="Message.Message"></textarea>
-        </div>
-        <button class="btn" type="submit">Pass Us A Note!</button>
-    </form>
+
+@section Head {
+    <link rel="stylesheet" href="~/css/Home/contact.css" asp-append-version="true" />
 }
 
+<div class="contact-page">
+    <div class="banner">
+        <h1>Leave us <br />a note</h1>
+        <p>Fill out the form below and we'll try to respond as soon as possible.</p>
+    </div>
+    @if (!string.IsNullOrEmpty(Model.ResponseMessage))
+    {
+        <div class="response">@Model.ResponseMessage</div>
+    }
+    else
+    {
+        <form asp-page="Contact" method="post" id="ContactPageForm">
+            <div class="error" asp-validation-summary="All"></div>
+            <div>
+                <label asp-for="Message.Category"></label>
+                <select asp-for="Message.Category" asp-items="new SelectList(Categories)">
+                </select>
+                <span asp-validation-for="Message.Category"></span>
+            </div>
+            <div>
+                <label asp-for="Message.Name"></label>
+                <input asp-for="Message.Name" />
+                <span asp-validation-for="Message.Category"></span>
+            </div>
+            <div>
+                <label asp-for="Message.Phone"></label>
+                <input asp-for="Message.Phone" />
+                <span asp-validation-for="Message.Category"></span>
+            </div>
+            <div>
+                <label asp-for="Message.Email"></label>
+                <input asp-for="Message.Email" />
+                <span asp-validation-for="Message.Category"></span>
+            </div>
+            <div>
+                <label asp-for="Message.Message"></label>
+                <textarea class="form-control" asp-for="Message.Message" rows="5"></textarea>
+                <span asp-validation-for="Message.Category"></span>
+            </div>
+            <button class="btn" type="submit" >Pass Us A Note!</button>
+        </form>
+    }
+    <div class="copyBox">
+        <div class="copyBox_card active" asp-forCard="@Categories[0]">
+            <h1>@Categories[0]</h1>
+            <p>Add More Text Here</p>
+        </div>
+        <div class="copyBox_card" asp-forCard="@Categories[1]">
+            <h1>@Categories[1]</h1>
+            <p>Add More Text Here</p>
+        </div>
+        <div class="copyBox_card" asp-forCard="@Categories[2]">
+            <h1>@Categories[2]</h1>
+            <p>Add More Text Here</p>
+        </div>
+        <div class="copyBox_card" asp-forCard="@Categories[3]">
+            <h1>@Categories[3]</h1>
+            <p>Add More Text Here</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/Home/contact.js" asp-append-version="true"></script>
+}
