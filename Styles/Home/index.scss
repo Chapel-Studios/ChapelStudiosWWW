@@ -10,8 +10,12 @@ section {
     display: grid;
 
     &:nth-of-type(3n-2) {
-        grid-template: "accent title" auto "text text" 1fr "tag tag" auto / minmax(0, 1fr) 4fr;
+        //grid-template: "accent title" auto "text text" 1fr "tag tag" auto / minmax(0, 1fr) 4fr;
         background-color: $TertiaryBackground;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: baseline;
     }
 
     &:nth-of-type(3n-1) {
@@ -180,6 +184,10 @@ a.anchor {
 
     &.covid {
         @include AlertProto($ERBGColour, $ERTextColour, $ERBorderColour);
+        position: absolute;
+        top: 63%;
+        left: 0;
+        transform: translateY(-50%);
 
         p {
             text-align: center;
@@ -247,6 +255,10 @@ a.anchor {
     display: none;
 }
 
+#patreon + section {
+    min-height: 475px;
+}
+
 @supports (-ms-ime-align: auto) {
     .library-logos {
         justify-content: space-around;
@@ -270,7 +282,10 @@ a.anchor {
 @media (min-width: 600px) {
     section {
         &:nth-of-type(3n-2) {
+            display: grid;
             grid-template: "title accent" auto "text accent" 1fr "tag accent" auto / minmax(0, 3fr) 1fr;
+            justify-content: unset;
+            align-content: unset;
 
             .section_title {
                 justify-self: end;
