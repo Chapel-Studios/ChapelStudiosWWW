@@ -23,12 +23,6 @@ body {
     color: $MainTextColour;
     display: flex;
     flex-direction: column;
-
-    &.lock-scroll {
-        overflow-y: scroll;
-        position: fixed;
-        width: 100%;
-    }
 }
 
 .content {
