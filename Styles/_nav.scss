@@ -40,6 +40,8 @@ nav {
     justify-items: center;
     align-items: center;
     transition: left linear .5s;
+    overflow-y: hidden;
+    overscroll-behavior: contain;
 }
 
 #navbar-checkbox {
@@ -60,7 +62,6 @@ nav {
         & ~ .navbar-collapse {
             left: 0;
             overflow-y: auto;
-            scroll-behavior: smooth;
         }
     }
 }
@@ -273,6 +274,7 @@ nav {
             "nav-main nav-main" auto
             / 4fr minmax(110px, auto);
         background: none;
+        overflow-y: unset;
     }
 
     .nav-main {
