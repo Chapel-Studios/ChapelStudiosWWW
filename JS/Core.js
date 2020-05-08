@@ -1,8 +1,12 @@
 ﻿(function () {
+    //----------------------------------
     // Automated scrolling functions
-    const ToTopBtn = document.getElementsByClassName("to-top-btn")[0];
-    //const pageElements = [document.getElementsByTagName('body'), document.getElementsByTagName('html')];
+    //----------------------------------
 
+    // To-Top Button
+    //----------------------------------
+    const ToTopBtn = document.getElementsByClassName("to-top-btn")[0];
+    
     function checkScrollPos() {
         let currentPos = document.documentElement.scrollTop || document.body.scrollTop;
         if (currentPos === 0) {
@@ -28,7 +32,8 @@
         });
     });
 
-    // Manage anchor links behaviour (on page only)
+    // Manage anchor link behaviour (on page only)
+    //-----------------------------------------------
     function filterPath(string) {
         return string
             .replace(/^\//, '')
