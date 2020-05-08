@@ -1,15 +1,4 @@
 ﻿(function () {
-    // Scroll locking for mobile menu
-    const body = document.getElementsByTagName("body")[0];
-    document.getElementById('navbar-checkbox').addEventListener('click', function () {
-        if (this.checked) {
-            body.classList.add("lock-scroll");
-        }
-        else {
-            body.classList.remove("lock-scroll");
-        }
-    });
-
     // Automated scrolling functions
     const ToTopBtn = document.getElementsByClassName("to-top-btn")[0];
     //const pageElements = [document.getElementsByTagName('body'), document.getElementsByTagName('html')];
