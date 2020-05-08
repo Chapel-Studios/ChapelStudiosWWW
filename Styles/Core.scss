@@ -13,6 +13,7 @@ body, html, ul, button, section, h1, p {
 
 html, body {
     overflow: auto;
+    height: 100%;
 }
 
 body {
@@ -20,12 +21,12 @@ body {
     font-size: 17px;
     font-family: $StandardFont;
     color: $MainTextColour;
+    display: flex;
+    flex-direction: column;
+}
 
-    &.lock-scroll {
-        overflow-y: scroll;
-        position: fixed;
-        width: 100%;
-    }
+.content {
+    flex: 1 0 auto;
 }
 
 .container {
@@ -245,6 +246,7 @@ footer {
     background: $PrimaryBackground;
     min-height: 100px;
     padding: 2vh 3vw;
+    flex-shrink: 0;
 
     .container {
         width: 85vw;

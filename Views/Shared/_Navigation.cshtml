@@ -40,7 +40,7 @@
         </ul>
     </li>
 
-    @if (SignInManager.IsSignedIn(User))
+    @*@if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
             <a class="nav-link" asp-area="ResumeBuilder" asp-controller="Resumes" asp-action="Index">Resum&eacute;</a>
@@ -53,7 +53,7 @@
                 </li>
             </ul>
         </li>
-    }
+    }*@
     @if (showAboutMenu)
     {
         <li class="nav-item">
@@ -86,7 +86,7 @@
                     <a class="nav-link" asp-controller="Home" asp-action="Index" asp-fragment="patreon">Support Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="ResumeBuilder" asp-controller="Resumes" asp-action="Index">Meet the Team</a>
+                    <a class="nav-link" href="#">Meet the Team</a>
                 </li>
             </ul>
         </li>

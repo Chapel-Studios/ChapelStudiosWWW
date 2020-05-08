@@ -3,7 +3,7 @@
 
 .contact-page {
     display: grid;
-    grid-template: "banner" minmax(30vh, auto) "form" 1fr / 1fr;
+    grid-template: "banner" minmax(30vh, auto) "form" 1fr / minmax(0px, 1fr);
     margin-bottom: 5vh;
 }
 
@@ -12,6 +12,7 @@
     justify-self: center;
     text-align: center;
     display: grid;
+    grid-template-columns: minmax(0px, auto);
     align-content: end;
     font-size: 1.2rem;
     color: $HeaderTextColour;
@@ -19,12 +20,10 @@
 
     h1 {
         text-transform: uppercase;
-        white-space: nowrap;
-        text-align: justify;
-        text-align-last: justify;
-        text-justify: inter-character;
         padding: 1em;
         line-height: 1.5em;
+        word-spacing: 0.5em;
+        letter-spacing: 0.05em;
     }
 }
 
@@ -122,6 +121,20 @@
     text-align: center;
 }
 
+@-moz-document url-prefix() {
+    .banner h1 {
+        text-align: justify;
+        text-align-last: justify;
+        text-justify: inter-character;
+    }
+
+    @media (mmin-width: 475px) {
+        .banner h1 {
+            text-transform: uppercase full-width;
+        }
+    }
+}
+
 @media (min-width: 800px) {
     .contact-page {
         grid-template: "banner banner" minmax(30vh, auto) "form copyBox" 1fr / 50% 50%;
@@ -133,6 +146,10 @@
 
         h1 {
             padding: 0;
+
+            br {
+                display: none;
+            }
         }
     }
 
