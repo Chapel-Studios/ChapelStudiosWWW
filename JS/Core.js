@@ -1,4 +1,19 @@
 ﻿(function () {
+    //-----------------------------------------------------
+    // Handle Scroll Locking when hamburger menu is open
+    //-----------------------------------------------------
+    const html = document.getElementsByTagName("html")[0];
+    const navCheckbox = document.getElementById('navbar-checkbox');
+    navCheckbox.addEventListener('click', function () {
+        if (this.checked) {
+            html.classList.add("scroll-lock");
+        }
+        else {
+            html.classList.remove("scroll-lock");
+        }
+    });
+
+
     //----------------------------------
     // Automated scrolling functions
     //----------------------------------
@@ -57,8 +72,12 @@
                 if (targetEl) {
                     link.addEventListener('click', () => {
                         event.preventDefault();
+                        if (navCheckbox.checked) {
+                            navCheckbox.checked = false;
+                        }
+
                         targetEl.scrollIntoView({
-                            top: 50,
+                            top: 0,
                             left: 0,
                             behavior: "smooth"
                         });

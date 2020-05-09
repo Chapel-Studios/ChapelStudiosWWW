@@ -11,9 +11,16 @@ body, html, ul, button, section, h1, p {
     box-sizing: border-box;
 }
 
-html, body {
-    overflow: auto;
+html {
     height: 100%;
+
+    &.scroll-lock {
+        overflow: auto;
+
+        body {
+            overflow: auto;
+        }
+    }
 }
 
 body {
@@ -23,6 +30,8 @@ body {
     color: $MainTextColour;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    padding-top: 75px;
 }
 
 .content {
@@ -36,7 +45,8 @@ body {
 }
 
 header {
-    position: sticky;
+    position: fixed;
+    width: 100%;
     top: 0;
     z-index: 99;
     -webkit-box-shadow: 0px 2px 12px -4px rgba(255,255,255,0.55);
@@ -157,6 +167,26 @@ a {
         &::before {
             background-color: rgba(44,44,44, 0.2);
         }
+    }
+}
+
+.banner {
+    grid-area: banner;
+    justify-self: center;
+    text-align: center;
+    display: grid;
+    grid-template-columns: minmax(0px, auto);
+    align-content: end;
+    font-size: 1.2rem;
+    color: $HeaderTextColour;
+    padding: 0 2em;
+
+    h1 {
+        text-transform: uppercase;
+        padding: 1em;
+        line-height: 1.5em;
+        word-spacing: 0.5em;
+        letter-spacing: 0.05em;
     }
 }
 
@@ -294,6 +324,20 @@ footer {
     }
 }
 
+@-moz-document url-prefix() {
+    .banner h1 {
+        text-align: justify;
+        text-align-last: justify;
+        text-justify: inter-character;
+    }
+
+    @media (mmin-width: 475px) {
+        .banner h1 {
+            text-transform: uppercase full-width;
+        }
+    }
+}
+
 @media (max-height: 450px) {
     header {
         position: relative;
@@ -336,25 +380,36 @@ footer {
     }
 }
 
-@media (min-width: 1100px) {
-    .container { 
-        max-width: 80vw;
-    }
+@media (min-width: 800px) {
+    .banner {
+        font-size: 1.5rem;
+        margin-bottom: 1.5em;
 
-    .card_container {
-        grid-auto-flow: column;
+        h1 {
+            padding: 0;
 
-        .card {
-            width: 250px;
-            grid-template: 
-                "photo" minmax(100px, max-content) 
-                "title" minmax(50px, max-content) 
-                "desc" minmax(150px, auto) 
-                / minmax(0px, 1fr);
-
-            .card_photo {
-                height: 300px;
+            br {
+                display: none;
             }
         }
     }
 }
+
+@media (min-width: 1100px) {
+        .container {
+            max-width: 80vw;
+        }
+
+        .card_container {
+            grid-auto-flow: column;
+
+            .card {
+                width: 250px;
+                grid-template: "photo" minmax(100px, max-content) "title" minmax(50px, max-content) "desc" minmax(150px, auto) / minmax(0px, 1fr);
+
+                .card_photo {
+                    height: 300px;
+                }
+            }
+        }
+    }
