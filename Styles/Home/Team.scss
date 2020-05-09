@@ -1,0 +1,11 @@
+﻿.card_container.team {
+    grid-template: "." auto / auto;
+
+    card.team-member {
+        grid-template: 
+            "photo title" 1fr
+            "photo position" 1fr
+            "photo bio" 3fr
+            / minmax(0px, 1fr);
+    }
+}

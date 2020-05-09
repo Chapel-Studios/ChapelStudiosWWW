@@ -1,0 +1,48 @@
+﻿@page "/MeetTheTeam"
+@{
+    ViewData["Title"] = "Team";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/css/Home/team.css" asp-append-version="true" />
+}
+
+<div class="banner">
+    <h1>Come Meet Our Team</h1>
+</div>
+
+
+<div class="card_container team">
+    <div class="card team-member">
+        <div class="card_photo" style="background: url('/Assets/Images/Home/jake_profile.jpg')"></div>
+        <h1 class="card_title">Jake Blackwell</h1>
+        <h2 class="team_position">One man, 99% of the hats: CEO, Engineer, Developer and Main Creative Lead.</h2>
+        <p class="bio">Bio snipit will go here</p>
+    </div>
+    <div class="card team-member">
+        <div class="card_photo" style="background: url('/Assets/Images/Home/jake_profile.jpg')"></div>
+        <h1 class="card_title">Jake Blackwell</h1>
+        <h2 class="team_position">One man, 99% of the hats. CEO, Engineer, developer and main creative.</h2>
+        <p class="bio">Bio snipit will go here</p>
+    </div>
+    <div class="card team-member">
+        <div class="card_photo" style="background: url('/Assets/Images/Home/jake_profile.jpg')"></div>
+        <h1 class="card_title">Jake Blackwell</h1>
+        <h2 class="team_position">One man, 99% of the hats. CEO, Engineer, developer and main creative.</h2>
+        <p class="bio">Bio snipit will go here</p>
+    </div>
+    <h1 class="header">Open Positions</h1>
+    <div class="card open_position">
+        <h2 class="team_position">One man, 99% of the hats. CEO, Engineer, developer and main creative.</h2>
+        <p class="bio">Bio snipit will go here</p>
+        <a class="btn" href="#">Apply Now</a>
+    </div>
+    <div class="card open_position">
+        <h2 class="team_position">One man, 99% of the hats: CEO, Engineer, Developer and Main Creative Lead.</h2>
+        <p class="bio">Bio snipit will go here</p>
+        <a class="btn" href="#">Apply Now</a>
+    </div>
+
+</div>
+
