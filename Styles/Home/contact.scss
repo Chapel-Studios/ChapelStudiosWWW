@@ -7,26 +7,6 @@
     margin-bottom: 5vh;
 }
 
-.banner {
-    grid-area: banner;
-    justify-self: center;
-    text-align: center;
-    display: grid;
-    grid-template-columns: minmax(0px, auto);
-    align-content: end;
-    font-size: 1.2rem;
-    color: $HeaderTextColour;
-    padding: 0 2em;
-
-    h1 {
-        text-transform: uppercase;
-        padding: 1em;
-        line-height: 1.5em;
-        word-spacing: 0.5em;
-        letter-spacing: 0.05em;
-    }
-}
-
 .response {
     grid-area: form;
 }
@@ -121,36 +101,9 @@
     text-align: center;
 }
 
-@-moz-document url-prefix() {
-    .banner h1 {
-        text-align: justify;
-        text-align-last: justify;
-        text-justify: inter-character;
-    }
-
-    @media (mmin-width: 475px) {
-        .banner h1 {
-            text-transform: uppercase full-width;
-        }
-    }
-}
-
 @media (min-width: 800px) {
     .contact-page {
         grid-template: "banner banner" minmax(30vh, auto) "form copyBox" 1fr / 50% 50%;
-    }
-
-    .banner {
-        font-size: 1.5rem;
-        margin-bottom: 1.5em;
-
-        h1 {
-            padding: 0;
-
-            br {
-                display: none;
-            }
-        }
     }
 
     #ContactPageForm {
