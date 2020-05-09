@@ -225,7 +225,8 @@ a {
             font-size: 1.5em;
             color: $HighlightTextColour;
             padding: 0.35em 0.85em;
-            place-self: center;
+            justify-self: center;
+            align-self: center;
             text-align: center;
         }
 
