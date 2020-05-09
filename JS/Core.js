@@ -73,7 +73,7 @@
                     link.addEventListener('click', () => {
                         event.preventDefault();
                         if (navCheckbox.checked) {
-                            navCheckbox.checked = false;
+                            navCheckbox.click();
                         }
 
                         targetEl.scrollIntoView({

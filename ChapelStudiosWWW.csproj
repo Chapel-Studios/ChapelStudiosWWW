@@ -6,10 +6,9 @@
     <StartupObject>ChapelStudiosWWW.Program</StartupObject>
     <Authors>ChapelStudios</Authors>
     <Product>ChapelStudios Website</Product>
-    <AssemblyVersion>0.6.2.1</AssemblyVersion>
-    <FileVersion>0.6.2.1</FileVersion>
-    <PackageReleaseNotes>fixed more issues with scroll behaviour on mobile;
-pushing out with minor code cleanup as hotfix;</PackageReleaseNotes>
+    <AssemblyVersion>0.6.2.2</AssemblyVersion>
+    <FileVersion>0.6.2.2</FileVersion>
+    <PackageReleaseNotes>caught mistake on scroll-to-top button when using mobil nav and hotfixed</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
