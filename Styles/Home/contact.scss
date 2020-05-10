@@ -3,7 +3,7 @@
 
 .contact-page {
     display: grid;
-    grid-template: "banner" minmax(30vh, auto) "form" 1fr / minmax(0px, 1fr);
+    grid-template: "banner" minmax(0px, auto) "form" 1fr / minmax(0px, 1fr);
     margin-bottom: 5vh;
 }
 
