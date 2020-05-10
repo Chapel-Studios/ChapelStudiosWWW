@@ -304,6 +304,10 @@ footer {
         margin-right: calc(1em + 50px - 7.5vw);
         text-align: end;
 
+        li {
+            padding: 0 0.5em;
+        }
+
         a {
             color: $MainTextColour;
             line-height: 1.5em;
