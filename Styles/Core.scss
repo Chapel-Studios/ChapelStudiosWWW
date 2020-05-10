@@ -56,7 +56,7 @@ header {
 
 main {
     display: grid;
-    padding-top: 4vh;
+    padding: 4vh 0;
     grid-template: 
         "banner" auto 
         "." 1fr 
