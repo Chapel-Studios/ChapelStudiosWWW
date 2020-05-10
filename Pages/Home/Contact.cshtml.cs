@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using ChapelStudiosWWW.Attributes;
+﻿using ChapelStudiosWWW.Attributes;
 using ChapelStudiosWWW.Models.Home;
 using ChapelStudiosWWW.Services.Contracts;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Newtonsoft.Json;
 
 namespace ChapelStudiosWWW.Pages
 {
