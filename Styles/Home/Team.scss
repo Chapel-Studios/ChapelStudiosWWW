@@ -1,20 +1,109 @@
 ﻿@import '../_colours';
+@import '../_typography';
 
 .card_container.team {
     grid-template: "." auto / auto;
     grid-auto-flow: row;
+    grid-gap: 3.3em;
+    margin-top: 0;
 
-    .card.team-member {
-        grid-template: 
-            "photo title" 50px
-            "photo position" minmax(50px, auto)
-            "photo bio" minmax(150px, 3fr)
-            / minmax(0px, 2fr) minmax(0px, 5fr);
+    .card {
         width: 100%;
         background-color: #FFF;
+        //box-shadow: 0 0 5px 2px $PrimaryBackground, 0 0 10px 5px $SoftBlack;
+        /*========================================================================
+         * thanks to https://css-tricks.com/almanac/properties/b/box-shadow/
+         * ======================================================================*/
+        position: relative;
+        -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 
-        .team-position {
+        &:before, &:after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            -webkit-box-shadow: 0 0 20px rgba($PrimaryBackground, 0.8);
+            -moz-box-shadow: 0 0 20px rgba($PrimaryBackground, 0.8);
+            box-shadow: 0 0 20px rgba($PrimaryBackground, 0.8);
+            top: 50%;
+            bottom: 0;
+        }
+
+        &:after {
+            right: 10px;
+            left: auto;
+            -webkit-transform: skew(8deg) rotate(3deg);
+            -moz-transform: skew(8deg) rotate(3deg);
+            -ms-transform: skew(8deg) rotate(3deg);
+            -o-transform: skew(8deg) rotate(3deg);
+            transform: skew(8deg) rotate(3deg);
+        }
+
+        &.team-member {
+            grid-template: 
+                "photo title" minmax(50px, auto) 
+                "photo position" minmax(50px, auto) 
+                "photo bio" minmax(150px, 3fr) 
+                / minmax(0px, 2fr) minmax(0px, 5fr);
+
+            &:nth-child(1) {
+                border-radius: 160px;
+
+                &:before {
+                    -moz-border-radius: 160px / 100px;
+                    border-radius: 160px / 100px;
+                    left: 40px;
+                    right: 40px;
+                }
+            }
+
+            &:nth-child(2) {
+                border-radius: 49px;
+
+                &:before {
+                    -moz-border-radius: 75px / 10px;
+                    border-radius: 75px / 10px;
+                    left: 25px;
+                    right: 25px;
+                }
+            }
+
+            &:nth-child(3) {
+                //border-radius: 0;
+
+                &:before {
+                    -moz-border-radius: 100px / 10px;
+                    border-radius: 100px / 10px;
+                    left: 10px;
+                    right: 10px;
+                }
+            }
+
+            .bio {
+                padding-left: 0;
+            }
+        }
+
+        &.open_position {
+            align-items: center;
+            justify-items: center;
+        }
+
+        .card_title {
+            font-family: $TitleFont;
+            color: $PrimaryBackground;
+            //margin: 1em 2em .5em;
+            justify-self: start;
+            font-size: 3rem;
+        }
+
+        .team_position {
             padding-right: 1em;
+            color: $SoftBlack;
+            align-self: center;
+            font-weight: 600;
+            text-transform: capitalize;
         }
 
         .card_photo {
@@ -24,13 +113,13 @@
             justify-self: center;
             align-self: center;
             border-radius: 50%;
-            box-shadow: 0 0 5px 2px $TertiaryBackground,
-                0 0 10px 5px $BackdropColour;
+            box-shadow: 0 0 5px 2px $TertiaryBackground, 0 0 10px 5px $BackdropColour;
             margin: 3em;
         }
 
         .bio {
-            padding: 1em 0;
+            padding: 1em 3em;
+            color: $SoftBlack;
         }
     }
 }

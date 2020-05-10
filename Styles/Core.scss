@@ -207,11 +207,16 @@ a {
     margin: 3vh auto;
 
     .header {
-
+        color: $HeaderTextColour;
+        text-transform: uppercase;
+        line-height: 1.5em;
+        word-spacing: 0.5em;
+        letter-spacing: 0.05em;
+        justify-self: center;
+        text-align: center;
     }
 
     .card {
-        //grid-area: card;
         width: 100%;
         display: grid;
         grid-template: 
