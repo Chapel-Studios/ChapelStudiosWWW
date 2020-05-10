@@ -2,8 +2,9 @@
     //-----------------------------------------------------
     // Handle Scroll Locking when hamburger menu is open
     //-----------------------------------------------------
-    const html = document.getElementsByTagName("html")[0];
-    const navCheckbox = document.getElementById('navbar-checkbox');
+    const html = document.getElementsByTagName("html")[0],
+        navCheckbox = document.getElementById('navbar-checkbox');
+
     navCheckbox.addEventListener('click', function () {
         if (this.checked) {
             html.classList.add("scroll-lock");
