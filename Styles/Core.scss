@@ -168,6 +168,7 @@ a {
 
     &:hover {
         top: 3px;
+        text-decoration: none;
 
         &::before {
             background-color: rgba(44,44,44, 0.2);
