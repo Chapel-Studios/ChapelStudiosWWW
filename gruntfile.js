@@ -60,8 +60,14 @@ module.exports = function (grunt) {
             }
         }
         , watch: {
-            files: ["JS/*.js", "Styles/*.scss"],
-            tasks: "debug"
+            JS: {
+                files: ["JS/*.js"],
+                tasks: "Debug"
+            }
+            , SCSS: {
+                files: ["Styles/*.scss"],
+                tasks: "Debug"
+            }
         }
     });
 
@@ -74,5 +80,5 @@ module.exports = function (grunt) {
     grunt.registerTask('Debug', ['sass', 'terser:debug']);
     grunt.registerTask('JustMin', ['terser:release']);
     grunt.registerTask('Release', ['sass', 'terser:release']);
-    grunt.registerTask('Watch', ['watch']);
+    grunt.registerTask('Watch', ['watch:JS', 'watch:SCSS']);
 };
