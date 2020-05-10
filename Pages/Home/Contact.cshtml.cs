@@ -23,9 +23,17 @@ namespace ChapelStudiosWWW.Pages
         public string ResponseMessage { get; private set; }
 
 
-        public void OnGet()
+        public void OnGet(string category = "", string job = "")
         {
             Message = new ContactPageMessage();
+            if (!string.IsNullOrEmpty(category))
+            {
+                Message.Category = category;
+            }
+            if (!string.IsNullOrEmpty(job))
+            {
+                Message.Subject = category;
+            }
         }
 
         public void OnPost()
