@@ -57,6 +57,10 @@ header {
 main {
     display: grid;
     padding-top: 4vh;
+    grid-template: 
+        "banner" auto 
+        "." 1fr 
+        / minmax(0px, auto);
 }
 
 section {
@@ -202,9 +206,11 @@ a {
     margin: 3vh auto;
 
     .header {
+
     }
 
     .card {
+        //grid-area: card;
         width: 100%;
         display: grid;
         grid-template: 
@@ -218,6 +224,8 @@ a {
             grid-area: photo;
             justify-self: stretch;
             align-self: stretch;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
         }
 
         .card_title {
@@ -378,6 +386,12 @@ footer {
 
     footer .sitemap {
         margin-right: 0;
+    }
+}
+
+@media (min-width: 700px) {
+    body { 
+        padding-top: 125px;
     }
 }
 
