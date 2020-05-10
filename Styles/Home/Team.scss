@@ -1,23 +1,36 @@
-﻿.card_container.team {
+﻿@import '../_colours';
+
+.card_container.team {
     grid-template: "." auto / auto;
     grid-auto-flow: row;
 
     .card.team-member {
         grid-template: 
             "photo title" 50px
-            "photo position" 100px
-            "photo bio" 3fr
+            "photo position" minmax(50px, auto)
+            "photo bio" minmax(150px, 3fr)
             / minmax(0px, 2fr) minmax(0px, 5fr);
         width: 100%;
+        background-color: #FFF;
+
+        .team-position {
+            padding-right: 1em;
+        }
 
         .card_photo {
             position: relative;
             height: 200px;
             width: 200px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            justify-self: center;
+            align-self: center;
             border-radius: 50%;
+            box-shadow: 0 0 5px 2px $TertiaryBackground,
+                0 0 10px 5px $BackdropColour;
+            margin: 3em;
+        }
+
+        .bio {
+            padding: 1em 0;
         }
     }
 }
