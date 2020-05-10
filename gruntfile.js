@@ -50,7 +50,10 @@ module.exports = function (grunt) {
                 }]
             }
             , release: {
-                files: [{
+                options: {
+                    mangle: true
+                }
+                , files: [{
                     expand: true,
                     cwd: "JS",
                     src: ["**/*.js"],
