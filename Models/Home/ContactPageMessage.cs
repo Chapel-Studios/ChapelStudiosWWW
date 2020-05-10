@@ -11,6 +11,9 @@ namespace ChapelStudiosWWW.Models.Home
         [Required]
         public string Name { get; set; }
 
+        [Required]
+        public string Subject { get; set; }
+
         [EmailAddress]
         public string Email { get; set; }
 
