@@ -35,6 +35,11 @@ else
             <span asp-validation-for="Message.Category"></span>
         </div>
         <div>
+            <label asp-for="Message.Subject">@(Model.IsJobMode ? "Position" : "")</label>
+            <input asp-for="Message.Subject" />
+            <span asp-validation-for="Message.Subject"></span>
+        </div>
+        <div>
             <label asp-for="Message.Name"></label>
             <input asp-for="Message.Name" />
             <span asp-validation-for="Message.Category"></span>
