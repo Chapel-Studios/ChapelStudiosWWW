@@ -146,7 +146,8 @@ a {
 }
 
 .btn {
-    margin-top: 10px;
+    display: inline-block;
+    margin-top: 1em;
     font-family: $TitleFont;
     color: $HighlightLink;
     Background: $HighlightBackground;
