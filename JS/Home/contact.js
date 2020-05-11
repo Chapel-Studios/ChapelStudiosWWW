@@ -1,7 +1,8 @@
 ﻿const cards = document.getElementsByClassName("copyBox_card");
-document.getElementById("Message_Category").addEventListener("change", function () {
+const catSelect = document.getElementById("Message_Category");
+let changeCard = () => {
     for (const card of cards) {
-        if (this.value === card.attributes["asp-forcard"].value) {
+        if (catSelect.value === card.attributes["asp-forcard"].value) {
             card.classList.add("active");
         }
         else {
@@ -9,4 +10,6 @@ document.getElementById("Message_Category").addEventListener("change", function 
         }
 
     };
-});
+}
+catSelect.addEventListener("change", changeCard);
+changeCard();
