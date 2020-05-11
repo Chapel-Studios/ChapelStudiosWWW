@@ -52,7 +52,7 @@
                 "photo bio" minmax(150px, 3fr) 
                 / minmax(0px, 2fr) minmax(0px, 5fr);
 
-            &:nth-child(1) {
+            /*&:nth-child(1) {
                 border-radius: 160px;
 
                 &:before {
@@ -61,7 +61,7 @@
                     left: 40px;
                     right: 40px;
                 }
-            }
+            }*/
 
             /*&:nth-child(2) {
                 border-radius: 49px;
@@ -84,6 +84,7 @@
                     right: 10px;
                 }
             }*/
+
             .bio {
                 padding-left: 0;
 
