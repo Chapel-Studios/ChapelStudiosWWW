@@ -30,7 +30,7 @@ namespace ChapelStudiosWWW.Pages
             Message = new ContactPageMessage();
 
             if (!string.IsNullOrEmpty(category)) { Message.Category = category; }
-            if (!string.IsNullOrEmpty(subject)) { Message.Subject = category; }
+            if (!string.IsNullOrEmpty(subject)) { Message.Subject = subject; }
         }
 
         public void OnPost()
