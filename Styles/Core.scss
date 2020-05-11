@@ -403,6 +403,14 @@ footer {
     body { 
         padding-top: 125px;
     }
+
+    .med-hide {
+        display: none;
+    }
+
+    .med-show {
+        display: block;
+    }
 }
 
 @media (min-width: 800px) {
@@ -437,4 +445,12 @@ footer {
                 }
             }
         }
+    }
+
+    .lrg-hide {
+        display: none;
+    }
+
+    .lrg-show {
+        display: block;
     }
