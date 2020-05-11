@@ -18,6 +18,7 @@
         -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
         -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        border-radius: 160px;
 
         &:before, &:after {
             content: "";
@@ -28,6 +29,10 @@
             box-shadow: 0 0 20px rgba($PrimaryBackground, 0.8);
             top: 50%;
             bottom: 0;
+            -moz-border-radius: 160px / 100px;
+            border-radius: 160px / 100px;
+            left: 40px;
+            right: 40px;
         }
 
         &:after {
@@ -58,7 +63,7 @@
                 }
             }
 
-            &:nth-child(2) {
+            /*&:nth-child(2) {
                 border-radius: 49px;
 
                 &:before {
@@ -67,9 +72,9 @@
                     left: 25px;
                     right: 25px;
                 }
-            }
+            }*/
 
-            &:nth-child(3) {
+            /*&:nth-child(3) {
                 //border-radius: 0;
 
                 &:before {
@@ -78,10 +83,13 @@
                     left: 10px;
                     right: 10px;
                 }
-            }
-
+            }*/
             .bio {
                 padding-left: 0;
+
+                p {
+                    text-align: justify;
+                }
             }
         }
 
