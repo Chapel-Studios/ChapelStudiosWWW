@@ -46,12 +46,7 @@
         }
 
         &.team-member {
-            grid-template: 
-                "photo title" minmax(50px, auto) 
-                "photo position" minmax(50px, auto) 
-                "photo bio" minmax(150px, 3fr) 
-                / minmax(0px, 2fr) minmax(0px, 5fr);
-
+            grid-template: "photo" minmax(0px, auto) "title" minmax(0px, auto) "position" minmax(0px, auto) "bio" minmax(0px, auto) / minmax(0px, 1fr);
             /*&:nth-child(1) {
                 border-radius: 160px;
 
@@ -86,33 +81,37 @@
             }*/
 
             .bio {
-                padding-left: 0;
-
-                p {
-                    text-align: justify;
-                }
+                padding-bottom: 4em;
             }
         }
 
         &.open_position {
+            grid-template: "position" minmax(0px, auto) "bio" minmax(0px, auto) / minmax(0px, 1fr);
             align-items: center;
             justify-items: center;
+
+            .team_position {
+                width: 75%;
+                margin-top: 50px;
+            }
+
+            .bio {
+                padding-bottom: 1.5em;
+            }
         }
 
         .card_title {
             font-family: $TitleFont;
             color: $PrimaryBackground;
-            //margin: 1em 2em .5em;
-            justify-self: start;
-            font-size: 3rem;
+            font-size: 2rem;
         }
 
         .team_position {
-            padding-right: 1em;
             color: $SoftBlack;
             align-self: center;
             font-weight: 600;
             text-transform: capitalize;
+            text-align: center;
         }
 
         .card_photo {
@@ -123,12 +122,101 @@
             align-self: center;
             border-radius: 50%;
             box-shadow: 0 0 5px 2px $TertiaryBackground, 0 0 10px 5px $BackdropColour;
-            margin: 3em;
+            margin: 1em;
         }
 
         .bio {
-            padding: 1em 3em;
+            grid-area: bio;
+            padding: 1em 1em;
             color: $SoftBlack;
+            text-align-last: center;
+
+            p {
+                text-align: justify;
+            }
+        }
+    }
+}
+
+@media (min-width: 700px) {
+    .card_container.team {
+
+        .card {
+
+            &.team-member {
+                grid-template: "photo title" minmax(50px, auto) "photo position" minmax(50px, auto) "bio bio" minmax(150px, 3fr) / minmax(275px, 2fr) minmax(0px, 5fr);
+
+                .card_title {
+                    margin-top: 50px;
+                }
+
+                .bio {
+                    padding: 0 50px 1.5em;
+                }
+
+                .team_position {
+                    align-self: start;
+                    padding-right: 50px;
+                }
+            }
+
+            &.open_position {
+
+                .bio {
+                    padding: 0 50px 1.5em;
+                }
+            }
+
+            .card_photo {
+                margin: 50px 25px 25px 50px;
+            }
+
+            .card_title {
+                justify-self: start;
+                align-self: end;
+                font-size: 3rem;
+                padding: 0px;
+                padding-right: 50px;
+                width: 100%;
+            }
+
+            .team_position {
+                margin-bottom: 0.75em;
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media (min-width: 1100px) {
+    .card_container.team {
+
+        .card {
+
+            &.team-member {
+                grid-template: "photo title" minmax(50px, auto) "photo position" minmax(50px, auto) "photo bio" minmax(150px, 3fr) / minmax(375px, 2fr) minmax(0px, 5fr);
+
+                .bio {
+                    padding-left: 0;
+                    text-align-last: auto;
+                }
+
+                .team_position {
+                    text-align: left;
+                }
+            }
+
+            .card_photo {
+                height: 300px;
+                width: 300px;
+                margin: 3em;
+                justify-self: center;
+            }
+
+            .card_title {
+                text-align: left;
+                margin-bottom: 0.5em;
+            }
         }
     }
 }
