@@ -144,7 +144,7 @@ nav {
     &.logged-in {
 
         .nav-item {
-            display: table;
+            display: grid;
 
             &:hover {
                 background: $PrimaryBackground;
@@ -153,12 +153,6 @@ nav {
                 a {
                     color: $MainTextColour;
                 }
-            }
-
-            & > * {
-                display: table-cell;
-                vertical-align: middle;
-                padding-left: 1em;
             }
         }
 
@@ -275,6 +269,7 @@ nav {
             / 4fr minmax(110px, auto);
         background: none;
         overflow-y: unset;
+        overflow-x: hidden;
     }
 
     .nav-main {
