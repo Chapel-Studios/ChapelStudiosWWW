@@ -280,6 +280,10 @@ a.anchor {
     section:nth-of-type(3n) > * {
         grid-area: unset;
     }
+
+    .card_container {
+        display: none;
+    }
 }
 
 @media (min-width: 600px) {
