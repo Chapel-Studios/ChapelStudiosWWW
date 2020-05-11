@@ -1,6 +1,9 @@
 ﻿@page "/Contact"
 @model ChapelStudiosWWW.Pages.ContactModel
 @{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
     List<string> Categories = new List<string>()
     {
         "General Inquiry",
@@ -8,9 +11,11 @@
         "Web Development Services",
         "World Building Services"
     };
-    if (Model.IsJobMode) { Categories.Add("Application"); }
-    ViewData["Title"] = "Contact";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Model.IsJobMode)
+    {
+        Categories.Add("Application");
+    }
+
 }
 
 @section Head {

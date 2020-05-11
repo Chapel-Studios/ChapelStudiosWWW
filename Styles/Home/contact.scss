@@ -1,12 +1,6 @@
 ﻿@import '../_colours';
 @import '../_typography';
 
-/*.contact-page {
-    display: grid;
-    grid-template: "banner" minmax(0px, auto) "form" 1fr / minmax(0px, 1fr);
-    margin-bottom: 5vh;
-}*/
-
 main {
     grid-template: 
         "banner" minmax(0px, auto) 
@@ -51,7 +45,6 @@ main {
 }
 
 .copyBox {
-    //display: none;
     grid-area: copyBox;
     width: 90%;
     align-self: center;
