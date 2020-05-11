@@ -21,19 +21,16 @@ namespace ChapelStudiosWWW.Pages
         [FormContainsEmailOrPhone]
         public ContactPageMessage Message { get; set; }
         public string ResponseMessage { get; private set; }
+        public bool IsJobMode { get; private set; }
 
-
-        public void OnGet(string category = "", string job = "")
+        public void OnGet(string category = "", string subject = "")
         {
+            if (category == "Application") { IsJobMode = true; }
+
             Message = new ContactPageMessage();
-            if (!string.IsNullOrEmpty(category))
-            {
-                Message.Category = category;
-            }
-            if (!string.IsNullOrEmpty(job))
-            {
-                Message.Subject = category;
-            }
+
+            if (!string.IsNullOrEmpty(category)) { Message.Category = category; }
+            if (!string.IsNullOrEmpty(subject)) { Message.Subject = category; }
         }
 
         public void OnPost()

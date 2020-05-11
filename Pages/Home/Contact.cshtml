@@ -1,14 +1,14 @@
 ﻿@page "/Contact"
 @model ChapelStudiosWWW.Pages.ContactModel
 @{
-    string[] Categories = new string[]
+    List<string> Categories = new List<string>()
     {
         "General Inquiry",
         "Game Design Services",
         "Web Development Services",
-        "World Building Services",
-        "Application"
+        "World Building Services"
     };
+    if (Model.IsJobMode) { Categories.Add("Application"); }
     ViewData["Title"] = "Contact";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -30,10 +30,9 @@
     {
         <form asp-page="Contact" method="post" id="ContactPageForm">
             <div class="error" asp-validation-summary="All"></div>
-            <div>
+            <div style='@(Model.IsJobMode ? "display: none" : "")'>
                 <label asp-for="Message.Category"></label>
-                <select asp-for="Message.Category" asp-items='new SelectList(Model.Message.Category == "Application" ? new string[] {"Application"} : Categories)'>
-                </select>
+                <select asp-for="Message.Category" asp-items='new SelectList(Categories)'></select>
                 <span asp-validation-for="Message.Category"></span>
             </div>
             <div>
@@ -52,7 +51,7 @@
                 <span asp-validation-for="Message.Category"></span>
             </div>
             <div>
-                <label asp-for="Message.Message"></label>
+                <label asp-for="Message.Message">@(Model.IsJobMode ? "Tell us about yourself" : "")</label>
                 <textarea class="form-control" asp-for="Message.Message" rows="5"></textarea>
                 <span asp-validation-for="Message.Category"></span>
             </div>
@@ -75,6 +74,12 @@
         <div class="copyBox_card" asp-forCard="@Categories[3]">
             <h1>@Categories[3]</h1>
             <p>Add More Text Here</p>
+        </div>
+        <div class="copyBox_card" asp-forCard="Application">
+            <h1>Wanna Join Us?</h1>
+            <p>We're thrilled that you're interested in one of our open positions, but keep in mind, these positions are for a faux company. We're not paying, just offering you a place to showcase your work.</p>
+            <p>If you're still excited to join us, drop us a message letting us know how you can improve the team.</p>
+            <p>Nothing Formal.</p>
         </div>
     </div>
 </div>

@@ -59,16 +59,23 @@
         height: 100%;
         width: 100%;
         grid-template-rows: auto 1fr;
+        font-size: 1.25rem;
+
+        &.active {
+            display: grid;
+        }
 
         h1 {
             margin-bottom: .5em;
             text-align: center;
             text-transform: capitalize;
             text-decoration: underline;
+            color: $PrimaryBackground;
         }
 
-        &.active {
-            display: grid;
+        p {
+            text-align: justify;
+            color: $SecondaryBackground;
         }
     }
 }
