@@ -112,6 +112,7 @@
             font-weight: 600;
             text-transform: capitalize;
             text-align: center;
+            padding: 1em;
         }
 
         .card_photo {
@@ -166,6 +167,7 @@
                 .team_position {
                     align-self: start;
                     padding-right: 50px;
+                    padding-left: 0;
                 }
             }
 
@@ -213,6 +215,10 @@
                 .team_position {
                     text-align: left;
                 }
+            }
+
+            .team_position {
+                padding-left: 0;
             }
 
             .card_photo {
