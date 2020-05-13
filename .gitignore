@@ -6,3 +6,4 @@ obj/
 wwwroot/*
 !wwwroot/Assets/
 !wwwroot/favicon.ico
+!wwwroot/robots.txt
