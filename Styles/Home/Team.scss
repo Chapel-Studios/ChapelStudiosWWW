@@ -123,6 +123,15 @@
             border-radius: 50%;
             box-shadow: 0 0 5px 2px $TertiaryBackground, 0 0 10px 5px $BackdropColour;
             margin: 1em;
+            overflow: hidden;
+
+            .material-icons {
+                position: relative;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -44%);
+                font-size: 17rem;
+            }
         }
 
         .bio {
@@ -211,6 +220,10 @@
                 width: 300px;
                 margin: 3em;
                 justify-self: center;
+
+                .material-icons {
+                    font-size: 24rem;
+                }
             }
 
             .card_title {
