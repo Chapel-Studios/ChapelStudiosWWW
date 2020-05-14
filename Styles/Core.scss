@@ -34,6 +34,10 @@ body {
     padding-top: 75px;
 }
 
+h1, h2 {
+    margin: 0.5em 0;
+}
+
 h1, h2, h3 {
     color: $PrimaryBackground;
 }
@@ -65,6 +69,7 @@ main {
         "banner" auto 
         "." 1fr 
         / minmax(0px, auto);
+    position: relative;
 }
 
 section {
