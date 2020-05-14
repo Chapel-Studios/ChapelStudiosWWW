@@ -194,6 +194,8 @@
             .team_position {
                 margin-bottom: 0.75em;
                 width: 100%;
+                padding-top: 0;
+                padding-bottom: 0;
             }
         }
     }
@@ -234,7 +236,7 @@
 
             .card_title {
                 text-align: left;
-                margin-bottom: 0.5em;
+                margin-bottom: 0;
             }
         }
     }
