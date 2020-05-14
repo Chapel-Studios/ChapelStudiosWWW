@@ -34,6 +34,10 @@ body {
     padding-top: 75px;
 }
 
+h1, h2, h3 {
+    color: $PrimaryBackground;
+}
+
 .content {
     flex: 1 0 auto;
 }
