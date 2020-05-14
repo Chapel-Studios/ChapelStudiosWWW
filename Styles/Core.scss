@@ -34,6 +34,10 @@ body {
     padding-top: 75px;
 }
 
+h1, h2, h3 {
+    color: $PrimaryBackground;
+}
+
 .content {
     flex: 1 0 auto;
 }
@@ -89,6 +93,7 @@ ul {
 
 p {
     margin-bottom: 1em;
+    color: $HeaderTextColour;
 
     &.legalese {
         font-size: 0.68em;
@@ -101,7 +106,7 @@ p {
 
 a {
     text-decoration: none;
-    color: $LinkColour;
+    color: $HighlightLink;
 
     &:hover {
         text-decoration: underline;
@@ -194,6 +199,7 @@ a {
         line-height: 1.5em;
         word-spacing: 0.5em;
         letter-spacing: 0.05em;
+        color: inherit;
     }
 }
 
