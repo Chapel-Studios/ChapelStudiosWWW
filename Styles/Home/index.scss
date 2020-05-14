@@ -47,6 +47,14 @@ section {
             padding: 0 0.25em;
         }
     }
+
+    p {
+        color: $MainTextColour;
+    }
+
+    a {
+        color: $LinkColour;
+    }
 }
 
 a.anchor {
@@ -196,6 +204,7 @@ a.anchor {
             text-align: center;
             margin-left: 15%;
             margin-right: 15%;
+            color: inherit;
         }
 
         .links {
