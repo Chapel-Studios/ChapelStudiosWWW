@@ -6,9 +6,11 @@
     <StartupObject>ChapelStudiosWWW.Program</StartupObject>
     <Authors>ChapelStudios</Authors>
     <Product>ChapelStudios Website</Product>
-    <AssemblyVersion>0.6.4</AssemblyVersion>
-    <FileVersion>0.6.4</FileVersion>
-    <PackageReleaseNotes>added new privacy page and some minor style updates</PackageReleaseNotes>
+    <AssemblyVersion>0.6.5</AssemblyVersion>
+    <FileVersion>0.6.5</FileVersion>
+    <PackageReleaseNotes>updated registration process-
+added new email confirmation template;
+fixed issue with duplicate emails;</PackageReleaseNotes>
     <AssemblyName>ChapelStudiosWWW</AssemblyName>
   </PropertyGroup>
 
