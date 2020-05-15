@@ -1,10 +1,12 @@
-﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using ChapelStudiosWWW.Models.EmailTemplates;
+using ChapelStudiosWWW.Services.Contracts;
+using ChapelStudiosWWW.Utilities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -28,7 +30,7 @@ namespace ChapelStudiosWWW.Areas.Identity.Pages.Account
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailService emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -87,9 +89,12 @@ namespace ChapelStudiosWWW.Areas.Identity.Pages.Account
                         pageHandler: null,
                         values: new { area = "Identity", userId = user.Id, code = code },
                         protocol: Request.Scheme);
+                    var templateOptions = new ConfirmEmailTemplateVariableSet();
+                    templateOptions.Name = user.UserName;
+                    templateOptions.ConfirmationURL = HtmlEncoder.Default.Encode(callbackUrl);
+                    var emailHTML = EmailBuilder.BuildTemplateEmailHTML(EmailTemplateTypes.ConfirmEmail, templateOptions);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await _emailSender.SendEmailAsync(user.Email, EmailTemplateTypes.ConfirmEmail.EmailSubject, emailHTML);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
