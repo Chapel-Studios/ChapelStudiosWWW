@@ -164,7 +164,7 @@ a {
     border-radius: 25px;
     padding: 0.5em 1em;
     position: relative;
-    transition: top ease .4s;
+    transition: top ease .1s;
     cursor: pointer;
 
     &::before {
@@ -178,7 +178,7 @@ a {
     }
 
     &:hover {
-        top: 3px;
+        top: 2px;
         text-decoration: none;
 
         &::before {
