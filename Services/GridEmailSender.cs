@@ -20,7 +20,7 @@ namespace ChapelStudiosWWW.Services
 
         public AuthMessageSenderOptions Options { get; }
 
-        public Task Execute(string apiKey, string subject, string message, string emailAddy, EmailAddress fromAddress)
+        private Task Execute(string apiKey, string subject, string message, string emailAddy, EmailAddress fromAddress)
         {
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
