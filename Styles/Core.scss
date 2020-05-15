@@ -280,6 +280,7 @@ a {
     opacity: 0;
     transition: opacity 0.5s ease-in;
     z-index: 900;
+    cursor: pointer;
 
     &.active {
         opacity: 100;
