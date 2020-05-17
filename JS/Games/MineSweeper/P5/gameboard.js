@@ -1,4 +1,5 @@
 ﻿'use strict';
+//require('../grammar-helper')
 
 function GameBoard(canvasWidth, canvasHeight, cellWidth
     // Handles
@@ -390,7 +391,8 @@ GameBoard.prototype.UpdateScoreBoard = function () {
             if (scores[i] !== undefined && scores[i] !== null) {
                 let scoretext = scores[i] === 1 ? "Instant Win!" : ConvertTimerToString(scores[i]);
                 scorePos = i === 0 || scores[i] === scores[i - 1] ? scorePos : i + 1;
-                ulData += `<li><span>${scorePos}</span>${scoretext}</li>`;
+                let suffix = NSJ.GrammerHelper.GetOrdinalSuffix(scorePos);
+                ulData += `<li><span>${scorePos}${suffix}</span> &bull; ${scoretext}</li>`;
             }
         }
     }
