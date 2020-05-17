@@ -158,6 +158,7 @@ a {
 .btn {
     display: inline-block;
     margin-top: 1em;
+    margin-bottom: 1em;
     font-family: $TitleFont;
     color: $HighlightLink;
     Background: $HighlightBackground;
@@ -166,6 +167,11 @@ a {
     position: relative;
     transition: top ease .1s;
     cursor: pointer;
+
+    &.inverted {
+        color: $HighlightBackground;
+        Background: $HighlightLink;
+    }
 
     &::before {
         content: '';
