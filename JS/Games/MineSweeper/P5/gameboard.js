@@ -397,7 +397,7 @@ GameBoard.prototype.UpdateWinPercentage = function () {
     let losses = this.GetCurrentPlayInfo().losses;
     let totalGames = (wins + losses);
     let winPercent = totalGames === 0 ? 0 : (wins / totalGames) * 100;
-    document.getElementById(this.Handles.WinPercent).innerText = `Wins: ${winPercent.toFixed(2)}%`;
+    document.getElementById(this.Handles.WinPercent).innerText = winPercent.toFixed(2);
 }
 
 // GamePlay
