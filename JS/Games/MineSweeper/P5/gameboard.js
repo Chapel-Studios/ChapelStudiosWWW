@@ -383,11 +383,19 @@ GameBoard.prototype.UpdateTimer = function () {
 GameBoard.prototype.UpdateScoreBoard = function () {
     let ulData = `High Scores for ${this.MaxMineCount} Mine${this.MaxMineCount > 1 ? "s" : ""}`;
     let scores = this.GetCurrentPlayInfo().scores;
-    for (let i = 0; i < scores.length; i++) {
-        if (scores[i] !== undefined && scores[i] !== null) {
-            let scoretext = scores[i] === 1 ? "Instant Win!" : ConvertTimerToString(scores[i]);
-            ulData += `<li>${scoretext}</li>`;
+    let scorePos = 1;
+
+    if (scores && scores.length > 0) {
+        for (let i = 0; i < scores.length; i++) {
+            if (scores[i] !== undefined && scores[i] !== null) {
+                let scoretext = scores[i] === 1 ? "Instant Win!" : ConvertTimerToString(scores[i]);
+                scorePos = i === 0 || scores[i] === scores[i - 1] ? scorePos : i + 1;
+                ulData += `<li><span>${scorePos}</span>${scoretext}</li>`;
+            }
         }
+    }
+    else {
+        ulData += `<li>There are no wins for ${this.MaxMineCount} mines yet.</li>`
     }
     document.getElementById(this.Handles.ScoreBoard).innerHTML = ulData;
 }
