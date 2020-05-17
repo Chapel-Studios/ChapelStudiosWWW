@@ -497,16 +497,20 @@ GameBoard.prototype.EndGame = function (wasWin) {
 // Instructions
 GameBoard.prototype.Initialize = function () {
     let self = this;
+    //set const for reused elements
+    const resetBtn = document.getElementById(self.Handles.Reset);
+    const vol = document.getElementById(self.Handles.Volume);
+    const maxMines = document.getElementById(self.Handles.MaxMineCountOption);
     // Set Events
-    document.getElementById(self.Handles.Reset).onclick = function () {
+    resetBtn.onclick = function () {
         self.Reset();
     };
-    document.getElementById(self.Handles.Volume).onchange = function () {
+    vol.onchange = function () {
         let newVolume = this.value / 100;
         self.SetVolume(newVolume);
         localStorage.setItem('volume', this.value)
     };
-    document.getElementById(self.Handles.MaxMineCountOption).onchange = function () {
+    maxMines.onchange = function () {
         let newMax = Number.parseInt(this.value);
         if (newMax && newMax !== self.MaxMineCount) {
             self.MaxMineCount = newMax;
@@ -516,10 +520,10 @@ GameBoard.prototype.Initialize = function () {
     // Load Data
     self.GatherDataFromStorage();
     // Set Data
-    document.getElementById(self.Handles.MaxMineCountOption).value = this.MaxMineCount;
-    document.getElementById(self.Handles.MaxMineCountOption).onchange();
-    document.getElementById(self.Handles.Volume).value = this._VolumeStartPosition;
-    document.getElementById(self.Handles.Volume).onchange();
+    maxMines.value = this.MaxMineCount;
+    maxMines.onchange();
+    vol.value = this._VolumeStartPosition;
+    vol.onchange();
     self.SetNewBoard();
     self.UpdateScoreBoard();
     self.UpdateWinPercentage();
