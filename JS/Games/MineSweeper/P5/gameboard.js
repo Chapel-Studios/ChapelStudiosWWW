@@ -382,7 +382,7 @@ GameBoard.prototype.UpdateTimer = function () {
 }
 
 GameBoard.prototype.UpdateScoreBoard = function () {
-    let ulData = `High Scores for ${this.MaxMineCount} Mine${this.MaxMineCount > 1 ? "s" : ""}`;
+    let ulData = `High Scores for ${this.MaxMineCount} Mine${this.MaxMineCount > 1 ? "s" : ""}:`;
     let scores = this.GetCurrentPlayInfo().scores;
     let scorePos = 1;
 
