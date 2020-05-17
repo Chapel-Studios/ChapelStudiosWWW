@@ -504,6 +504,9 @@ GameBoard.prototype.Initialize = function () {
     // Set Events
     resetBtn.onclick = function () {
         self.Reset();
+        if (resetBtn.innerHTML == "Apply") {
+            resetBtn.innerHTML = "Reset";
+        }
     };
     vol.onchange = function () {
         let newVolume = this.value / 100;
@@ -515,6 +518,10 @@ GameBoard.prototype.Initialize = function () {
         if (newMax && newMax !== self.MaxMineCount) {
             self.MaxMineCount = newMax;
             localStorage.setItem('mineCount', newMax);
+            resetBtn.innerHTML = "Apply";
+        }
+        else {
+            resetBtn.innerHTML = "Reset";
         }
     };
     // Load Data
