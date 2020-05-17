@@ -4,6 +4,7 @@
     margin-bottom: 5vw;
     display: grid;
     grid-template: "game scores" auto / 600px minmax(150px, auto);
+    align-items: center;
     background-color: $PrimaryBackground;
     justify-content: flex-start;
     padding: 3em;
@@ -19,6 +20,10 @@
 
         p {
             color: inherit;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
         }
 
         .control-group {
@@ -42,7 +47,7 @@
 
     .btn {
         justify-self: center;
-        margin-top: 0;
+        margin-top: 0.25em;
         font-size: 1rem;
         padding: 0.25em 1em;
     }
@@ -53,12 +58,17 @@
 }
 
 #MinesOption {
-    padding: 0.25rem;
+    padding: 0;
     margin: 0 0.5em;
     font-size: 1.25rem;
     line-height: 1.25em;
     width: 50px;
     text-align: center;
+    //-moz-appearance: textfield;
+
+    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+        margin: 0;
+    }
 }
 
 #VolumeSlider {
