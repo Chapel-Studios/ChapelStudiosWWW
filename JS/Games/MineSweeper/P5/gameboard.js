@@ -381,7 +381,7 @@ GameBoard.prototype.UpdateTimer = function () {
 }
 
 GameBoard.prototype.UpdateScoreBoard = function () {
-    let ulData = `<p>High Scores for ${this.MaxMineCount} Mine${this.MaxMineCount > 1 ? "s" : ""}</p>`;
+    let ulData = `High Scores for ${this.MaxMineCount} Mine${this.MaxMineCount > 1 ? "s" : ""}`;
     let scores = this.GetCurrentPlayInfo().scores;
     for (let i = 0; i < scores.length; i++) {
         if (scores[i] !== undefined && scores[i] !== null) {
