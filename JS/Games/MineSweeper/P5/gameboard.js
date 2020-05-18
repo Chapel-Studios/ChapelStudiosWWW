@@ -1,4 +1,5 @@
 ﻿'use strict';
+//require('../grammar-helper')
 
 function GameBoard(canvasWidth, canvasHeight, cellWidth
     // Handles
@@ -6,7 +7,7 @@ function GameBoard(canvasWidth, canvasHeight, cellWidth
     , timerHandle, flagDisplayHandle
     , exposedDisplayHandle, unflaggedHandle
     , volumeSliderHandle, scoreBoardHandle
-    , winPercentHandle
+    , scoreTextHandle, winPercentHandle
 ) {
     this.ColumnCount = Math.floor(canvasWidth / cellWidth);
     this.RowCount = Math.floor(canvasHeight / cellWidth);
@@ -49,6 +50,7 @@ function GameBoard(canvasWidth, canvasHeight, cellWidth
         , MaxMineCountOption: mineOptionHandle
         , Volume: volumeSliderHandle
         , ScoreBoard: scoreBoardHandle
+        , ScoreText: scoreTextHandle
         , WinPercent: winPercentHandle
     }
 }
@@ -381,14 +383,26 @@ GameBoard.prototype.UpdateTimer = function () {
 }
 
 GameBoard.prototype.UpdateScoreBoard = function () {
-    let ulData = `<p>High Scores for ${this.MaxMineCount} Mine${this.MaxMineCount > 1 ? "s" : ""}</p>`;
+    let ulData = "";
     let scores = this.GetCurrentPlayInfo().scores;
-    for (let i = 0; i < scores.length; i++) {
-        if (scores[i] !== undefined && scores[i] !== null) {
-            let scoretext = scores[i] === 1 ? "Instant Win!" : ConvertTimerToString(scores[i]);
-            ulData += `<li>${scoretext}</li>`;
+    let scorePos = 1;
+
+    if (scores && scores.length > 0) {
+        for (let i = 0; i < scores.length; i++) {
+            if (scores[i] !== undefined && scores[i] !== null) {
+                let scoretext = scores[i] === 1 ? "Instant Win!" : ConvertTimerToString(scores[i]) + " sec";
+                scorePos = i === 0 || scores[i] === scores[i - 1] ? scorePos : i + 1;
+                let suffix = NSJ.GrammerHelper.GetOrdinalSuffix(scorePos);
+                ulData += `<li><span>${scorePos}${suffix}</span> &bull; ${scoretext}</li>`;
+            }
         }
     }
+
+    if (ulData === "") {
+        ulData = `<li>There are no wins for ${this.MaxMineCount} mines yet.</li>`
+    }
+
+    document.getElementById(this.Handles.ScoreText).innerHTML = `High Scores for ${this.MaxMineCount} Mine${this.MaxMineCount > 1 ? "s" : ""}:`;
     document.getElementById(this.Handles.ScoreBoard).innerHTML = ulData;
 }
 
@@ -397,7 +411,7 @@ GameBoard.prototype.UpdateWinPercentage = function () {
     let losses = this.GetCurrentPlayInfo().losses;
     let totalGames = (wins + losses);
     let winPercent = totalGames === 0 ? 0 : (wins / totalGames) * 100;
-    document.getElementById(this.Handles.WinPercent).innerText = `Wins: ${winPercent.toFixed(2)}%`;
+    document.getElementById(this.Handles.WinPercent).innerText = winPercent.toFixed(2);
 }
 
 // GamePlay
@@ -497,29 +511,40 @@ GameBoard.prototype.EndGame = function (wasWin) {
 // Instructions
 GameBoard.prototype.Initialize = function () {
     let self = this;
+    //set const for reused elements
+    const resetBtn = document.getElementById(self.Handles.Reset);
+    const vol = document.getElementById(self.Handles.Volume);
+    const maxMines = document.getElementById(self.Handles.MaxMineCountOption);
     // Set Events
-    document.getElementById(self.Handles.Reset).onclick = function () {
+    resetBtn.onclick = function () {
         self.Reset();
+        if (resetBtn.innerHTML == "Apply") {
+            resetBtn.innerHTML = "Reset";
+        }
     };
-    document.getElementById(self.Handles.Volume).onchange = function () {
+    vol.onchange = function () {
         let newVolume = this.value / 100;
         self.SetVolume(newVolume);
         localStorage.setItem('volume', this.value)
     };
-    document.getElementById(self.Handles.MaxMineCountOption).onchange = function () {
+    maxMines.onchange = function () {
         let newMax = Number.parseInt(this.value);
         if (newMax && newMax !== self.MaxMineCount) {
             self.MaxMineCount = newMax;
             localStorage.setItem('mineCount', newMax);
+            resetBtn.innerHTML = "Apply";
+        }
+        else {
+            resetBtn.innerHTML = "Reset";
         }
     };
     // Load Data
     self.GatherDataFromStorage();
     // Set Data
-    document.getElementById(self.Handles.MaxMineCountOption).value = this.MaxMineCount;
-    document.getElementById(self.Handles.MaxMineCountOption).onchange();
-    document.getElementById(self.Handles.Volume).value = this._VolumeStartPosition;
-    document.getElementById(self.Handles.Volume).onchange();
+    maxMines.value = this.MaxMineCount;
+    maxMines.onchange();
+    vol.value = this._VolumeStartPosition;
+    vol.onchange();
     self.SetNewBoard();
     self.UpdateScoreBoard();
     self.UpdateWinPercentage();
