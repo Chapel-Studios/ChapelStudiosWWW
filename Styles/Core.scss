@@ -160,17 +160,17 @@ a {
     margin-top: 1em;
     margin-bottom: 1em;
     font-family: $TitleFont;
-    color: $HighlightLink;
-    Background: $HighlightBackground;
     border-radius: 25px;
     padding: 0.5em 1em;
     position: relative;
     transition: top ease .1s;
     cursor: pointer;
+    color: $HighlightBackground;
+    Background: $HighlightLink;
 
     &.inverted {
-        color: $HighlightBackground;
-        Background: $HighlightLink;
+        color: $HighlightLink;
+        Background: $HighlightBackground;
     }
 
     &::before {
