@@ -71,6 +71,15 @@
     }
 }
 
+#ScoreText {
+    margin-bottom: 0.25em;
+}
+
+#ScoreBoard {
+    display: inline-block;
+    text-align: left;
+}
+
 #VolumeSlider {
     -webkit-appearance: none;
     width: 100%;

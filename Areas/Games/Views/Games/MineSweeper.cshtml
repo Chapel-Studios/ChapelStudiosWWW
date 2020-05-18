@@ -35,6 +35,7 @@
                 , "MinesDisplay"
                 , "VolumeSlider"
                 , "ScoreBoard"
+                , "ScoreText"
                 , "Win%"
             ];
             NSJ.MineSweeper = new GameBoard(...CANVAS_SIZE, CELL_WIDTH, ...HANDLES);
@@ -99,6 +100,7 @@
         </div>
         <div class="control-group">
             <p>Wins: <span id="Win%"></span>%</p>
+            <p id="ScoreText"></p>
             <ul id="ScoreBoard"></ul>
         </div>
         <div id="Controls" class="control-group">

@@ -7,7 +7,7 @@ function GameBoard(canvasWidth, canvasHeight, cellWidth
     , timerHandle, flagDisplayHandle
     , exposedDisplayHandle, unflaggedHandle
     , volumeSliderHandle, scoreBoardHandle
-    , winPercentHandle
+    , scoreTextHandle, winPercentHandle
 ) {
     this.ColumnCount = Math.floor(canvasWidth / cellWidth);
     this.RowCount = Math.floor(canvasHeight / cellWidth);
@@ -50,6 +50,7 @@ function GameBoard(canvasWidth, canvasHeight, cellWidth
         , MaxMineCountOption: mineOptionHandle
         , Volume: volumeSliderHandle
         , ScoreBoard: scoreBoardHandle
+        , ScoreText: scoreTextHandle
         , WinPercent: winPercentHandle
     }
 }
@@ -382,7 +383,7 @@ GameBoard.prototype.UpdateTimer = function () {
 }
 
 GameBoard.prototype.UpdateScoreBoard = function () {
-    let ulData = `High Scores for ${this.MaxMineCount} Mine${this.MaxMineCount > 1 ? "s" : ""}:`;
+    let ulData = "";
     let scores = this.GetCurrentPlayInfo().scores;
     let scorePos = 1;
 
@@ -399,6 +400,8 @@ GameBoard.prototype.UpdateScoreBoard = function () {
     else {
         ulData += `<li>There are no wins for ${this.MaxMineCount} mines yet.</li>`
     }
+
+    document.getElementById(this.Handles.ScoreText).innerHTML = `High Scores for ${this.MaxMineCount} Mine${this.MaxMineCount > 1 ? "s" : ""}:`;
     document.getElementById(this.Handles.ScoreBoard).innerHTML = ulData;
 }
 
