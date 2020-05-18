@@ -397,8 +397,9 @@ GameBoard.prototype.UpdateScoreBoard = function () {
             }
         }
     }
-    else {
-        ulData += `<li>There are no wins for ${this.MaxMineCount} mines yet.</li>`
+
+    if (ulData === "") {
+        ulData = `<li>There are no wins for ${this.MaxMineCount} mines yet.</li>`
     }
 
     document.getElementById(this.Handles.ScoreText).innerHTML = `High Scores for ${this.MaxMineCount} Mine${this.MaxMineCount > 1 ? "s" : ""}:`;
