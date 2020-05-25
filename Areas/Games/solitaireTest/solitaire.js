@@ -5,7 +5,7 @@ class KlondikeGameBoard {
     _handTemplate = document.getElementById("HandTemplate");
     _drawPile = document.querySelector("#DrawPile");
     _dragBox = document.getElementById("DragBox");
-    _gameboard = document.getElementById("Gameboard");
+    _gameboard = document.getElementById("Playfield");
     _deck;
     // Drag Properties
     _shiftX = 0;
