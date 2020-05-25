@@ -147,10 +147,15 @@ html, body {
     & > .card {
         top: 0;
         left: 0;
+
+        & > .handle {
+            padding-top: 2em;
+        }
     }
 
     .handle {
         pointer-events: all;
+        padding-top: 5px;
     }
 
 }
