@@ -69,6 +69,8 @@ class KlondikeGameBoard {
             if (!card.classList.contains("empty")) {
                 card.classList.add("back");
                 card.classList.remove("show");
+                card.onmousedown = null;
+                card.onmouseup = null;
     
                 NSJ.GetDeepestChild("#DrawPile .handle").appendChild(card);
             }
