@@ -7,7 +7,7 @@ class Card {
         let displayValue = value;
         if (value == 1) displayValue = "A";
         else if (value == 11) displayValue = "J";
-        else if (value == 12) value = "Q";
+        else if (value == 12) displayValue = "Q";
         else if (value == 13) displayValue = "K";
 
         let clone =  document.importNode(this._template.content, true);
