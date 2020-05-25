@@ -155,7 +155,7 @@ class KlondikeGameBoard {
                 timerStart = Date.now();
             }
             // Else this is a double-click event
-            else if (){
+            else {
                 // Do doubleclick stuff
                 isDoubleClick = true;
             }
