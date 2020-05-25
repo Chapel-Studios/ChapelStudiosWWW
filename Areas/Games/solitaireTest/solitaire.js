@@ -7,6 +7,10 @@ class KlondikeGameBoard {
     _dragBox = document.getElementById("DragBox");
     _gameboard = document.getElementById("Gameboard");
     _deck;
+    // Drag Properties
+    _shiftX = 0;
+    _shiftY = 0;
+    _zone = "";
 
     _layout() {
         function createSection(templateID, newID, addEmpty){
@@ -110,16 +114,101 @@ class KlondikeGameBoard {
         }
     }
 
+    _setEvents = (el) => {
+        let validateCardRelease = (el) => {
+            let suit = el.getAttribute("suit");
+            let val = Number.parseInt(el.getAttribute("card-value"));
+            let runEnd = NSJ.GetDeepestChild(`#${this._zone} .card`);
+            let endValue = Number.parseInt(runEnd.getAttribute("card-value"));
+            // If this._zone matches it is a run
+            if (this._zone === suit) 
+            {  
+                let stackHeight = el.querySelectorAll(".handle").length;
+                // BI: Can only push stacks of one to runs
+                return (stackHeight === 1 && endValue === val - 1);
+            }
+            else if (this._zone.includes("Stack")) {
+                let isRed = el.getAttribute("is-red");
+                let endIsRed = runEnd.getAttribute("is-red");
+                return ((
+                            (endValue === val + 1) && (endIsRed != isRed)
+                        ) || (
+                            (endValue === 0) && (val === 13)
+                        ));
+            }
+            return false;
+        }
 
+        let origin, 
+            stack,
+            originZone = "",
+            timerStart = Date.now();
 
+        el.onmousedown = (event) => {
+            let dif = Date.now() - timerStart;
+            let isDoubleClick = false;
+            stack = event.target.parentElement;
+            origin = stack.parentElement;
+            originZone = NSJ.GetParentID(origin);
 
+            if (Date.now() - timerStart > 250) {
+                timerStart = Date.now();
+            }
+            // Else this is a double-click event
+            else if (){
+                // Do doubleclick stuff
+                isDoubleClick = true;
+            }
+
+            let elementRect  = stack.getBoundingClientRect();
+            this._shiftX = event.clientX - elementRect.left;
+            this._shiftY = event.clientY - elementRect.top;
+            this._moveDragBox.bind(this)(event);
+            this._dragBox.appendChild(stack);
+        }
+
+        el.onmouseup = (event) => {
+            if (this._dragBox.childNodes.length > 0) {
+                if (validateCardRelease(stack)) {
+                    NSJ.GetDeepestChild(`#${this._zone} .handle`).appendChild(stack);
+                    if (originZone === "Hands") {
+                        // do hand stuff
+                        let lastHand = NSJ.GetDeepestChild(`#${originZone} .hand`);
+                        if (lastHand.childNodes.length === 0) {
+                            lastHand.remove();
+                        }
+                    }
+                    else if (originZone.includes("Stack")) {
+                        let endCard = NSJ.GetDeepestChild(`#${originZone} .card`);
+                        if (endCard.classList.contains("back")) {
+                            endCard.classList.add("show");
+                            endCard.classList.remove("back");
+                            this._setEvents(endCard.querySelector(".handle"));
+                        }
+                    }
+                }
+                else {
+                    origin.appendChild(stack);
+                }
+            }
+        }
+    }
+    
+    _moveDragBox (event) {
+        if (this._dragBox.childNodes.length > 0) {
+            this._dragBox.hidden = true;
+            let target = document.elementFromPoint(event.clientX, event.clientY);
+            if (!target) return;
+            this._zone = NSJ.GetParentID(target);
+            this._dragBox.hidden = false;
+
+            if (!this._zone) return;
 
         }
 
+        this._dragBox.style.left = `${event.pageX - this._shiftX}px`;
+        this._dragBox.style.top = `${event.pageY - this._shiftY}px`;
     }
-
-
-
     _init() {
         // Draw Functions
         this._drawPile.addEventListener("click", () => {
@@ -127,71 +216,11 @@ class KlondikeGameBoard {
         });
 
         // Drag Functions
-        let shiftX = 0, 
-            shiftY = 0,
-            zone = "";
-        function moveDragBox (event) {
 
-            if (this._dragBox.childNodes.length > 0) {
-                this._dragBox.hidden = true;
-                let target = document.elementFromPoint(event.clientX, event.clientY);
-                if (!target) return;
-                zone = NSJ.GetParentID(target);
-                this._dragBox.hidden = false;
-
-                if (!zone) return;
-
-            }
-
-            this._dragBox.style.left = `${event.pageX - shiftX}px`;
-            this._dragBox.style.top = `${event.pageY - shiftY}px`;
-        }
-
-        let setEvents = (el) => {
-            let origin, stack;
-
-            el.onmousedown = (event) => {
-                let elementRect  = el.getBoundingClientRect();
-                shiftX = event.clientX - elementRect.left;
-                shiftY = event.clientY - elementRect.top;
-                moveDragBox.bind(this)(event);
-                stack = event.target.parentElement;
-                origin = stack.parentElement;
-                this._dragBox.appendChild(stack);
-            }
-
-            el.onmouseup = (event) => {
-                if (this._dragBox.childNodes.length > 0) {
-                    if (validateCardRelease(stack)) {
-                        NSJ.GetDeepestChild(`#${zone} .handle`).appendChild(stack);
-                    }
-                    else {
-                        origin.appendChild(stack);
-                    }
-                }
-            }
-        }
-
-        let validateCardRelease = (el) => {
-            let suit = el.getAttribute("suit");
-            let val = el.getAttribute("card-value");
-            let stackHeight = el.querySelectorAll(".handle").length;
-            // if Zone matches is in correct run, can only push stacks of one
-            if (zone === suit && stackHeight === 1) {
-                let runEnd = NSJ.GetDeepestChild(`#${zone} .card`);
-                let endValue = Number.parseInt(runEnd.getAttribute("card-value"));
-                if (endValue === val - 1)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        document.onmousemove = moveDragBox.bind(this);
+        document.onmousemove = this._moveDragBox.bind(this);
 
         document.querySelectorAll(".card.show .handle").forEach(card => {
-            setEvents(card);
+            this._setEvents(card);
         });
     }
 
