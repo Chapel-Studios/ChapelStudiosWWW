@@ -22,7 +22,7 @@ html, body {
     display: grid;
     grid-template: 
         "draw hand hand Hearts Diamonds Spades Clubs" 13vw
-        "stack1 stack2 stack3 stack4 stack5 stack6 stack7" minmax(calc(13vw + 5em), 1fr);
+        "Stack1 Stack2 Stack3 Stack4 Stack5 Stack6 Stack7" minmax(calc(13vw + 5em), 1fr);
     grid-template-columns: repeat(7, minmax(8vw, 1fr));
     justify-items: stretch;
     padding: 3vh 5%;
@@ -186,46 +186,3 @@ html, body {
 
 }
 
-#Hearts {
-    grid-area: Hearts;
-}
-
-#Diamonds {
-    grid-area: Diamonds;
-}
-
-#Spades {
-    grid-area: Spades;
-}
-
-#Clubs {
-    grid-area: Clubs;
-}
-
-#stack1 {
-    grid-area: stack1;
-}
-
-#stack2 {
-    grid-area: stack2;
-}
-
-#stack3 {
-    grid-area: stack3;
-}
-
-#stack4 {
-    grid-area: stack4;
-}
-
-#stack5 {
-    grid-area: stack5;
-}
-
-#stack6 {
-    grid-area: stack6;
-}
-
-#stack7 {
-    grid-area: stack7;
-}

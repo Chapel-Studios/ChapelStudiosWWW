@@ -18,7 +18,9 @@ class KlondikeGameBoard {
                 divs[divs.length - 1].appendChild(empty);
             }
 
-            clone.querySelector("*").id = newID;
+            let top = clone.querySelector("*");
+            top.id = newID;
+            top.setAttribute("style", `grid-area: ${newID};`);
 
             return clone;
         }
