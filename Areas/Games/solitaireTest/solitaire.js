@@ -94,6 +94,7 @@ class KlondikeGameBoard {
             if (!card.classList.contains("empty")) {
                 card.classList.remove("back");
                 card.classList.add("show");
+                this._setEvents(card);
 
                 newHand.appendChild(card);
             }
