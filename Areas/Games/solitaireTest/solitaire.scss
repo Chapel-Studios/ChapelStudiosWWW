@@ -108,6 +108,14 @@ html, body {
             right: 0;
         }
 
+        .center {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
         .handle {
             height: 100%;
             width: 100%;
