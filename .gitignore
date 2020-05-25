@@ -8,3 +8,5 @@ wwwroot/*
 !wwwroot/favicon.ico
 !wwwroot/robots.txt
 Properties/PublishProfiles/
+*.css
+*.css.map
