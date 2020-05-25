@@ -109,43 +109,12 @@ class KlondikeGameBoard {
         }
     }
 
-    _pickUpCard = function(event) {
-        //if (stack.classList.contains("back")) return false;
 
 
-        this._dragBox.appendChild(stack);
 
-        //stack.classList.add("drag");
-        
 
-        //document.getElementById("Gameboard").appendChild(stack);
-        //document.body.appendChild(stack);
-
-        // let moveAt = (pageX, pageY) => {
-        //     stack.style.left = (pageX - shiftX) + "px";
-        //     stack.style.top = (pageY - shiftY) + "px";
-        // }
-
-        // moveAt(event.pageX, event.pageY);
-
-        function dragCard (){
         }
 
-        // function releaseCard() {
-        //     //document.removeEventListener('mousemove', dragCard, false);
-        //     stack.onmouseup = null;
-        //     if (_validateCardRelease()) {
-
-        //     }
-        //     else {
-        //         origin.appendChild(stack);
-        //     }
-        //     stack.classList.remove("drag");
-        // }
-
-        //document.addEventListener('mousemove', dragCard, false);
-
-        //stack.onmouseup = releaseCard.bind(this);
     }
 
 
@@ -160,9 +129,6 @@ class KlondikeGameBoard {
         let shiftX = 0, 
             shiftY = 0,
             zone = "";
-        // this._dragBox.ondragstart = () => {
-        //     return false;
-        // }
         function moveDragBox (event) {
 
             if (this._dragBox.childNodes.length > 0) {
