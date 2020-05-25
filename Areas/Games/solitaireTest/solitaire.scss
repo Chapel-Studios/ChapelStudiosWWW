@@ -71,6 +71,14 @@ html, body {
         top: -1px;
         cursor: pointer;
 
+        &[is-red=true] {
+            color: red;
+        }
+
+        &[is-red=false] {
+            color: black;
+        }
+
         &.empty {
             margin-top: 10px;
             left: 0px;
