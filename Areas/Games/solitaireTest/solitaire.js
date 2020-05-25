@@ -40,7 +40,6 @@ class KlondikeGameBoard {
             this._gameboard.appendChild(newSection);
         })
 
-        let stacks = document.querySelectorAll("#Gameboard .stack");
         // Fill Stacks
         for (let i = 0; i < 7; i++) {
             for (let n = i; n < 7; n++) {
