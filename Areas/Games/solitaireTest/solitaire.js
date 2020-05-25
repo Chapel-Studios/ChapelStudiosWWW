@@ -25,6 +25,7 @@ class KlondikeGameBoard {
             return clone;
         }
 
+        // Create Run Sections
         Deck.Suits.forEach(suit => {
             let newSection = createSection("RunTemplate", suit.name, true);
             let center = newSection.querySelector(".center");
@@ -33,13 +34,14 @@ class KlondikeGameBoard {
             this._gameboard.appendChild(newSection);
         });
 
+        // Create Stack Sections
         [...Array(8).keys()].slice(1).forEach(i => {
             let newSection = createSection("StackTemplate", `Stack${i}`, true);
             this._gameboard.appendChild(newSection);
         })
 
         let stacks = document.querySelectorAll("#Gameboard .stack");
-        // Create Stacks
+        // Fill Stacks
         for (let i = 0; i < 7; i++) {
             for (let n = i; n < 7; n++) {
                 let card = this._deck.Cards.pop();
