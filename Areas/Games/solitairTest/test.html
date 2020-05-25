@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="/solitaire.css" />
+    </head>
+    <body>
+        <template id="CardTemplate">
+            <div class="card">
+                <div class="top">
+                    <div class="value"></div>
+                    <div class="suit"></div>
+                </div>
+                <div class="bottom">
+                    <div class="value"></div>
+                    <div class="suit"></div>
+                </div>
+                <div class="handle"></div>
+            </div>
+        </template>
+        <template id=HandTemplate>
+            <div class="hand"></div>
+        </template>
+        <template id="RunTemplate">
+            <div class="run">
+            </div>
+        </template>
+        <template id="StackTemplate">
+            <div class="stack">
+            </div>
+        </template>
+        <template id="EmptyCard">
+            <div class="card empty handle" card-value=0 suit="none"></div>
+        </template>
+
+
+        <div id="Gameboard">
+            <div id="DragBox"></div>
+            <div id="DrawPile">
+                <div class="card empty handle"></div>
+            </div>
+            <div id="Hands">
+                <div class="hand base">
+                    <div class="card empty handle"></div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var NSJ = NSJ || {}
+            
+            NSJ.Random = (max, min = 0) => {
+                return Math.floor(Math.random() * (max - min) + min);
+            }
+            
+            NSJ.GetDeepestChild = (selector) => {
+                let nodes = document.querySelectorAll(selector);
+                if (!nodes.length) return false;
+                return nodes[nodes.length - 1];
+            }
+
+            NSJ.GetParentID = (node) => {
+                if (node.id != "") {
+                    return node.id;
+                }
+                if (!node.parentElement) return false;
+                return NSJ.GetParentID(node.parentElement);
+            }
+
+        </script>
+        <script src="/card-deck.js"></script>
+        <script src="/solitaire.js"></script>
+    </body>
+</html>
