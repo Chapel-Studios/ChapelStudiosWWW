@@ -194,3 +194,9 @@ html, body {
 
 }
 
+@-moz-document url-prefix() {
+    #Gameboard .card {
+        left: -0.5px;
+    }
+}
+
