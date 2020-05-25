@@ -14,11 +14,14 @@ class Card {
         
         let card = clone.querySelector(".card");
         let suitAttr = document.createAttribute("suit");
-        suitAttr.value = suit;
+        suitAttr.value = suit.name;
         card.setAttributeNode(suitAttr);
         let valAttr = document.createAttribute("card-value");
         valAttr.value = value;
         card.setAttributeNode(valAttr);
+        let isRedAttr = document.createAttribute("is-red");
+        isRedAttr.value = suit.isRed;
+        card.setAttributeNode(isRedAttr);
         
         let valDivs = clone.querySelectorAll(".value");
         valDivs.forEach(div => {
@@ -27,7 +30,7 @@ class Card {
         
         let suits = clone.querySelectorAll(".suit");
         suits.forEach(div => {
-            div.append(suit)
+            div.append(suit.name);
         });
         
         return clone;
@@ -60,7 +63,7 @@ class Deck {
             let cSuit = suits[cSuitIndex];
             let cValIndex = NSJ.Random(cSuit.available.length);
 
-            this.Cards.push(Card.Create(cSuit.name, cSuit.available[cValIndex]));
+            this.Cards.push(Card.Create(cSuit, cSuit.available[cValIndex]));
 
             cSuit.available.splice(cValIndex, 1);
             if (cSuit.available.length == 0) {

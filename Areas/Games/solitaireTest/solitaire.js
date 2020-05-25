@@ -24,8 +24,11 @@ class KlondikeGameBoard {
         }
 
         Deck.Suits.forEach(suit => {
-           let newSection = createSection("RunTemplate", suit.name, true);
-           this._gameboard.appendChild(newSection);
+            let newSection = createSection("RunTemplate", suit.name, true);
+            let center = newSection.querySelector(".center");
+            center.append(suit.name);
+            center.style.color = suit.isRed ? "red" : "black";
+            this._gameboard.appendChild(newSection);
         });
 
         [...Array(8).keys()].slice(1).forEach(i => {
