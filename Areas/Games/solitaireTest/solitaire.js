@@ -148,8 +148,11 @@ class KlondikeGameBoard {
             let dif = Date.now() - timerStart;
             let isDoubleClick = false;
             stack = event.target.parentElement;
+            // Only reset if actually picking something up in case card gets stuck to pointer
+            // ToDo: better work-around: drop stack on origin when point focus(?) lost
             origin = stack.parentElement;
-            originZone = NSJ.GetParentID(origin);
+            let newOriginZone = NSJ.GetParentID(origin);
+            originZone = newOriginZone === "DragBox" ? originZone : newOriginZone;
 
             if (Date.now() - timerStart > 250) {
                 timerStart = Date.now();
