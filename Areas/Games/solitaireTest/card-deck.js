@@ -62,6 +62,7 @@ class Card {
             center.appendChild(imgClone);
         });
 
+        // Add Corner Values
         let valDivs = clone.querySelectorAll(".value");
         valDivs.forEach(div => {
             div.append(displayValue)

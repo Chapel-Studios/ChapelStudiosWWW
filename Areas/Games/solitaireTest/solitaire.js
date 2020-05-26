@@ -219,9 +219,9 @@ class KlondikeGameBoard {
         });
 
         // Drag Functions
-
         document.onmousemove = this._moveDragBox.bind(this);
 
+        // ToDo: Move this to part of deal function
         document.querySelectorAll(".card.show .handle").forEach(card => {
             this._setEvents(card);
         });
