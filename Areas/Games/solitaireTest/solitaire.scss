@@ -1,3 +1,7 @@
+//$basepath: "/wwwroot/assets/Images/Games/Cards/";
+$basepath: "/Images/";
+
+
 html, body, div {
     margin: 0;
     padding: 0;
@@ -93,6 +97,34 @@ html, body {
             color: black;
         }
 
+        &[suit="Hearts"] {
+
+            & > div > .suit {
+                background-image: url($basepath + "Hearts.png");
+            }
+        }
+
+        &[suit="Diamonds"] {
+
+            & > div > .suit {
+                background-image: url($basepath + "Diamonds.png");
+            }
+        }
+
+        &[suit="Spades"] {
+
+            & > div > .suit {
+                background-image: url($basepath + "Spades.png");
+            }
+        }
+
+        &[suit="Clubs"] {
+
+            & > div > .suit {
+                background-image: url($basepath + "Clubs.png");
+            }
+        }
+
         &.empty {
             margin-top: 10px;
             left: 0px;
@@ -107,7 +139,7 @@ html, body {
         &.back {
             background-color: green;
 
-            & > .top, & > .bottom {
+            & > .top, & > .bottom, & > .center {
                 display: none;
             }
         }
@@ -128,14 +160,230 @@ html, body {
         .bottom {
             bottom: 0;
             right: 0;
+            transform: rotate(180deg);
         }
 
         .center {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            display: grid;
+            justify-items: center;
+            align-items: center;
+            justify-content: center;
+            padding: 10% 20%;
+
+            .suit {
+                height: 1.5vw;
+                width: 1.5vw;
+                position: relative;
+            }
+
+            &[count="1"] {
+                justify-content: stretch;
+
+                .suit {
+                    height: 45%;
+                    width: 100%;
+                }
+            }
+
+            &[count="2"] {
+
+                .suit:nth-child(2) {
+                    transform: rotate(180deg);
+                }
+            }
+
+            &[count="3"] {
+
+                .suit:last-child {
+                    transform: rotate(180deg);
+                }
+            }
+
+            &[count="4"] {
+                padding: 10% 20%;
+
+                .suit {
+                    transform: translateX(-50%);
+                    
+                    &:nth-child(1) {
+                        left: 200%;
+                    }
+                    
+                    &:nth-child(2) {
+                        left: 100%;
+                    }
+                    
+                    &:nth-child(3) {
+                        transform: translateX(-50%) rotate(180deg);
+                        left: 0%;
+                    }
+                    
+                    &:nth-child(4) {
+                        transform: translateX(-50%) rotate(180deg);
+                        left: -100%;
+                    }
+                }
+            }
+
+            &[count="5"] {
+                grid-template: 
+                    'pip1 . pip2' minmax(1.5vw, 1fr)
+                    '. pip3 .' minmax(1.5vw, 1fr)
+                    'pip4 . pip5' minmax(1.5vw, 1fr);
+                padding: 33% 20%;
+
+                @for $i from 1 through 5 {
+                    .suit:nth-child(#{$i}) {
+                        grid-area: pip#{$i};
+
+                        @if $i == 4 or $i == 5 {
+                            transform: rotate(180deg);
+                        }
+                    }
+                }
+            }
+
+            &[count="6"] {
+                grid-template-rows: repeat(3, minmax(1.5vw, 1fr));
+                grid-template-columns: repeat(2, minmax(0px, 1fr));
+
+                .suit {
+
+                    &:nth-child(1), &:nth-child(2){
+                        justify-self: end;
+                        left: 10%;
+                    }
+                    
+                    &:nth-child(4){
+                        transform: rotate(180deg);
+                    }
+                    
+                    &:nth-child(5), &:nth-child(6){
+                        transform: rotate(180deg);
+                        justify-self: start;
+                        right: 10%;
+                    }
+                }
+            }
+
+            &[count="7"] {
+                grid-template: 
+                    'pip1 pip1 pip1 pip2 pip2 pip2' minmax(1.5vw, 1fr)
+                    'pip3 pip3 pip4 pip4 pip5 pip5' minmax(1.5vw, 1fr)
+                    'pip6 pip6 pip6 pip7 pip7 pip7' minmax(1.5vw, 1fr);
+                padding: 5% 15%;
+                justify-content: stretch;
+
+                @for $i from 1 through 7 {
+                    .suit:nth-child(#{$i}) {
+                        grid-area: pip#{$i};
+                        @if $i == 1 or $i == 6 {
+                            left: 15%;
+                        }
+                        @else if $i == 2 or $i == 7 {
+                            right: 15%;
+                        }
+                    }
+                }
+            }
+
+            &[count="8"] {
+                grid-template: 
+                    'pip1 . pip6' minmax(0.75vw, 1fr)
+                    'pip1 pip4 pip6' minmax(0.75vw, 1fr)
+                    'pip2 pip4 pip7' minmax(0.75vw, 1fr)
+                    'pip2 pip5 pip7' minmax(0.75vw, 1fr)
+                    'pip3 pip5 pip8' minmax(0.75vw, 1fr)
+                    'pip3 . pip8' minmax(0.75vw, 1fr);
+
+                @for $i from 1 through 8 {
+                    .suit:nth-child(#{$i}) {
+                        grid-area: pip#{$i};
+
+                        @if $i == 3 or
+                            $i == 5 or
+                            $i == 7 or
+                            $i == 8 {
+                                transform: rotate(180deg);
+                        }
+                    }
+                }
+            }
+
+            &[count="9"] {
+                grid-template-rows: repeat(3, minmax(1.5vw, 1fr));
+                grid-template-columns: repeat(3, minmax(0px, .75fr));
+                padding: 20% 20%;
+
+                @for $i from 1 through 9 {
+                    .suit:nth-child(#{$i}) {
+                        @if $i == 1 or $i == 4 or $i == 7 {
+                            top: 33%;
+                        }
+                        @else if $i == 3 or $i == 6 or $i == 9 {
+                            bottom: 33%;
+                        }
+                        
+                        @if $i == 4 or
+                            $i == 7 or
+                            $i == 8 or
+                            $i == 9 {
+                                transform: rotate(180deg);
+                        }
+                    }
+                }
+            }
+
+            &[count="10"] {
+                grid-template: 
+                    '. pip4 . ' minmax(0.75vw, 1fr)
+                    'pip1 pip4 pip8' minmax(0.75vw, 1fr)
+                    'pip1 pip5 pip8' minmax(0.75vw, 1fr)
+                    'pip2 pip5 pip9' minmax(0.75vw, 1fr)
+                    'pip2 pip6 pip9' minmax(0.75vw, 1fr)
+                    'pip3 pip6 pip10' minmax(0.75vw, 1fr)
+                    'pip3 pip7 pip10' minmax(0.75vw, 1fr)
+                    '. pip7 . ' minmax(0.75vw, 1fr);
+
+                @for $i from 1 through 10 {
+                    .suit:nth-child(#{$i}) {
+                        grid-area: pip#{$i};
+                        
+                        @if $i == 3 or
+                            $i == 6 or
+                            $i == 7 or
+                            $i == 9 or
+                            $i == 10 {
+                                transform: rotate(180deg);
+                        }
+                    }
+                }
+            }
+
+            &.face {
+                padding: 5%;
+
+                .suit {
+                    height: 100%;
+                }
+            }
+        }
+
+        .suit {
+            height: 1.1vw;
+            width: 1.1vw;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .value {
+            font-size: 1.45vw;
         }
 
         .handle {
