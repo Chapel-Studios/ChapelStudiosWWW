@@ -84,7 +84,7 @@ class KlondikeGameBoard {
 
     }
 
-    _resetDeck = () => {
+    _resetDrawPile = () => {
         let cards = document.querySelectorAll("#Hands .card");
         //const pile = document.getElementById("DrawPile");
         for (let i = cards.length; i > 0; i-- ){
@@ -122,7 +122,7 @@ class KlondikeGameBoard {
                 newHand.appendChild(card);
             }
             else if (i == 0) {
-                this._resetDeck();
+                this._resetDrawPile();
                 i = count;
             }
         }
