@@ -234,10 +234,11 @@ class KlondikeGameBoard {
     constructor (options) {
         this._deck = new Deck();
         this._layout();
+        this._dealCards();
         this._init();
     }
 }
 
 const test = new KlondikeGameBoard();
 
-//test.init();
+// test.DealCards();
