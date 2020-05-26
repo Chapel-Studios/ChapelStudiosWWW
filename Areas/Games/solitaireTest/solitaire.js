@@ -65,6 +65,8 @@ class KlondikeGameBoard {
                 }
                 else {
                     card.querySelector(".card").classList.add("back");
+                    // CSS Work-Around (ToDo: Fixed in 4!)
+                    card.classList.add("bottom-card");
                 }
                 NSJ.GetDeepestChild(`#Stack${n + 1} .handle`).appendChild(card);
             }
@@ -194,6 +196,16 @@ class KlondikeGameBoard {
             if (this._dragBox.childNodes.length > 0) {
                 if (validateCardRelease(stack)) {
                     NSJ.GetDeepestChild(`#${this._zone} .handle`).appendChild(stack);
+
+                    // CSS Work-Around (ToDo: Fixed in 4!)
+                    if (this._zone.includes("Stack")) {
+                        stack.classList.remove("bottom-card");
+
+                        if ("13" == stackStartValue) {
+                            stack.classList.add("bottom-card");
+                        }
+                        
+                    }
                     if (this._originZone === "Hands") {
                         // do hand stuff
                         let lastHand = NSJ.GetDeepestChild(`#${this._originZone} .hand`);
@@ -206,6 +218,8 @@ class KlondikeGameBoard {
                         if (endCard.classList.contains("back")) {
                             endCard.classList.add("show");
                             endCard.classList.remove("back");
+                            // CSS Work-Around (ToDo: Fixed in 4!)
+                            endCard.classList.add("bottom-card");
                             this._setEvents(endCard.querySelector(".handle"));
                         }
                     }
