@@ -145,6 +145,8 @@ class KlondikeGameBoard {
             timerStart = Date.now();
 
         el.onmousedown = (event) => {
+            if (event.button !== 1) return;
+
             let dif = Date.now() - timerStart;
             let isDoubleClick = false;
             stack = event.target.parentElement;
