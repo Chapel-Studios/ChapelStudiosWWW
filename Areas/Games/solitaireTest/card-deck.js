@@ -83,17 +83,19 @@ class Suit {
 }
 
 class Deck {
-    static Suits = [
-        new Suit("Hearts", "", true),
-        new Suit("Diamonds", "", true),
-        new Suit("Spades", ""),
-        new Suit("Clubs", "")
-    ];
+    static GetSuitsList() { 
+        return [
+            new Suit("Hearts", "", true),
+            new Suit("Diamonds", "", true),
+            new Suit("Spades", ""),
+            new Suit("Clubs", "")
+        ];
+    }
 
     Cards = [];
 
     constructor () {
-        let suits = Deck.Suits.slice(0);
+        let suits = Deck.GetSuitsList();
         for (let cc = 0; cc < 52; cc++) {
             let cSuitIndex = NSJ.Random(suits.length);
             let cSuit = suits[cSuitIndex];

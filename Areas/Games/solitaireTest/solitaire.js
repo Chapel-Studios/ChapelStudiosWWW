@@ -31,7 +31,7 @@ class KlondikeGameBoard {
         }
 
         // Create Run Sections
-        Deck.Suits.forEach(suit => {
+        Deck.GetSuitsList().forEach(suit => {
             let newSection = createSection("RunTemplate", suit.name, true);
             let center = newSection.querySelector(".center");
             center.append(suit.name);
