@@ -269,7 +269,6 @@ class KlondikeGameBoard {
     constructor (options) {
         this._layout();
         this._buildDeck();
-        this._dealCards();
         this._init();
     }
 }
