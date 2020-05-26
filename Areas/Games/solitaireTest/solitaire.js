@@ -217,7 +217,8 @@ class KlondikeGameBoard {
         el.onmouseup = (event) => {
             if (this._dragBox.childNodes.length > 0) {
                 if (validateCardRelease(stack)) {
-                    NSJ.GetDeepestChild(`#${this._zone} .handle`).appendChild(stack);
+                    let zoneHandle = NSJ.GetDeepestChild(`#${this._zone} .handle`)
+                    let stackStartValue = stack.getAttribute("card-value");
 
                     // CSS Work-Around (ToDo: Fixed in 4!)
                     if (this._zone.includes("Stack")) {
@@ -228,6 +229,12 @@ class KlondikeGameBoard {
                         }
                         
                     }
+
+                    zoneHandle.appendChild(stack);
+                    if (this._zone == stack.getAttribute("suit") && "13" == stackStartValue) {
+                        this._checkForWin();
+                    }
+
                     if (this._originZone === "Hands") {
                         // do hand stuff
                         let lastHand = NSJ.GetDeepestChild(`#${this._originZone} .hand`);
@@ -286,6 +293,13 @@ class KlondikeGameBoard {
         document.getElementById("Reset").addEventListener('click', () => {
             this.ResetGame();
         });
+    }
+
+    _checkForWin() {
+        if (document.querySelectorAll(".run .card.show").length == 52) {
+            // Win is confirmed
+            this.ResetGame();
+        }
     }
 
     constructor (options) {
