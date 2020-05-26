@@ -144,7 +144,7 @@ class KlondikeGameBoard {
 
         let origin, 
             stack,
-            timerStart = Date.now();
+            timerStart;
 
         el.onmousedown = (event) => {
             if (event.button !== 1) return;
