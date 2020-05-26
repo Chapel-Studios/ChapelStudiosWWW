@@ -84,6 +84,24 @@ class KlondikeGameBoard {
 
     }
 
+    ResetGame() {
+
+        // Clear piles housed in cards
+        document.querySelectorAll("#Playfield .stack, #Playfield .run, #DrawPile").forEach(el => {
+            if (el) {
+                let bottomCard = el.querySelector(".card:not(.empty)")
+                if (bottomCard) bottomCard.remove();
+            }
+        });
+        
+        // Clear piles housed in cards
+        let hand = document.querySelector("#Hands .hand:not(.base)");
+        if (hand) hand.remove();
+
+        // Place New Deck
+        this._buildDeck();
+    }
+
     _resetDrawPile = () => {
         let cards = document.querySelectorAll("#Hands .card");
         //const pile = document.getElementById("DrawPile");
@@ -264,6 +282,10 @@ class KlondikeGameBoard {
         // Drag Functions
         document.onmousemove = this._moveDragBox.bind(this);
 
+        // Menu Functions
+        document.getElementById("Reset").addEventListener('click', () => {
+            this.ResetGame();
+        });
     }
 
     constructor (options) {
