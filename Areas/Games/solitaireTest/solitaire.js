@@ -42,8 +42,10 @@ class KlondikeGameBoard {
         [...Array(8).keys()].slice(1).forEach(i => {
             let newSection = createSection("StackTemplate", `Stack${i}`, true);
             this._gameboard.appendChild(newSection);
-        })
+        });
+    }
 
+    _dealCards() {
         // Fill Stacks
         for (let i = 0; i < 7; i++) {
             for (let n = i; n < 7; n++) {
