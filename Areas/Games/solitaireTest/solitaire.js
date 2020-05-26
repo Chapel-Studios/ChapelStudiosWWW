@@ -6,6 +6,7 @@ class KlondikeGameBoard {
     _drawPile = document.querySelector("#DrawPile");
     _dragBox = document.getElementById("DragBox");
     _gameboard = document.getElementById("Playfield");
+    _suitImageTemplate = document.getElementById("SuitImageTemplate");
     _deck;
     // Drag Properties
     _shiftX = 0;
@@ -34,9 +35,16 @@ class KlondikeGameBoard {
         // Create Run Sections
         Deck.GetSuitsList().forEach(suit => {
             let newSection = createSection("RunTemplate", suit.name, true);
+            let imgClone =  document.importNode(this._suitImageTemplate.content, true);
             let center = newSection.querySelector(".center");
-            center.append(suit.name);
             center.style.color = suit.isRed ? "red" : "black";
+            let suitAttr = document.createAttribute("suit");
+            suitAttr.value = suit.name;
+            center.parentElement.setAttributeNode(suitAttr);
+            let centerCountAttr = document.createAttribute("count");
+            centerCountAttr.value = 1;
+            center.setAttributeNode(centerCountAttr);
+            center.appendChild(imgClone);
             this._gameboard.appendChild(newSection);
         });
 
