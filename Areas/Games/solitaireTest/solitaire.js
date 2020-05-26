@@ -11,6 +11,7 @@ class KlondikeGameBoard {
     _shiftX = 0;
     _shiftY = 0;
     _zone = "";
+    _originZone = "";
 
     _layout() {
         function createSection(templateID, newID, addEmpty){
@@ -143,7 +144,6 @@ class KlondikeGameBoard {
 
         let origin, 
             stack,
-            originZone = "",
             timerStart = Date.now();
 
         el.onmousedown = (event) => {
@@ -156,7 +156,7 @@ class KlondikeGameBoard {
             // ToDo: better work-around: drop stack on origin when point focus(?) lost
             origin = stack.parentElement;
             let newOriginZone = NSJ.GetParentID(origin);
-            originZone = newOriginZone === "DragBox" ? originZone : newOriginZone;
+            this._originZone = newOriginZone === "DragBox" ? this._originZone : newOriginZone;
 
             if (Date.now() - timerStart > 250) {
                 timerStart = Date.now();
@@ -178,15 +178,15 @@ class KlondikeGameBoard {
             if (this._dragBox.childNodes.length > 0) {
                 if (validateCardRelease(stack)) {
                     NSJ.GetDeepestChild(`#${this._zone} .handle`).appendChild(stack);
-                    if (originZone === "Hands") {
+                    if (this._originZone === "Hands") {
                         // do hand stuff
-                        let lastHand = NSJ.GetDeepestChild(`#${originZone} .hand`);
+                        let lastHand = NSJ.GetDeepestChild(`#${this._originZone} .hand`);
                         if (lastHand.childNodes.length === 0) {
                             lastHand.remove();
                         }
                     }
-                    else if (originZone.includes("Stack")) {
-                        let endCard = NSJ.GetDeepestChild(`#${originZone} .card`);
+                    else if (this._originZone.includes("Stack")) {
+                        let endCard = NSJ.GetDeepestChild(`#${this._originZone} .card`);
                         if (endCard.classList.contains("back")) {
                             endCard.classList.add("show");
                             endCard.classList.remove("back");
