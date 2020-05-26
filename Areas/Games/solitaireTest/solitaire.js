@@ -253,7 +253,12 @@ class KlondikeGameBoard {
     _init() {
         // Draw Functions
         this._drawPile.addEventListener("click", () => {
-            this.Draw();
+            if (document.querySelectorAll("#DrawPile .card").length != 53) {
+                this.Draw();
+            }
+            else {
+                this._dealCards();
+            }
         });
 
         // Drag Functions
