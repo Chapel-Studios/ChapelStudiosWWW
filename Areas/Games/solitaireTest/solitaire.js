@@ -69,8 +69,10 @@ class KlondikeGameBoard {
     _dealCards() {
         // Fill Stacks
         for (let i = 0; i < 7; i++) {
+            // Create tier effect
             for (let n = i; n < 7; n++) {
                 let card = NSJ.GetDeepestChild("#DrawPile .card:not(.empty)");
+                // Flip Top Cards
                 if (i == n) {
                     card.classList.remove("back");
                     card.classList.add("show");
@@ -217,6 +219,7 @@ class KlondikeGameBoard {
         el.onmouseup = (event) => {
             if (this._dragBox.childNodes.length > 0) {
                 if (validateCardRelease(stack)) {
+                    // oncomplete
                     let zoneHandle = NSJ.GetDeepestChild(`#${this._zone} .handle`)
                     let stackStartValue = stack.getAttribute("card-value");
 
@@ -235,6 +238,7 @@ class KlondikeGameBoard {
                         this._checkForWin();
                     }
 
+                    // callback...
                     if (this._originZone === "Hands") {
                         // do hand stuff
                         let lastHand = NSJ.GetDeepestChild(`#${this._originZone} .hand`);
@@ -275,6 +279,7 @@ class KlondikeGameBoard {
         this._dragBox.style.left = `${event.pageX - this._shiftX}px`;
         this._dragBox.style.top = `${event.pageY - this._shiftY}px`;
     }
+
     _init() {
         // Draw Functions
         this._drawPile.addEventListener("click", () => {
