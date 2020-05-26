@@ -7,7 +7,6 @@ class KlondikeGameBoard {
     _dragBox = document.getElementById("DragBox");
     _gameboard = document.getElementById("Playfield");
     _suitImageTemplate = document.getElementById("SuitImageTemplate");
-    _deck;
     // Drag Properties
     _shiftX = 0;
     _shiftY = 0;
@@ -55,16 +54,26 @@ class KlondikeGameBoard {
         });
     }
 
+    _buildDeck() {
+        // Create Deck
+        let deck = new Deck();
+
+        // Push cards to DrawPile
+        while (deck.Cards.length > 0){
+            let card = deck.Cards.pop();
+            card.querySelector(".card").classList.add("back");
+            NSJ.GetDeepestChild("#DrawPile .handle").appendChild(card);
+        }
+    }
+
     _dealCards() {
         // Fill Stacks
         for (let i = 0; i < 7; i++) {
             for (let n = i; n < 7; n++) {
-                let card = this._deck.Cards.pop();
+                let card = NSJ.GetDeepestChild("#DrawPile .card:not(.empty)");
                 if (i == n) {
-                    card.querySelector(".card").classList.add("show");
-                }
-                else {
-                    card.querySelector(".card").classList.add("back");
+                    card.classList.remove("back");
+                    card.classList.add("show");
                     // CSS Work-Around (ToDo: Fixed in 4!)
                     card.classList.add("bottom-card");
                 }
@@ -72,12 +81,6 @@ class KlondikeGameBoard {
             }
         }
 
-        // Create Deck
-        while (this._deck.Cards.length > 0){
-            let card = this._deck.Cards.pop();
-            card.querySelector(".card").classList.add("back");
-            NSJ.GetDeepestChild("#DrawPile .handle").appendChild(card);
-        }
     }
 
     _resetDeck = () => {
@@ -262,8 +265,8 @@ class KlondikeGameBoard {
     }
 
     constructor (options) {
-        this._deck = new Deck();
         this._layout();
+        this._buildDeck();
         this._dealCards();
         this._init();
     }
