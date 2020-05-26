@@ -17,7 +17,7 @@ html, body {
 }
 
 #Gameboard {
-    margin: 5vh auto;
+    margin: 5vh auto 13vw;
     display: grid;
     grid-template: 
         "menu" minmax(calc(50px + 0.5vw), 10vh) 
@@ -58,17 +58,19 @@ html, body {
         .card {
             margin: 0;
 
-            &.back {
-
-                .handle {
-                    padding-top: 5px;
-                }
+            &.back > .handle {
+                padding-top: 2px;
             }
 
             &.show {
 
+                // CSS Work-Around (ToDo: Fixed in 4!)
+                &.bottom-card > .handle {
+                    padding-top: 2vw;
+                }
+
                 .handle {
-                    padding-top: 2em;
+                    padding-top: 1vw;
                 }
             }
 
@@ -126,7 +128,6 @@ html, body {
         }
 
         &.empty {
-            margin-top: 10px;
             left: 0px;
             top: 0px;
             cursor: unset;
@@ -441,30 +442,30 @@ html, body {
         display: grid;
         align-items: center;
         z-index: 25;
-    }
 
-    .card {
-        position: absolute;
-        top: unset;
-
-        &.empty {
-            top: unset;
-            margin-top: 0;
+        &.base {
+            width: 50%;
+            justify-self: start;
+            justify-items: center;
+            position: relative;
         }
 
-        &:nth-child(3n-2) {
-            left: 30px;
+        .card {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
             z-index: 1;
-        }
-
-        &:nth-child(3n-1) {
-            left: calc(30px + 2em);
-            z-index: 2;
-        }
-
-        &:nth-child(3n) {
-            left: calc(30px + 4em);
-            z-index: 3;
+    
+            &:nth-child(3n-1) {
+                left: calc(50% + 2vw);
+                z-index: 2;
+            }
+    
+            &:nth-child(3n) {
+                left: calc(50% + 4vw);
+                z-index: 3;
+            }
         }
     }
 
