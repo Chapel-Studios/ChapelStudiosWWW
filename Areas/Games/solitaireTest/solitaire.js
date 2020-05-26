@@ -76,6 +76,7 @@ class KlondikeGameBoard {
                     card.classList.add("show");
                     // CSS Work-Around (ToDo: Fixed in 4!)
                     card.classList.add("bottom-card");
+                    this._setEvents(card);
                 }
                 NSJ.GetDeepestChild(`#Stack${n + 1} .handle`).appendChild(card);
             }
@@ -258,10 +259,6 @@ class KlondikeGameBoard {
         // Drag Functions
         document.onmousemove = this._moveDragBox.bind(this);
 
-        // ToDo: Move this to part of deal function
-        document.querySelectorAll(".card.show .handle").forEach(card => {
-            this._setEvents(card);
-        });
     }
 
     constructor (options) {
