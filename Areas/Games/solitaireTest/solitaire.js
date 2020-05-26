@@ -12,6 +12,7 @@ class KlondikeGameBoard {
     _shiftY = 0;
     _zone = "";
     _originZone = "";
+    __cheatmode__ = false;
 
     _layout() {
         function createSection(templateID, newID, addEmpty){
@@ -119,6 +120,7 @@ class KlondikeGameBoard {
 
     _setEvents = (el) => {
         let validateCardRelease = (el) => {
+            let result = false;
             let suit = el.getAttribute("suit");
             let val = Number.parseInt(el.getAttribute("card-value"));
             let runEnd = NSJ.GetDeepestChild(`#${this._zone} .card`);
@@ -128,18 +130,24 @@ class KlondikeGameBoard {
             {  
                 let stackHeight = el.querySelectorAll(".handle").length;
                 // BI: Can only push stacks of one to runs
-                return (stackHeight === 1 && endValue === val - 1);
+                result = (stackHeight === 1 && endValue === val - 1);
             }
             else if (this._zone.includes("Stack")) {
                 let isRed = el.getAttribute("is-red");
                 let endIsRed = runEnd.getAttribute("is-red");
-                return ((
+                result = ((
                             (endValue === val + 1) && (endIsRed != isRed)
                         ) || (
                             (endValue === 0) && (val === 13)
                         ));
             }
-            return false;
+            
+            if (!result && this.__cheatmode__) {
+                console.log("Cheating is bad! This is for testing!");
+                return true;
+            }
+            
+            return result;
         }
 
         let origin, 
@@ -240,5 +248,6 @@ class KlondikeGameBoard {
 }
 
 const test = new KlondikeGameBoard();
+test.__cheatmode__ = true;
 
 // test.DealCards();
