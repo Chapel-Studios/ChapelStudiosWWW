@@ -66,7 +66,7 @@ class KlondikeGameBoard {
         }
     }
 
-    _dealCards() {
+    DealCards() {
         // Fill Stacks
         for (let i = 0; i < 7; i++) {
             // Create tier effect
@@ -287,7 +287,7 @@ class KlondikeGameBoard {
                 this.Draw();
             }
             else {
-                this._dealCards();
+                this.DealCards();
             }
         });
 
