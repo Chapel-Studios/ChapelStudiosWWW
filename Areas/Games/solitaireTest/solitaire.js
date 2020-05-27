@@ -7,12 +7,12 @@ class KlondikeGameBoard {
     _dragBox = document.getElementById("DragBox");
     _gameboard = document.getElementById("Playfield");
     _suitImageTemplate = document.getElementById("SuitImageTemplate");
+    __cheatmode__ = false;
     // Drag Properties
     _shiftX = 0;
     _shiftY = 0;
     _zone = "";
     _originZone = "";
-    __cheatmode__ = false;
 
     _layout() {
         function createSection(templateID, newID, addEmpty){
