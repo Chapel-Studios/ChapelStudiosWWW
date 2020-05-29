@@ -392,7 +392,7 @@ GameBoard.prototype.UpdateScoreBoard = function () {
             if (scores[i] !== undefined && scores[i] !== null) {
                 let scoretext = scores[i] === 1 ? "Instant Win!" : ConvertTimerToString(scores[i]) + " sec";
                 scorePos = i === 0 || scores[i] === scores[i - 1] ? scorePos : i + 1;
-                let suffix = NSJ.GrammerHelper.GetOrdinalSuffix(scorePos);
+                let suffix = CSTools.GrammerHelper.GetOrdinalSuffix(scorePos);
                 ulData += `<li><span>${scorePos}${suffix}</span> &bull; ${scoretext}</li>`;
             }
         }

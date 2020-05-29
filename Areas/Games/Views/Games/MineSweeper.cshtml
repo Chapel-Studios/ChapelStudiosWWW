@@ -7,7 +7,7 @@
 @section Scripts {
     <link rel="stylesheet" type="text/css" href="~/css/Games/MineSweeper/p5-minesweeper.css" asp-append-version="true">
 
-    <script type="text/javascript" src="~/js/grammar-helper.js"></script>
+    <script type="text/javascript" src="~/js/CSTools.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/addons/p5.sound.min.js"></script>
     <script type="text/javascript" src="~/js/Games/MineSweeper/P5/cell.js"></script>
@@ -20,7 +20,7 @@
 
         // P5 Global Variables for Functions
         var setup, mouseReleased, draw, preload;
-        var NSJ = NSJ || {};
+        var CSTools = CSTools || {};
 
         ; (function () {
             // Page Specific Variables
@@ -38,26 +38,26 @@
                 , "ScoreText"
                 , "Win%"
             ];
-            NSJ.MineSweeper = new GameBoard(...CANVAS_SIZE, CELL_WIDTH, ...HANDLES);
+            CSTools.MineSweeper = new GameBoard(...CANVAS_SIZE, CELL_WIDTH, ...HANDLES);
 
             // P5 Function Definitions
             preload = function () {
-                NSJ.MineSweeper.Assets.Sounds.Lose = loadSound("../../Assets/Audio/mk-soul.wav");
-                NSJ.MineSweeper.Assets.Sounds.Win = loadSound("../../Assets/Audio/FFVI-VictoryFanfare.mp3");
+                CSTools.MineSweeper.Assets.Sounds.Lose = loadSound("../../Assets/Audio/mk-soul.wav");
+                CSTools.MineSweeper.Assets.Sounds.Win = loadSound("../../Assets/Audio/FFVI-VictoryFanfare.mp3");
             }
 
             setup = function () {
                 let canvas = createCanvas(...CANVAS_SIZE);
                 canvas.parent('GameBoardDiv');
-                NSJ.MineSweeper.Initialize();
-                //setInterval(NSJ.MineSweeper.UpdateTimer.bind(NSJ.MineSweeper), 2);
+                CSTools.MineSweeper.Initialize();
+                //setInterval(CSTools.MineSweeper.UpdateTimer.bind(CSTools.MineSweeper), 2);
             }
 
             mousePressed = function () {
                 if (mouseX <= CANVAS_SIZE[0] && mouseX > -1
                     && mouseY <= CANVAS_SIZE[1] && mouseY > -1
                 ) {
-                    NSJ.MineSweeper.ClickStart(mouseX, mouseY);
+                    CSTools.MineSweeper.ClickStart(mouseX, mouseY);
                 }
             }
 
@@ -65,13 +65,13 @@
                 if (mouseX <= CANVAS_SIZE[0] && mouseX > -1
                     && mouseY <= CANVAS_SIZE[1] && mouseY > -1
                 ) {
-                    NSJ.MineSweeper.ClickEnd(mouseX, mouseY, mouseButton);
+                    CSTools.MineSweeper.ClickEnd(mouseX, mouseY, mouseButton);
                 }
             }
 
             draw = function () {
                 background(255);
-                NSJ.MineSweeper.Show();
+                CSTools.MineSweeper.Show();
             }
 
             // Onload Instructions

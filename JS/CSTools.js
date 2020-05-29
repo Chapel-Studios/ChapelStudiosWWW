@@ -1,7 +1,7 @@
 ﻿'use strict'
 
-var NSJ = NSJ || {};
-NSJ.GrammerHelper = {
+var CSTools = CSTools || {};
+CSTools.GrammerHelper = {
     GetOrdinalSuffix: (input) => {
         let result = "th";
         if (input === 1) {
