@@ -44,6 +44,7 @@ html, body {
     grid-template-columns: repeat(7, minmax(8vw, 1fr));
     justify-items: stretch;
     padding: 3vh 5%;
+    position: relative;
 
     & > * {
         display: grid;
@@ -55,7 +56,7 @@ html, body {
         position: relative;
         align-items: start;
 
-        .card {
+        .playing-card {
             margin: 0;
 
             &.back > .handle {
@@ -80,320 +81,320 @@ html, body {
             }
         }
     }
+}
 
-    .card {
-        height: 12.6vw; // 5:7
-        width: 9vw;
-        border: 1px solid #000;
-        border-radius: 10px;
-        position: relative;
-        left: -1px;
-        top: -1px;
-        cursor: pointer;
+.playing-card {
+    height: 12.6vw; // 5:7
+    width: 9vw;
+    border: 1px solid #000;
+    border-radius: 10px;
+    position: relative;
+    left: -1px;
+    top: -1px;
+    cursor: pointer;
 
-        &[is-red=true] {
-            color: red;
+    &[is-red=true] {
+        color: red;
+    }
+
+    &[is-red=false] {
+        color: black;
+    }
+
+    &[suit="Hearts"] {
+
+        & > div > div > .suit {
+            background-image: url($basepath + "Hearts.png");
+        }
+    }
+
+    &[suit="Diamonds"] {
+
+        & > div > div > .suit {
+            background-image: url($basepath + "Diamonds.png");
+        }
+    }
+
+    &[suit="Spades"] {
+
+        & > div > div > .suit {
+            background-image: url($basepath + "Spades.png");
+        }
+    }
+
+    &[suit="Clubs"] {
+
+        & > div > div > .suit {
+            background-image: url($basepath + "Clubs.png");
+        }
+    }
+
+    &.empty {
+        left: 0px;
+        top: 0px;
+        cursor: unset;
+    }
+
+    &.show {
+        background-color: #fff;
+    }
+
+    &.back {
+        background-color: green;
+
+        & > .display {
+            display: none;
+        }
+    }
+
+    .top, .bottom {
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        margin: 0.5em;
+        position: absolute;
+    }
+
+    .top {
+        top: 0;
+        left: 0;
+    }
+
+    .bottom {
+        bottom: 0;
+        right: 0;
+        transform: rotate(180deg);
+    }
+
+    .center {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        justify-content: center;
+        padding: 10% 20%;
+
+        .suit {
+            height: 1.5vw;
+            width: 1.5vw;
+            position: relative;
         }
 
-        &[is-red=false] {
-            color: black;
-        }
+        &[count="1"] {
+            justify-content: stretch;
 
-        &[suit="Hearts"] {
-
-            & > div > .suit {
-                background-image: url($basepath + "Hearts.png");
+            .suit {
+                height: 45%;
+                width: 100%;
             }
         }
 
-        &[suit="Diamonds"] {
+        &[count="2"] {
 
-            & > div > .suit {
-                background-image: url($basepath + "Diamonds.png");
+            .suit:nth-child(2) {
+                transform: rotate(180deg);
             }
         }
 
-        &[suit="Spades"] {
+        &[count="3"] {
 
-            & > div > .suit {
-                background-image: url($basepath + "Spades.png");
+            .suit:last-child {
+                transform: rotate(180deg);
             }
         }
 
-        &[suit="Clubs"] {
-
-            & > div > .suit {
-                background-image: url($basepath + "Clubs.png");
-            }
-        }
-
-        &.empty {
-            left: 0px;
-            top: 0px;
-            cursor: unset;
-        }
-
-        &.show {
-            background-color: #fff;
-        }
-
-        &.back {
-            background-color: green;
-
-            & > .top, & > .bottom, & > .center {
-                display: none;
-            }
-        }
-
-        .top, .bottom {
-            display: grid;
-            align-items: center;
-            justify-items: center;
-            margin: 0.5em;
-            position: absolute;
-        }
-
-        .top {
-            top: 0;
-            left: 0;
-        }
-
-        .bottom {
-            bottom: 0;
-            right: 0;
-            transform: rotate(180deg);
-        }
-
-        .center {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            top: 0;
-            left: 0;
-            display: grid;
-            justify-items: center;
-            align-items: center;
-            justify-content: center;
+        &[count="4"] {
             padding: 10% 20%;
 
             .suit {
-                height: 1.5vw;
-                width: 1.5vw;
-                position: relative;
-            }
-
-            &[count="1"] {
-                justify-content: stretch;
-
-                .suit {
-                    height: 45%;
-                    width: 100%;
+                transform: translateX(-50%);
+                
+                &:nth-child(1) {
+                    left: 200%;
+                }
+                
+                &:nth-child(2) {
+                    left: 100%;
+                }
+                
+                &:nth-child(3) {
+                    transform: translateX(-50%) rotate(180deg);
+                    left: 0%;
+                }
+                
+                &:nth-child(4) {
+                    transform: translateX(-50%) rotate(180deg);
+                    left: -100%;
                 }
             }
+        }
 
-            &[count="2"] {
+        &[count="5"] {
+            grid-template: 
+                'pip1 . pip2' minmax(1.5vw, 1fr)
+                '. pip3 .' minmax(1.5vw, 1fr)
+                'pip4 . pip5' minmax(1.5vw, 1fr);
+            padding: 33% 20%;
 
-                .suit:nth-child(2) {
+            @for $i from 1 through 5 {
+                .suit:nth-child(#{$i}) {
+                    grid-area: pip#{$i};
+
+                    @if $i == 4 or $i == 5 {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+
+        &[count="6"] {
+            grid-template-rows: repeat(3, minmax(1.5vw, 1fr));
+            grid-template-columns: repeat(2, minmax(0px, 1fr));
+
+            .suit {
+
+                &:nth-child(1), &:nth-child(2){
+                    justify-self: end;
+                    left: 10%;
+                }
+                
+                &:nth-child(4){
                     transform: rotate(180deg);
                 }
-            }
-
-            &[count="3"] {
-
-                .suit:last-child {
+                
+                &:nth-child(5), &:nth-child(6){
                     transform: rotate(180deg);
+                    justify-self: start;
+                    right: 10%;
                 }
             }
+        }
 
-            &[count="4"] {
-                padding: 10% 20%;
+        &[count="7"] {
+            grid-template: 
+                'pip1 pip1 pip1 pip2 pip2 pip2' minmax(1.5vw, 1fr)
+                'pip3 pip3 pip4 pip4 pip5 pip5' minmax(1.5vw, 1fr)
+                'pip6 pip6 pip6 pip7 pip7 pip7' minmax(1.5vw, 1fr);
+            padding: 5% 15%;
+            justify-content: stretch;
 
-                .suit {
-                    transform: translateX(-50%);
-                    
-                    &:nth-child(1) {
-                        left: 200%;
+            @for $i from 1 through 7 {
+                .suit:nth-child(#{$i}) {
+                    grid-area: pip#{$i};
+                    @if $i == 1 or $i == 6 {
+                        left: 15%;
                     }
-                    
-                    &:nth-child(2) {
-                        left: 100%;
-                    }
-                    
-                    &:nth-child(3) {
-                        transform: translateX(-50%) rotate(180deg);
-                        left: 0%;
-                    }
-                    
-                    &:nth-child(4) {
-                        transform: translateX(-50%) rotate(180deg);
-                        left: -100%;
+                    @else if $i == 2 or $i == 7 {
+                        right: 15%;
                     }
                 }
             }
+        }
 
-            &[count="5"] {
-                grid-template: 
-                    'pip1 . pip2' minmax(1.5vw, 1fr)
-                    '. pip3 .' minmax(1.5vw, 1fr)
-                    'pip4 . pip5' minmax(1.5vw, 1fr);
-                padding: 33% 20%;
+        &[count="8"] {
+            grid-template: 
+                'pip1 . pip6' minmax(0.75vw, 1fr)
+                'pip1 pip4 pip6' minmax(0.75vw, 1fr)
+                'pip2 pip4 pip7' minmax(0.75vw, 1fr)
+                'pip2 pip5 pip7' minmax(0.75vw, 1fr)
+                'pip3 pip5 pip8' minmax(0.75vw, 1fr)
+                'pip3 . pip8' minmax(0.75vw, 1fr);
 
-                @for $i from 1 through 5 {
-                    .suit:nth-child(#{$i}) {
-                        grid-area: pip#{$i};
+            @for $i from 1 through 8 {
+                .suit:nth-child(#{$i}) {
+                    grid-area: pip#{$i};
 
-                        @if $i == 4 or $i == 5 {
+                    @if $i == 3 or
+                        $i == 5 or
+                        $i == 7 or
+                        $i == 8 {
                             transform: rotate(180deg);
-                        }
                     }
                 }
             }
+        }
 
-            &[count="6"] {
-                grid-template-rows: repeat(3, minmax(1.5vw, 1fr));
-                grid-template-columns: repeat(2, minmax(0px, 1fr));
+        &[count="9"] {
+            grid-template-rows: repeat(3, minmax(1.5vw, 1fr));
+            grid-template-columns: repeat(3, minmax(0px, .75fr));
+            padding: 20% 20%;
 
-                .suit {
-
-                    &:nth-child(1), &:nth-child(2){
-                        justify-self: end;
-                        left: 10%;
+            @for $i from 1 through 9 {
+                .suit:nth-child(#{$i}) {
+                    @if $i == 1 or $i == 4 or $i == 7 {
+                        top: 33%;
+                    }
+                    @else if $i == 3 or $i == 6 or $i == 9 {
+                        bottom: 33%;
                     }
                     
-                    &:nth-child(4){
-                        transform: rotate(180deg);
+                    @if $i == 4 or
+                        $i == 7 or
+                        $i == 8 or
+                        $i == 9 {
+                            transform: rotate(180deg);
                     }
+                }
+            }
+        }
+
+        &[count="10"] {
+            grid-template: 
+                '. pip4 . ' minmax(0.75vw, 1fr)
+                'pip1 pip4 pip8' minmax(0.75vw, 1fr)
+                'pip1 pip5 pip8' minmax(0.75vw, 1fr)
+                'pip2 pip5 pip9' minmax(0.75vw, 1fr)
+                'pip2 pip6 pip9' minmax(0.75vw, 1fr)
+                'pip3 pip6 pip10' minmax(0.75vw, 1fr)
+                'pip3 pip7 pip10' minmax(0.75vw, 1fr)
+                '. pip7 . ' minmax(0.75vw, 1fr);
+
+            @for $i from 1 through 10 {
+                .suit:nth-child(#{$i}) {
+                    grid-area: pip#{$i};
                     
-                    &:nth-child(5), &:nth-child(6){
-                        transform: rotate(180deg);
-                        justify-self: start;
-                        right: 10%;
+                    @if $i == 3 or
+                        $i == 6 or
+                        $i == 7 or
+                        $i == 9 or
+                        $i == 10 {
+                            transform: rotate(180deg);
                     }
-                }
-            }
-
-            &[count="7"] {
-                grid-template: 
-                    'pip1 pip1 pip1 pip2 pip2 pip2' minmax(1.5vw, 1fr)
-                    'pip3 pip3 pip4 pip4 pip5 pip5' minmax(1.5vw, 1fr)
-                    'pip6 pip6 pip6 pip7 pip7 pip7' minmax(1.5vw, 1fr);
-                padding: 5% 15%;
-                justify-content: stretch;
-
-                @for $i from 1 through 7 {
-                    .suit:nth-child(#{$i}) {
-                        grid-area: pip#{$i};
-                        @if $i == 1 or $i == 6 {
-                            left: 15%;
-                        }
-                        @else if $i == 2 or $i == 7 {
-                            right: 15%;
-                        }
-                    }
-                }
-            }
-
-            &[count="8"] {
-                grid-template: 
-                    'pip1 . pip6' minmax(0.75vw, 1fr)
-                    'pip1 pip4 pip6' minmax(0.75vw, 1fr)
-                    'pip2 pip4 pip7' minmax(0.75vw, 1fr)
-                    'pip2 pip5 pip7' minmax(0.75vw, 1fr)
-                    'pip3 pip5 pip8' minmax(0.75vw, 1fr)
-                    'pip3 . pip8' minmax(0.75vw, 1fr);
-
-                @for $i from 1 through 8 {
-                    .suit:nth-child(#{$i}) {
-                        grid-area: pip#{$i};
-
-                        @if $i == 3 or
-                            $i == 5 or
-                            $i == 7 or
-                            $i == 8 {
-                                transform: rotate(180deg);
-                        }
-                    }
-                }
-            }
-
-            &[count="9"] {
-                grid-template-rows: repeat(3, minmax(1.5vw, 1fr));
-                grid-template-columns: repeat(3, minmax(0px, .75fr));
-                padding: 20% 20%;
-
-                @for $i from 1 through 9 {
-                    .suit:nth-child(#{$i}) {
-                        @if $i == 1 or $i == 4 or $i == 7 {
-                            top: 33%;
-                        }
-                        @else if $i == 3 or $i == 6 or $i == 9 {
-                            bottom: 33%;
-                        }
-                        
-                        @if $i == 4 or
-                            $i == 7 or
-                            $i == 8 or
-                            $i == 9 {
-                                transform: rotate(180deg);
-                        }
-                    }
-                }
-            }
-
-            &[count="10"] {
-                grid-template: 
-                    '. pip4 . ' minmax(0.75vw, 1fr)
-                    'pip1 pip4 pip8' minmax(0.75vw, 1fr)
-                    'pip1 pip5 pip8' minmax(0.75vw, 1fr)
-                    'pip2 pip5 pip9' minmax(0.75vw, 1fr)
-                    'pip2 pip6 pip9' minmax(0.75vw, 1fr)
-                    'pip3 pip6 pip10' minmax(0.75vw, 1fr)
-                    'pip3 pip7 pip10' minmax(0.75vw, 1fr)
-                    '. pip7 . ' minmax(0.75vw, 1fr);
-
-                @for $i from 1 through 10 {
-                    .suit:nth-child(#{$i}) {
-                        grid-area: pip#{$i};
-                        
-                        @if $i == 3 or
-                            $i == 6 or
-                            $i == 7 or
-                            $i == 9 or
-                            $i == 10 {
-                                transform: rotate(180deg);
-                        }
-                    }
-                }
-            }
-
-            &.face {
-                padding: 5%;
-
-                .suit {
-                    height: 100%;
                 }
             }
         }
 
-        .suit {
-            height: 1.1vw;
-            width: 1.1vw;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
+        &.face {
+            padding: 5%;
 
-        .value {
-            font-size: 1.45vw;
+            .suit {
+                height: 100%;
+            }
         }
+    }
 
-        .handle {
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            z-index: 99;
-            border-radius: inherit
-        }
+    .suit {
+        height: 1.1vw;
+        width: 1.1vw;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .value {
+        font-size: 1.45vw;
+    }
+
+    .handle {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 99;
+        border-radius: inherit
     }
 }
 
@@ -404,10 +405,10 @@ html, body {
     min-height: 50px;
     pointer-events: none;
     //background-color: blue;
-    height: calc(10.5vw); // 5:7
-    width: calc(7.5vw);
+    // height: 12.6vw; // 5:7
+    // width: 9vw;
 
-    & > .card {
+    & > .playing-card {
         top: 0;
         left: 0;
 
@@ -426,7 +427,7 @@ html, body {
 #DrawPile {
     grid-area: draw;
 
-    .card {
+    .playing-card {
         top: -1.25px;
         left: -0.5px;
     }
@@ -450,7 +451,7 @@ html, body {
             position: relative;
         }
 
-        .card {
+        .playing-card {
             position: absolute;
             left: 50%;
             top: 50%;
@@ -471,9 +472,155 @@ html, body {
 
 }
 
+#WinScreen {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 100;
+    background-color: rgba(15, 15, 15, $alpha: 0.7);
+
+    .text {
+        background-color: white;
+        width: 40%;
+        height: 40%;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        font-size: 3rem;
+    }
+}
+
 @-moz-document url-prefix() {
-    #Gameboard .card {
+    #Gameboard .playing-card {
         left: -0.5px;
     }
 }
 
+//***************************************************
+// Win-Celebration
+//***************************************************
+$particles: 50;
+$width: 500;
+$height: 500;
+
+// Create the explosion...
+$box-shadow: ();
+$box-shadow2: ();
+@for $i from 0 through $particles {
+    $box-shadow: $box-shadow,
+                random($width)-$width / 2 + px
+                random($height)-$height / 1.2 + px
+                hsl(random(360), 100, 50);
+    $box-shadow2: $box-shadow2, 0 0 #fff
+}
+@mixin keyframes ($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+
+    @-ms-keyframes #{$animationName} {
+        @content;
+    }
+
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+@mixin animation-delay ($settings) {
+    -moz-animation-delay: $settings;
+    -webkit-animation-delay: $settings;
+    -o-animation-delay: $settings;
+    -ms-animation-delay: $settings;
+    animation-delay: $settings;
+}
+
+@mixin animation-duration ($settings) {
+    -moz-animation-duration: $settings;
+    -webkit-animation-duration: $settings;
+    -o-animation-duration: $settings;
+    -ms-animation-duration: $settings;
+    animation-duration: $settings;
+}
+
+@mixin animation ($settings) {
+    -moz-animation: $settings;
+    -webkit-animation: $settings;
+    -o-animation: $settings;
+    -ms-animation: $settings;
+    animation: $settings;
+}
+
+@mixin transform ($settings) {
+    transform: $settings;
+    -moz-transform: $settings;
+    -webkit-transform: $settings;
+    -o-transform: $settings;
+    -ms-transform: $settings;
+}
+
+// body {
+//     margin:0;
+//     padding:0;
+//     background: #000;
+//     overflow: hidden;
+// }
+
+#WinScreen > .fireworksA, #WinScreen > .fireworksB {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    box-shadow: $box-shadow2;
+    z-index: 100;
+    @include animation((1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards));
+}
+    
+#WinScreen > .fireworksB {
+    @include animation-delay((1.25s, 1.25s, 1.25s));
+    @include animation-duration((1.25s, 1.25s, 6.25s));
+}
+        
+@include keyframes(bang) {
+    to {
+        box-shadow:$box-shadow;
+    }
+}
+    
+@include keyframes(gravity)  {
+    to {
+        @include transform(translateY(200px));
+        opacity: 0;
+    }
+}
+    
+@include keyframes(position) {
+    0%, 19.9% {
+        margin-top: 10%;
+        margin-left: 40%;
+    }
+    20%, 39.9% {
+        margin-top: 40%;
+        margin-left: 30%;
+    }
+    40%, 59.9% {  
+        margin-top: 20%;
+        margin-left: 70%
+    }
+    60%, 79.9% {  
+        margin-top: 30%;
+        margin-left: 20%;
+    }
+    80%, 99.9% {  
+        margin-top: 30%;
+        margin-left: 80%;
+    }
+}

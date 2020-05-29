@@ -6,12 +6,13 @@ class Card {
     //static _imageBasePath = "/wwwroot/assets/Images/Games/Cards/";
     static _imageBasePath = "/Images/";
 
-    static Create (suit, value) {
+    static Create (suit, value, startMove, updateMove, finishMove) {
         let displayValue = value;
         let centerCount = value;
         // ToDo: change this to dependancy injection...
         let centerImgSrc = this._imageBasePath + `${suit.name}`;
 
+        // Handle face card variables
         if (value == 1) displayValue = "A";
         else if (value == 11) {
             displayValue = "J";
@@ -29,9 +30,11 @@ class Card {
             centerImgSrc = centerImgSrc + `_King.png`;
         }
 
+        // Create Card
         let clone =  document.importNode(this._template.content, true);
+        let card = clone.querySelector(".playing-card");
         
-        let card = clone.querySelector(".card");
+        // Set Attributes
         let suitAttr = document.createAttribute("suit");
         suitAttr.value = suit.name;
         card.setAttributeNode(suitAttr);
@@ -68,6 +71,11 @@ class Card {
             div.append(displayValue)
         });
         
+        // Set Events
+        let handle = card.querySelector(".handle");
+        handle.onmousedown = startMove;
+        handle.onmousemove = updateMove;
+        handle.onmouseup = finishMove;
         
         return clone;
     }
@@ -91,22 +99,58 @@ class Deck {
             new Suit("Clubs", "")
         ];
     }
-
+    PlacementHandle;
+    PlacementHandleId;
     Cards = [];
+    CleanUpZones;
 
-    constructor () {
+    constructor (placementHandle, startMove, updateMove, finishMove, cleanUpZones) {
+        this.PlacementHandleID = placementHandle.id;
+        this.PlacementHandle = placementHandle;
+        this.CleanUpZones = cleanUpZones;
         let suits = Deck.GetSuitsList();
-        for (let cc = 0; cc < 52; cc++) {
-            let cSuitIndex = NSJ.Random(suits.length);
-            let cSuit = suits[cSuitIndex];
-            let cValIndex = NSJ.Random(cSuit.available.length);
+        // Create cards in random order
+        
+        suits.forEach(suit => {
+            suit.available.forEach(cardValue => {
+                this.Cards.push(Card.Create(suit, cardValue, startMove, updateMove, finishMove));
+            });
+        });
 
-            this.Cards.push(Card.Create(cSuit, cSuit.available[cValIndex]));
+        this.Shuffle();
+    }
 
-            cSuit.available.splice(cValIndex, 1);
-            if (cSuit.available.length == 0) {
-                suits.splice(cSuitIndex, 1);
-            }
+    PickUp = () => {
+        // Clear cards from the playfield
+        let query = "";
+        this.CleanUpZones.forEach(zone => {
+            query += `#Playfield ${zone} .playing-card:not(.empty), `
+        });
+        query += "#DrawPile .playing-card:not(.empty), ";
+        query += "#Hands .playing-card:not(.empty)";
+
+        let cards = document.querySelectorAll(query)
+        // Have to go in reverse order to ensure elements are removed from the Dom Correctly
+        for (let i = cards.length - 1; i > -1; i--) {
+            let card = cards[i];
+            card.classList.add("back");
+            card.classList.remove("show");
+            card.classList.remove("bottom-card");
+            this.Cards.push(card);
+            card.remove();
+        }
+
+        // Clear any empty hands
+        let hand = document.querySelector("#Hands .hand:not(.base)");
+        if (hand) hand.remove();
+    }
+
+    Shuffle = () => {
+        // Rebuild playing deck
+        for (let cardCount = 0; cardCount < 52; cardCount++) {
+            let cardIndex = NSJ.Random(this.Cards.length);
+            let card = this.Cards.splice(cardIndex, 1)[0];
+            NSJ.GetDeepestChild(`#${this.PlacementHandleID} .handle`).appendChild(card);
         }
     }
 }
