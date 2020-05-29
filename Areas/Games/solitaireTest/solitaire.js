@@ -124,7 +124,7 @@ class KlondikeGameBoard {
     InitialBindings = () => {
         // Draw Functions
         this._drawPile.addEventListener("click", () => {
-            if (document.querySelectorAll("#DrawPile .playing-playing-card").length != 53) {
+            if (document.querySelectorAll("#DrawPile .playing-card").length != 53) {
                 this.Draw();
             }
             else {
