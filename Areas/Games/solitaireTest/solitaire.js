@@ -172,6 +172,6 @@ class KlondikeGameBoard {
 }
 
 const test = new KlondikeGameBoard();
-test.Moves.__cheatmode__ = true;
+//test.Moves.__cheatmode__ = true;
 
 test.DealCards();
