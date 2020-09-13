@@ -9,9 +9,14 @@
     <meta property="og:url" content="https://www.chapelstudios.dev" />
 
     <title>@ViewData["Title"] - Chapel Studios</title>
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/core.css" />
+    </environment>
+    <environment include="Production">
+        <link rel="stylesheet" href="~/css/core.css" asp-append-version="true" />
+    </environment>
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/core.css" asp-append-version="true" />
     <script src="https://kit.fontawesome.com/acfd707b9b.js" crossorigin="anonymous"></script>
     @RenderSection("Head", false)
 </head>
@@ -55,9 +60,11 @@
         </div>
     </footer>
     <environment include="Development">
-        <script src="~/js/core.js" asp-append-version="true"></script>
+        <script src="~/js/core.js"></script>
+        <script src="~/js/CSTools.js"></script>
     </environment>
     <environment include="Production">
+        <script src="~/js/CSTools.min.js" asp-append-version="true"></script>
         <script src="~/js/core.min.js" asp-append-version="true"></script>
     </environment>
     @RenderSection("Scripts", required: false)
