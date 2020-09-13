@@ -45,11 +45,6 @@ class Card {
         isRedAttr.value = suit.isRed;
         card.setAttributeNode(isRedAttr);
 
-        // Add Corner Images
-        clone.querySelectorAll(".top img, .bottom img").forEach((img) => {
-            img.src = imgSrc;
-        });
-
         // Add Center Images
         [...Array(centerCount)].forEach(i => {
             let imgClone =  document.importNode(this._suitImageTemplate.content, true);
