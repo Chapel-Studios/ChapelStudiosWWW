@@ -1,0 +1,42 @@
+﻿@page   "/Games/{Style}"
+@model ChapelStudiosWWW.Pages.Games.SolitaireModel
+@{
+    ViewData["Title"] = $"{Model.Style} Solitaire";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@section Head {
+    <environment include="Development">
+        <link rel="stylesheet" type="text/css" href="~/css/Games/Solitaire.css">
+    </environment>
+    <environment include="Production">
+        <link rel="stylesheet" type="text/css" href="~/css/Games/Solitaire.css" asp-append-version="true">
+    </environment>
+}
+
+@section Scripts {
+    <environment include="Development">
+        <script type="text/javascript" src="~/js/Games/Solitaire/card-deck.js"></script>
+        <script type="text/javascript" src="~/js/Games/Solitaire/solitaire-move.js"></script>
+        <script type="text/javascript" src="~/js/Games/Solitaire/klondike.js"></script>
+        <script type="text/javascript" src="~/js/Games/Solitaire/solitaire.js"></script>
+    </environment>
+    <environment include="Production">
+        <script type="text/javascript" src="~/js/Games/Solitaire/card-deck.min.js" asp-append-version="true"></script>
+        <script type="text/javascript" src="~/js/Games/Solitaire/solitaire-move.min.js" asp-append-version="true"></script>
+        <script type="text/javascript" src="~/js/Games/Solitaire/klondike.min.js" asp-append-version="true"></script>
+        <script type="text/javascript" src="~/js/Games/Solitaire/solitaire.min.js" asp-append-version="true"></script>
+    </environment>
+}
+
+
+<div class="banner">
+    <h1>Solitaire</h1>
+    <p>Classic Klondike Solitaire, no adds, no hints, just you and a deck of cards.</p>
+</div>
+
+<div id="Gameboard">
+    @Html.Partial($"_{Model.Style}Board")
+</div>

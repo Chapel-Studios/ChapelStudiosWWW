@@ -1,0 +1,500 @@
+﻿$basepath: "../../assets/Images/Games/Cards/";
+
+main {
+    position: unset;
+}
+
+.container.content {
+    max-width: inherit;
+}
+
+#Gameboard {
+    margin: 5vh auto 13vw;
+    display: grid;
+    grid-template: "menu" minmax(calc(50px + 0.5vw), 10vh) "play"minmax(calc(26vw + 5em), 1fr);
+    width: 90vw;
+
+    .menu {
+        grid-area: menu;
+        background-color: rgba($color: #111111, $alpha: 0.5);
+        width: 100%;
+    }
+}
+
+#Playfield {
+    grid-area: play;
+    background-color: #524;
+    min-width: 450px;
+    height: 80vh;
+    min-height: calc(26vw + 6vh + 5em);
+    display: grid;
+    grid-template: 
+        "draw hand hand Hearts Diamonds Spades Clubs" 13vw 
+        "Stack1 Stack2 Stack3 Stack4 Stack5 Stack6 Stack7" minmax(calc(13vw + 5em), 1fr);
+    grid-template-columns: repeat(7, minmax(8vw, 1fr));
+    justify-items: stretch;
+    padding: 3vh 5%;
+    position: relative;
+
+    & > * {
+        display: grid;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .stack {
+        position: relative;
+        align-items: start;
+
+        .playing-card {
+            margin: 0;
+
+            &.back > .handle {
+                padding-top: 2px;
+            }
+
+            &.show {
+                // CSS Work-Around (ToDo: Fixed in 4!)
+                &.bottom-card > .handle {
+                    padding-top: 2vw;
+                }
+
+                .handle {
+                    padding-top: 1vw;
+                }
+            }
+
+            &.empty {
+                position: relative;
+                top: 2vw;
+            }
+        }
+    }
+}
+
+.playing-card {
+    height: 12.6vw; // 5:7
+    width: 9vw;
+    border: 1px solid #000;
+    border-radius: 10px;
+    position: relative;
+    left: -1px;
+    top: -1px;
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+    &[is-red=true] {
+        color: red;
+    }
+
+    &[is-red=false] {
+        color: black;
+    }
+
+    &[suit="Hearts"] {
+
+        & > div > div > .suit {
+            background-image: url($basepath + "Hearts.png");
+        }
+    }
+
+    &[suit="Diamonds"] {
+
+        & > div > div > .suit {
+            background-image: url($basepath + "Diamonds.png");
+        }
+    }
+
+    &[suit="Spades"] {
+
+        & > div > div > .suit {
+            background-image: url($basepath + "Spades.png");
+        }
+    }
+
+    &[suit="Clubs"] {
+
+        & > div > div > .suit {
+            background-image: url($basepath + "Clubs.png");
+        }
+    }
+
+    &.empty {
+        left: 0px;
+        top: 0px;
+        cursor: unset;
+    }
+
+    &.show {
+        background-color: #fff;
+    }
+
+    &.back {
+        background-color: green;
+
+        & > .display {
+            display: none;
+        }
+    }
+
+    .top, .bottom {
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        margin: 0.5em;
+        position: absolute;
+    }
+
+    .top {
+        top: 0;
+        left: 0;
+    }
+
+    .bottom {
+        bottom: 0;
+        right: 0;
+        transform: rotate(180deg);
+    }
+
+    .center {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        justify-content: center;
+        padding: 10% 20%;
+
+        .suit {
+            height: 1.5vw;
+            width: 1.5vw;
+            position: relative;
+        }
+
+        &[count="1"] {
+            justify-content: stretch;
+
+            .suit {
+                height: 45%;
+                width: 100%;
+            }
+        }
+
+        &[count="2"] {
+
+            .suit:nth-child(2) {
+                transform: rotate(180deg);
+            }
+        }
+
+        &[count="3"] {
+
+            .suit:last-child {
+                transform: rotate(180deg);
+            }
+        }
+
+        &[count="4"] {
+            padding: 10% 20%;
+
+            .suit {
+                transform: translateX(-50%);
+
+                &:nth-child(1) {
+                    left: 200%;
+                }
+
+                &:nth-child(2) {
+                    left: 100%;
+                }
+
+                &:nth-child(3) {
+                    transform: translateX(-50%) rotate(180deg);
+                    left: 0%;
+                }
+
+                &:nth-child(4) {
+                    transform: translateX(-50%) rotate(180deg);
+                    left: -100%;
+                }
+            }
+        }
+
+        &[count="5"] {
+            grid-template: 
+                'pip1 . pip2' minmax(1.5vw, 1fr) 
+                '. pip3 .' minmax(1.5vw, 1fr) 
+                'pip4 . pip5' minmax(1.5vw, 1fr);
+            padding: 33% 20%;
+
+            @for $i from 1 through 5 {
+                .suit:nth-child(#{$i}) {
+                    grid-area: pip#{$i};
+
+                    @if $i == 4 or $i == 5 {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+
+        &[count="6"] {
+            grid-template-rows: repeat(3, minmax(1.5vw, 1fr));
+            grid-template-columns: repeat(2, minmax(0px, 1fr));
+
+            .suit {
+
+                &:nth-child(1), &:nth-child(2) {
+                    justify-self: end;
+                    left: 10%;
+                }
+
+                &:nth-child(4) {
+                    transform: rotate(180deg);
+                }
+
+                &:nth-child(5), &:nth-child(6) {
+                    transform: rotate(180deg);
+                    justify-self: start;
+                    right: 10%;
+                }
+            }
+        }
+
+        &[count="7"] {
+            grid-template: 
+                'pip1 pip1 pip1 pip2 pip2 pip2' minmax(1.5vw, 1fr) 
+                'pip3 pip3 pip4 pip4 pip5 pip5' minmax(1.5vw, 1fr) 
+                'pip6 pip6 pip6 pip7 pip7 pip7' minmax(1.5vw, 1fr);
+            padding: 5% 15%;
+            justify-content: stretch;
+
+            @for $i from 1 through 7 {
+                .suit:nth-child(#{$i}) {
+                    grid-area: pip#{$i};
+
+                    @if $i == 1 or $i == 6 {
+                        left: 15%;
+                    }
+                    @else if $i == 2 or $i == 7 {
+                        right: 15%;
+                    }
+                }
+            }
+        }
+
+        &[count="8"] {
+            grid-template: 
+                'pip1 . pip6' minmax(0.75vw, 1fr) 
+                'pip1 pip4 pip6' minmax(0.75vw, 1fr) 
+                'pip2 pip4 pip7' minmax(0.75vw, 1fr) 
+                'pip2 pip5 pip7' minmax(0.75vw, 1fr) 
+                'pip3 pip5 pip8' minmax(0.75vw, 1fr) 
+                'pip3 . pip8' minmax(0.75vw, 1fr);
+
+            @for $i from 1 through 8 {
+                .suit:nth-child(#{$i}) {
+                    grid-area: pip#{$i};
+
+                    @if $i == 3 or $i == 5 or $i == 7 or $i == 8 {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+
+        &[count="9"] {
+            grid-template-rows: repeat(3, minmax(1.5vw, 1fr));
+            grid-template-columns: repeat(3, minmax(0px, .75fr));
+            padding: 20% 20%;
+
+            @for $i from 1 through 9 {
+                .suit:nth-child(#{$i}) {
+                    @if $i == 1 or $i == 4 or $i == 7 {
+                        top: 33%;
+                    }
+                    @else if $i == 3 or $i == 6 or $i == 9 {
+                        bottom: 33%;
+                    }
+
+                    @if $i == 4 or $i == 7 or $i == 8 or $i == 9 {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+
+        &[count="10"] {
+            grid-template: 
+                '. pip4 . ' minmax(0.75vw, 1fr) 
+                'pip1 pip4 pip8' minmax(0.75vw, 1fr) 
+                'pip1 pip5 pip8' minmax(0.75vw, 1fr) 
+                'pip2 pip5 pip9' minmax(0.75vw, 1fr) 
+                'pip2 pip6 pip9' minmax(0.75vw, 1fr) 
+                'pip3 pip6 pip10' minmax(0.75vw, 1fr) 
+                'pip3 pip7 pip10' minmax(0.75vw, 1fr) 
+                '. pip7 . ' minmax(0.75vw, 1fr);
+
+            @for $i from 1 through 10 {
+                .suit:nth-child(#{$i}) {
+                    grid-area: pip#{$i};
+
+                    @if $i == 3 or $i == 6 or $i == 7 or $i == 9 or $i == 10 {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+        }
+
+        &.face {
+            padding: 5%;
+
+            .suit {
+                height: 100%;
+            }
+        }
+    }
+
+    .suit {
+        height: 1.1vw;
+        width: 1.1vw;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .value {
+        font-size: 1.45vw;
+    }
+
+    .handle {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 2;
+        border-radius: inherit
+    }
+}
+
+#DragBox {
+    position: absolute;
+    z-index: 25;
+    min-width: 50px;
+    min-height: 50px;
+    pointer-events: none;
+    // background-color: blue;
+    // height: 12.6vw; // 5:7
+    // width: 9vw;
+    & > .playing-card {
+        top: 0;
+        left: 0;
+
+        & > .handle {
+            padding-top: 2em;
+        }
+    }
+
+    .handle {
+        pointer-events: all;
+        padding-top: 5px;
+    }
+}
+
+#DrawPile {
+    grid-area: draw;
+
+    .playing-card {
+        top: -1.25px;
+        left: -0.5px;
+    }
+#DrawPile {
+    grid-area: draw;
+
+    .playing-card {
+        top: -1.25px;
+        left: -0.5px;
+    }
+#DrawPile {
+    grid-area: draw;
+
+    .playing-card {
+        top: -1.25px;
+        left: -0.5px;
+    }
+#DrawPile {
+    grid-area: draw;
+
+    .playing-card {
+        top: -1.25px;
+        left: -0.5px;
+    }
+}}}}
+
+#Hands {
+    grid-area: hand;
+    position: relative;
+
+    .hand {
+        height: 100%;
+        width: 100%;
+        display: grid;
+        align-items: center;
+        z-index: 5;
+
+        &.base {
+            width: 50%;
+            justify-self: start;
+            justify-items: center;
+            position: relative;
+        }
+
+        .playing-card {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+
+            &:nth-child(3n-1) {
+                left: calc(50% + 2vw);
+                z-index: 2;
+            }
+
+            &:nth-child(3n) {
+                left: calc(50% + 4vw);
+                z-index: 3;
+            }
+        }
+    }
+}
+
+#WinScreen {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 100;
+    background-color: rgba(15, 15, 15, $alpha: 0.7);
+
+    .text {
+        background-color: white;
+        width: 40%;
+        height: 40%;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        font-size: 3rem;
+    }
+}
+
+@-moz-document url-prefix() {
+    #Gameboard .playing-card {
+        left: -0.5px;
+    }
+}
+
+@import '_WinAnimation';

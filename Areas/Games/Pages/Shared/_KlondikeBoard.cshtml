@@ -1,0 +1,56 @@
+﻿
+<div id="DragBox"></div>
+<div class="menu">
+    <div class="btn" id="Reset">Reset</div>
+</div>
+<div id="Playfield">
+    <div id="WinScreen" hidden>
+        <div class="fireworksA"></div>
+        <div class="fireworksB"></div>
+        <div class="text">Congrats on winning!</div>
+    </div>
+    <div id="DrawPile">
+        <div class="playing-card empty handle"></div>
+    </div>
+    <div id="Hands">
+        <div class="hand base">
+            <div class="playing-card empty handle"></div>
+        </div>
+    </div>
+</div>
+
+
+<template id="CardTemplate">
+    <div class="playing-card back">
+        <div class="display">
+            <div class="top">
+                <div class="value"></div>
+                <div class="suit"></div>
+            </div>
+            <div class="center"></div>
+            <div class="bottom">
+                <div class="value"></div>
+                <div class="suit"></div>
+            </div>
+        </div>
+        <div class="handle"></div>
+    </div>
+</template>
+<template id="SuitImageTemplate">
+    <div class="suit"></div>
+</template>
+<template id=HandTemplate>
+    <div class="hand"></div>
+</template>
+<template id="RunTemplate">
+    <div class="run"></div>
+</template>
+<template id="StackTemplate">
+    <div class="stack"></div>
+</template>
+<template id="EmptyCard">
+    <div class="playing-card empty handle" card-value=0 suit="none">
+        <div><div class="center"></div></div>
+        <div class="handle"></div>
+    </div>
+</template>
