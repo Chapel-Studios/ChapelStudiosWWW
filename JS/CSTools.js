@@ -37,6 +37,6 @@ CSTools.HTMLHelper = {
             return node.id;
         }
         if (!node.parentElement) return false;
-        return CSTools.GetParentID(node.parentElement);
+        return CSTools.HTMLHelper.GetParentID(node.parentElement);
     }
 }
