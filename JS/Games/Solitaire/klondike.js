@@ -1,166 +1,179 @@
-class KlondikeMove extends SolitaireMove {
+'use strict'
 
-    constructor (mouseDownEvent) {
-        super(mouseDownEvent);
-    }
 
-    ValidatePickUp () {
-        if (this.Origin.ZoneType == "Hands") {
-            return this.Stack.BottomCardElement.parentElement.lastElementChild === this.Stack.BottomCardElement;
-        }
-        return super.ValidatePickUp();
-    }
-
-    ValidateDrop () {
-        // ToDo: update this to allow runs to be dropping in any order
-        // If zone matches suit we are dropping in a run
-        if (this.Desination.ZoneName === this.Stack.BottomSuit) {
-            return (this.Stack.Length === 1 && this.Desination.TopValue === this.Stack.BottomValue - 1);
-        }
-
-        if (this.Desination.ZoneType === "Stack") {
-            return ((this.Desination.TopValue === this.Stack.BottomValue + 1 && this.Desination.TopIsRed != this.Stack.BottomIsRed)
-                    || (this.Desination.TopValue === 0 && this.Stack.BottomValue === 13));
-        }
-
-        return super.ValidateDrop();
-    }
-
-    Complete () {
-        // CSS Work-Around (ToDo: Fixed in 4!)
-        if (this.Desination.ZoneType === "Stack") {
-            if (this.Stack.BottomValue === 13) {
-                this.Stack.BottomCardElement.classList.add("bottom-card");
-            }
-            else {
-                this.Stack.BottomCardElement.classList.remove("bottom-card");
-            }
-        }
-
-        super.Complete();
-
-        if (this.Origin.ZoneType === "Hands") {
-            let lastHand = CSTools.HTMLHelper.GetDeepestChild(`#${this.Origin.ZoneName} .hand`);
-            if (lastHand.childNodes.length === 0) {
-                lastHand.remove();
-            }
-        }
-        else if (this.Origin.ZoneType === "Stack") {
-            let BottomCard = CSTools.HTMLHelper.GetDeepestChild(`#${this.Origin.ZoneName} .playing-card`);
-            if (BottomCard.classList.contains("back")) {
-                BottomCard.classList.add("show");
-                BottomCard.classList.remove("back");
-                // CSS Work-Around (ToDo: Fixed in 4!)
-                BottomCard.classList.add("bottom-card");
-            }
-        }
-    }
-}
-
-class KlondikeMoveList {
-    Dragbox;
+class KlondikeGameBoard {
+    // Elements
+    _handTemplate = document.getElementById("HandTemplate");
+    _drawPile = document.getElementById("DrawPile");
+    _dragBox = document.getElementById("DragBox");
+    _gameboard = document.getElementById("Playfield");
+    _suitImageTemplate = document.getElementById("SuitImageTemplate");
+    _winScreen = document.getElementById("WinScreen");
+        
+    Deck;
     Moves;
-    CheckForWin;
-    __cheatmode__ = false;
+    DrawCount
 
-    get CurrentMove () {
-        if (this.LastMove) {
-            return this.LastMove.IsActive ? this.LastMove : null;
+    _layout = () => {
+        function createSection(templateID, newID, addEmpty){
+            let template = document.getElementById(templateID);
+            let clone = document.importNode(template.content, true);
+            if (addEmpty) {
+                let empty = document.importNode(document.getElementById("EmptyCard").content, true);
+                let divs = clone.querySelectorAll("div");
+                divs[divs.length - 1].appendChild(empty);
+            }
+
+            let top = clone.querySelector("*");
+            top.id = newID;
+            top.setAttribute("style", `grid-area: ${newID};`);
+
+            return clone;
         }
-        return null;
+
+        // Create Run Sections
+        Deck.GetSuitsList().forEach(suit => {
+            let newSection = createSection("RunTemplate", suit.name, true);
+            let imgClone =  document.importNode(this._suitImageTemplate.content, true);
+            let center = newSection.querySelector(".center");
+            let suitAttr = document.createAttribute("suit");
+            suitAttr.value = suit.name;
+            center.parentElement.parentElement.setAttributeNode(suitAttr);
+            let centerCountAttr = document.createAttribute("count");
+            centerCountAttr.value = 1;
+            center.setAttributeNode(centerCountAttr);
+            center.appendChild(imgClone);
+            this._gameboard.appendChild(newSection);
+        });
+
+        // Create Stack Sections
+        [...Array(8).keys()].slice(1).forEach(i => {
+            let newSection = createSection("StackTemplate", `Stack${i}`, true);
+            this._gameboard.appendChild(newSection);
+        });
     }
 
-    get LastMove () {
-        if (this.Moves.length > 0) {
-            return this.Moves[this.Moves.length - 1];
+    DealCards = () => {
+        // Fill Stacks
+        for (let i = 0; i < 7; i++) {
+            // Create tier effect
+            for (let n = i; n < 7; n++) {
+                let card = CSTools.HTMLHelper.GetDeepestChild("#DrawPile .playing-card:not(.empty)");
+                // Flip Top Cards
+                if (i == n) {
+                    card.classList.remove("back");
+                    card.classList.add("show");
+                    // CSS Work-Around (ToDo: Fixed in 4!)
+                    card.classList.add("bottom-card");
+                }
+                CSTools.HTMLHelper.GetDeepestChild(`#Stack${n + 1} .handle`).appendChild(card);
+            }
         }
-        return null;
+
     }
 
-    IsMoveStartValid (mouseEvent) {
-        return !((mouseEvent.button !== 0) 
-            || (mouseEvent.target.parentElement.classList.contains("back")))
+    ResetGame = () => {
+        this.Deck.PickUp();
+        this.Deck.Shuffle();
     }
+
+    _resetDrawPile = () => {
+        let cards = document.querySelectorAll("#Hands .playing-card");
+        for (let i = cards.length; i > 0; i-- ){
+            let card = cards[i - 1];
+            if (!card.classList.contains("empty")) {
+                card.classList.add("back");
+                card.classList.remove("show");
+                card.onmousedown = null;
+                card.onmouseup = null;
     
-    constructor (dragBoxHandle, winCheckCallback) {
-        this.Moves = [];
-        this.Dragbox = dragBoxHandle;
-        this.CheckForWin = winCheckCallback;
-        //document.onmousemove = this.UpdateMove;
-    }
-
-    StartMove = (mouseEvent) => {
-        event.stopPropagation();
-        if (!this.IsMoveStartValid(mouseEvent)) return false;
-
-        let currentMove =  this.CurrentMove || new KlondikeMove(mouseEvent);
-        let isValid = currentMove.ValidatePickUp();
-        if (isValid) {
-            this.Moves.push(currentMove);
-            this.UpdateMove(mouseEvent);
-            currentMove.Start(this.Dragbox);
-            // Register Drag Event
-            document.onmousemove = this.UpdateMove;
-        }
-    }
-
-    UpdateMove = (mouseMoveEvent) => {
-        let currentMove = this.CurrentMove;
-        let x = 0;
-        let y = 0;
-
-        if (currentMove) {
-            if (currentMove.IsActive) {
-                this.Dragbox.hidden = true;
-                let target = document.elementFromPoint(event.clientX, event.clientY);
-                this.Dragbox.hidden = false;
-
-                // ToDo: We should probably update this to verify the target includes the gameboard for edge cases
-                currentMove.CurrentDropZone = CSTools.HTMLHelper.GetParentID(target)
-
-                // If there is no target we are off the gameboard
-                if (!currentMove.CurrentDropZone) {
-                    currentMove.Undo();
-                };
-            }
-
-            x = currentMove.OffsetX;
-            y = currentMove.OffsetY;
-        }
-        else {
-            let lastMove = this.LastMove;
-            if (lastMove) {
-                x = lastMove.OffsetX;
-                y = lastMove.OffsetY;
+                CSTools.HTMLHelper.GetDeepestChild("#DrawPile .handle").appendChild(card);
             }
         }
 
-        this.Dragbox.style.left = `${mouseMoveEvent.pageX - x}px`;
-        this.Dragbox.style.top = `${mouseMoveEvent.pageY - y}px`;
+        document.querySelectorAll("#Hands .hand:not(.base)").forEach(hand => {
+            hand.remove();
+        });
     }
 
-    FinishMove = (mouseUpEvent) => {
-        event.stopPropagation();
-        let currentMove = this.CurrentMove;
-        if (currentMove && currentMove.IsActive) {
-            currentMove.Desination = new MoveDestination(currentMove.CurrentDropZone);
+    Draw = (count = 1) => {
+        let newHandFragment = document.importNode(this._handTemplate.content, true);
+        let newHand = newHandFragment.querySelector(".hand");
 
-            let isValid = currentMove.ValidateDrop();
-            if (!isValid && this.__cheatmode__) {
-                console.log("Cheating is bad! This is for testing!");
-                isValid = true;
+        for(let i = 0; i < count; i++) {
+            let card = CSTools.HTMLHelper.GetDeepestChild("#DrawPile .playing-card");
+        
+            if (!card.classList.contains("empty")) {
+                card.classList.remove("back");
+                card.classList.add("show");
+
+                newHand.appendChild(card);
             }
+            else if (i == 0) {
+                this._resetDrawPile();
+                i = count;
+            }
+        }
 
-            if (isValid) {
-                currentMove.Complete();
-                this.CheckForWin();
+        if (newHand.children.length > 0) {
+            CSTools.HTMLHelper.GetDeepestChild("#Hands .hand").appendChild(newHandFragment);
+        }
+    }
+
+    InitialBindings = () => {
+        // Draw Functions
+        this._drawPile.addEventListener("click", () => {
+            if (document.querySelectorAll("#DrawPile .playing-card").length != 53) {
+                this.Moves.NewDraw(this.DrawCount);
             }
             else {
-                currentMove.Undo();
+                this.DealCards();
             }
-            document.onmousemove = null;
+        });
+
+        // Menu Functions
+        document.getElementById("Reset").addEventListener('click', () => {
+            this.ResetGame();
+        });
+
+        document.getElementById("Undo").addEventListener('click', () => {
+            this.Moves.UndoLastMove();
+        });
+
+        // Win Screen functionality
+        this._winScreen.addEventListener('click', () => {
+            this._winScreen.hidden = true;
+            this.ResetGame();
+        })
+    }
+
+    CheckForWin = () => {
+        if (document.querySelectorAll(".run .playing-card.show").length == 52) {
+            // Win is confirmed
+            //this.ResetGame();
+            this.Celebrate();
         }
     }
 
-}
+    Celebrate = () => {
+        let winScreen = document.getElementById("WinScreen");
+        winScreen.hidden = false;
+    }
 
+    UpdateCardBack = (cardBack) => {
+        this.Deck.SetBackImage(cardBack);
+    }
+
+    constructor (options) {
+        this._layout();
+        this.DrawCount = options.drawCount;
+        this.Moves = new KlondikeMoveList(this._dragBox, this.CheckForWin, this._handTemplate);
+        this.Deck = new Deck(this._drawPile, 
+                            this.Moves.StartMove,
+                            this.Moves.FinishMove,
+                            [ ".stack", ".run" ],
+                            options.cardBack
+        );
+        this.InitialBindings();
+    }
+}

@@ -19,15 +19,11 @@
 @section Scripts {
     <environment include="Development">
         <script type="text/javascript" src="~/js/Games/Solitaire/card-deck.js"></script>
-        <script type="text/javascript" src="~/js/Games/Solitaire/solitaire-move.js"></script>
-        <script type="text/javascript" src="~/js/Games/Solitaire/klondike.js"></script>
-        <script type="text/javascript" src="~/js/Games/Solitaire/solitaire.js"></script>
+        <script type="text/javascript" src="~/js/Games/Solitaire/solitaireMoves.js"></script>
     </environment>
     <environment include="Production">
         <script type="text/javascript" src="~/js/Games/Solitaire/card-deck.min.js" asp-append-version="true"></script>
-        <script type="text/javascript" src="~/js/Games/Solitaire/solitaire-move.min.js" asp-append-version="true"></script>
-        <script type="text/javascript" src="~/js/Games/Solitaire/klondike.min.js" asp-append-version="true"></script>
-        <script type="text/javascript" src="~/js/Games/Solitaire/solitaire.min.js" asp-append-version="true"></script>
+        <script type="text/javascript" src="~/js/Games/Solitaire/solitaireMoves.min.js" asp-append-version="true"></script>
     </environment>
 }
 
@@ -38,5 +34,18 @@
 </div>
 
 <div id="Gameboard">
-    @Html.Partial($"_{Model.Style}Board")
+    <div id="DragBox"></div>
+    <div class="menu">
+        <div class="btn" id="Reset">Reset</div>
+        <div class="btn" id="Undo">Undo</div>
+        <partial name="_CardDeck" />
+    </div>
+    <div id="Playfield">
+        <div id="WinScreen" hidden>
+            <div class="fireworksA"></div>
+            <div class="fireworksB"></div>
+            <div class="text">Congrats on winning!</div>
+        </div>
+        @Html.Partial($"_{Model.Style}Board")
+    </div>
 </div>

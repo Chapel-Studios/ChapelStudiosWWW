@@ -1,21 +1,12 @@
-﻿
-<div id="DragBox"></div>
-<div class="menu">
-    <div class="btn" id="Reset">Reset</div>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<div id="DrawPile">
+    <div class="playing-card empty handle"></div>
 </div>
-<div id="Playfield">
-    <div id="WinScreen" hidden>
-        <div class="fireworksA"></div>
-        <div class="fireworksB"></div>
-        <div class="text">Congrats on winning!</div>
-    </div>
-    <div id="DrawPile">
+<div id="Hands">
+    <div class="hand base">
         <div class="playing-card empty handle"></div>
-    </div>
-    <div id="Hands">
-        <div class="hand base">
-            <div class="playing-card empty handle"></div>
-        </div>
     </div>
 </div>
 
@@ -54,3 +45,29 @@
         <div class="handle"></div>
     </div>
 </template>
+
+
+<environment include="Development">
+    <script type="text/javascript" src="~/js/Games/Solitaire/klondikeMoves.js"></script>
+    <script type="text/javascript" src="~/js/Games/Solitaire/klondike.js"></script>
+</environment>
+<environment include="Production">
+    <script type="text/javascript" src="~/js/Games/Solitaire/klondikeMoves.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/Games/Solitaire/klondike.min.js" asp-append-version="true"></script>
+</environment>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const gameOptions = {
+            cardBack: "peak"
+            , drawCount: 3
+        }
+        const test = new KlondikeGameBoard(gameOptions);
+
+        //test.Moves.__cheatmode__ = true;
+
+        test.DealCards();
+
+    });
+</script>

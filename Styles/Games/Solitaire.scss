@@ -28,9 +28,7 @@ main {
     height: 80vh;
     min-height: calc(26vw + 6vh + 5em);
     display: grid;
-    grid-template: 
-        "draw hand hand Hearts Diamonds Spades Clubs" 13vw 
-        "Stack1 Stack2 Stack3 Stack4 Stack5 Stack6 Stack7" minmax(calc(13vw + 5em), 1fr);
+    grid-template: "draw hand hand Hearts Diamonds Spades Clubs" 13vw "Stack1 Stack2 Stack3 Stack4 Stack5 Stack6 Stack7" minmax(calc(13vw + 5em), 1fr);
     grid-template-columns: repeat(7, minmax(8vw, 1fr));
     justify-items: stretch;
     padding: 3vh 5%;
@@ -68,6 +66,30 @@ main {
                 position: relative;
                 top: 2vw;
             }
+        }
+    }
+
+    .back {
+        background-size: contain;
+
+        &.beach {
+            background-image: url($basepath + "Backs/cardback_beach.jpg");
+        }
+
+        &.peak {
+            background-image: url($basepath + "Backs/cardback_peak.jpg");
+        }
+
+        &.hill {
+            background-image: url($basepath + "Backs/cardback_hill.jpg");
+        }
+
+        &.sky {
+            background-image: url($basepath + "Backs/cardback_sky.jpg");
+        }
+
+        &.tulip {
+            background-image: url($basepath + "Backs/cardback_tulip.jpg");
         }
     }
 }

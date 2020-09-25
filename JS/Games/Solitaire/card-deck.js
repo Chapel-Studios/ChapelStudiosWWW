@@ -6,7 +6,7 @@ class Card {
     static _imageBasePath = "../assets/Images/Games/Cards/";
     
 
-    static Create (suit, value, startMove, updateMove, finishMove) {
+    static Create(suit, value, startMove, finishMove, backImage) {
         let displayValue = value;
         let centerCount = value;
         // ToDo: change this to dependancy injection...
@@ -33,6 +33,9 @@ class Card {
         // Create Card
         let clone =  document.importNode(this._template.content, true);
         let card = clone.querySelector(".playing-card");
+
+        // Add card back image class
+        card.classList.add(backImage);
         
         // Set Attributes
         let suitAttr = document.createAttribute("suit");
@@ -69,7 +72,6 @@ class Card {
         // Set Events
         let handle = card.querySelector(".handle");
         handle.onmousedown = startMove;
-        handle.onmousemove = updateMove;
         handle.onmouseup = finishMove;
         
         return clone;
@@ -98,8 +100,10 @@ class Deck {
     PlacementHandleId;
     Cards = [];
     CleanUpZones;
+    CardBackImage;
 
-    constructor (placementHandle, startMove, updateMove, finishMove, cleanUpZones) {
+    constructor(placementHandle, startMove, finishMove, cleanUpZones, backImage) {
+        this.CardBackImage = backImage;
         this.PlacementHandleID = placementHandle.id;
         this.PlacementHandle = placementHandle;
         this.CleanUpZones = cleanUpZones;
@@ -108,23 +112,26 @@ class Deck {
         
         suits.forEach(suit => {
             suit.available.forEach(cardValue => {
-                this.Cards.push(Card.Create(suit, cardValue, startMove, updateMove, finishMove));
+                this.Cards.push(Card.Create(suit, cardValue, startMove, finishMove, backImage));
             });
         });
 
         this.Shuffle();
     }
 
-    PickUp = () => {
-        // Clear cards from the playfield
+    GetCards = () => {
         let query = "";
         this.CleanUpZones.forEach(zone => {
             query += `#Playfield ${zone} .playing-card:not(.empty), `
         });
         query += "#DrawPile .playing-card:not(.empty), ";
         query += "#Hands .playing-card:not(.empty)";
+        return document.querySelectorAll(query);
+    }
 
-        let cards = document.querySelectorAll(query)
+    PickUp = () => {
+        // Clear cards from the playfield
+        let cards = this.GetCards();
         // Have to go in reverse order to ensure elements are removed from the Dom Correctly
         for (let i = cards.length - 1; i > -1; i--) {
             let card = cards[i];
@@ -147,5 +154,14 @@ class Deck {
             let card = this.Cards.splice(cardIndex, 1)[0];
             CSTools.HTMLHelper.GetDeepestChild(`#${this.PlacementHandleID} .handle`).appendChild(card);
         }
+    }
+
+    SetBackImage = (imgName) => {
+        const cards = this.GetCards();
+        cards.forEach(card => {
+            card.classList.remove(this.CardBackImage);
+            card.classList.add(imgName);
+            this.CardBackImage = imgName;
+        })
     }
 }
