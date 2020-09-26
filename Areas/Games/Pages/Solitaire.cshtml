@@ -27,6 +27,34 @@
     </environment>
 }
 
+<template id="CardTemplate">
+    <div class="playing-card back">
+        <div class="display">
+            <div class="top">
+                <div class="value"></div>
+                <div class="suit"></div>
+            </div>
+            <div class="center"></div>
+            <div class="bottom">
+                <div class="value"></div>
+                <div class="suit"></div>
+            </div>
+        </div>
+        <div class="handle"></div>
+    </div>
+</template>
+<template id="SuitImageTemplate">
+    <div class="suit"></div>
+</template>
+<template id="EmptyCard">
+    <div class="playing-card empty handle" card-value=0 suit="none">
+        <div><div class="center"></div></div>
+        <div class="handle"></div>
+    </div>
+</template>
+<template id=HandTemplate>
+    <div class="hand"></div>
+</template>
 
 <div class="banner">
     <h1>Solitaire</h1>
