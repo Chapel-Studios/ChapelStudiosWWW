@@ -27,6 +27,18 @@ CSTools.Math = {
     Random: (max, min = 0) => {
         return Math.floor(Math.random() * (max - min) + min);
     }
+    , ConvertToHexString(int) {
+        let result = int.toString(16);
+        if (result.length === 1) {
+            result = "0" + result;
+        }
+        return result;
+    }
+    , GetLastDigit: (rootNumber) => {
+        return Number.isInteger(rootNumber)
+            ? rootNumber % 10
+            : rootNumber.toString().slice(-1);
+    }
 }
 
 CSTools.HTMLHelper = {
@@ -41,5 +53,10 @@ CSTools.HTMLHelper = {
         }
         if (!node.parentElement) return false;
         return CSTools.HTMLHelper.GetParentID(node.parentElement);
+    }
+    , PreloadImage: (imgURL) => {
+        let img = new Image();
+        img.src = imgURL;
+        this._preloadedImages.push(img);
     }
 }
