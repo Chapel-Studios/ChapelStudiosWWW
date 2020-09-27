@@ -236,17 +236,23 @@ class DrawMove extends BonusMove {
 }
 
 class HandleEmptyHand extends BonusMove {
-    static HandFragment = document.importNode(document.getElementById("HandTemplate").content, true);
+    static HandFragment = document.getElementById("HandTemplate").content;
 
     constructor(mode) {
         super();
         if (mode === "clear") {
             this.Execute = HandleEmptyHand.RemoveHand;
-            this.Undo = HandleEmptyHand.CreateHand;
+            this.Undo = () => {
+                console.log(`${mode} undone`)
+                HandleEmptyHand.CreateHand;
+            }
         }
         else if (mode === "create") {
             this.Execute = HandleEmptyHand.CreateHand;
-            this.Undo = HandleEmptyHand.RemoveHand;
+            this.Undo = () => {
+                console.log(`${mode} undone`)
+                HandleEmptyHand.RemoveHand;
+            }
         }
 
         this.Execute();
@@ -256,7 +262,9 @@ class HandleEmptyHand extends BonusMove {
     Execute() { }
 
     static CreateHand() {
-        CSTools.HTMLHelper.GetDeepestChild("#Hands .hand").appendChild(HandleEmptyHand.HandFragment);
+        const node = document.importNode(HandleEmptyHand.HandFragment, true);
+        CSTools.HTMLHelper.GetDeepestChild("#Hands .hand").appendChild(node);
+        
     }
 
     static RemoveHand() {
