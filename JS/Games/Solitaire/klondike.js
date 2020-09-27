@@ -12,7 +12,8 @@ class KlondikeGameBoard {
         
     Deck;
     Moves;
-    DrawCount
+    DrawCount;
+    WinSong;
 
     _layout = () => {
         function createSection(templateID, newID, addEmpty){
@@ -73,6 +74,7 @@ class KlondikeGameBoard {
     }
 
     ResetGame = () => {
+        this.WinSong.load();
         this.Deck.PickUp();
         this.Deck.Shuffle();
     }
@@ -156,8 +158,8 @@ class KlondikeGameBoard {
     }
 
     Celebrate = () => {
-        let winScreen = document.getElementById("WinScreen");
-        winScreen.hidden = false;
+        this._winScreen.hidden = false;
+        this.WinSong.play();
     }
 
     UpdateCardBack = (cardBack) => {
@@ -174,6 +176,9 @@ class KlondikeGameBoard {
                             [ ".stack", ".run" ],
                             options.cardBack
         );
+        this.WinSong = new Audio("../../Assets/Audio/ContraStageClear.mp3");
+        this.WinSong.volume = 0.2;
+        this.WinSong.load();
         this.InitialBindings();
     }
 }
