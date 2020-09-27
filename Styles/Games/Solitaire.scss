@@ -65,7 +65,7 @@ main {
     grid-template: "draw hand hand Hearts Diamonds Spades Clubs" 13vw "Stack1 Stack2 Stack3 Stack4 Stack5 Stack6 Stack7" minmax(calc(13vw + 5em), 1fr);
     grid-template-columns: repeat(7, minmax(8vw, 1fr));
     justify-items: stretch;
-    padding: 3vh 5%;
+    padding: 0 7.5%;
     position: relative;
 
     & > div {
@@ -98,15 +98,15 @@ main {
 
             &.empty {
                 position: relative;
-                top: 2vw;
+                top: 1vw;
             }
         }
     }
 }
 
 .playing-card {
-    height: 12.6vw; // 5:7
-    width: 9vw;
+    height: 11.2vw; //12.6vw; // 5:7
+    width: 8vw; //9vw;
     border: 1px solid #000;
     border-radius: 10px;
     position: relative;
@@ -117,7 +117,6 @@ main {
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
-
     &[is-red=true] {
         color: red;
     }
