@@ -39,6 +39,7 @@
 
         const Board = new KlondikeGameBoard(gameOptions);
         const ImageSelector = new CardBackSelector(gameOptions.cardBack, cardBackOptions, Board.UpdateCardBack);
+        const ImageSelector = new CardBackSelector(gameOptions.cardBack, Board.UpdateCardBack);
 
         //test.Moves.__cheatmode__ = true;
 
