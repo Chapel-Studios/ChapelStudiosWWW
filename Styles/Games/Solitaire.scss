@@ -14,6 +14,40 @@ main {
     grid-template: "menu" minmax(calc(50px + 0.5vw), 10vh) "play"minmax(calc(26vw + 5em), 1fr);
     width: 90vw;
 
+    .modal {
+        position: absolute;
+
+        .content {
+            place-items: center;
+            border-radius: 15% / 35%;
+            background-color: rgba(243, 243, 243, 0.95);
+
+            .row {
+                width: 33%;
+                place-items: flex-end;
+                place-self: end;
+            }
+        }
+
+        h1 {
+            //color: #AAAAC4;
+        }
+
+        .card-options {
+            display: grid;
+            grid-auto-flow: dense column;
+            place-content: center;
+            grid-gap: 2.5vw;
+            align-self: center;
+            margin: 1vw 0;
+
+            .active {
+                border-color: #552244;
+                border-width: 5px;
+            }
+        }
+    }
+
     .menu {
         grid-area: menu;
         background-color: rgba($color: #111111, $alpha: 0.5);
@@ -66,30 +100,6 @@ main {
                 position: relative;
                 top: 2vw;
             }
-        }
-    }
-
-    .back {
-        background-size: contain;
-
-        &.beach {
-            background-image: url($basepath + "Backs/cardback_beach.jpg");
-        }
-
-        &.peak {
-            background-image: url($basepath + "Backs/cardback_peak.jpg");
-        }
-
-        &.hill {
-            background-image: url($basepath + "Backs/cardback_hill.jpg");
-        }
-
-        &.sky {
-            background-image: url($basepath + "Backs/cardback_sky.jpg");
-        }
-
-        &.tulip {
-            background-image: url($basepath + "Backs/cardback_tulip.jpg");
         }
     }
 }
@@ -154,7 +164,27 @@ main {
     }
 
     &.back {
-        background-color: green;
+        background-size: cover;
+
+        &.beach {
+            background-image: url($basepath + "Backs/cardback_beach.jpg");
+        }
+
+        &.peak {
+            background-image: url($basepath + "Backs/cardback_peak.jpg");
+        }
+
+        &.hill {
+            background-image: url($basepath + "Backs/cardback_hill.jpg");
+        }
+
+        &.sky {
+            background-image: url($basepath + "Backs/cardback_sky.jpg");
+        }
+
+        &.tulip {
+            background-image: url($basepath + "Backs/cardback_tulip.jpg");
+        }
 
         & > .display {
             display: none;
@@ -514,7 +544,7 @@ main {
 }
 
 @-moz-document url-prefix() {
-    #Gameboard .playing-card {
+    #Playfield .playing-card {
         left: -0.5px;
     }
 }

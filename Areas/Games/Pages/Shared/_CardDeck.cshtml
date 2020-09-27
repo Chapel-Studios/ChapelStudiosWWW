@@ -1,16 +1,30 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@using ChapelStudiosWWW.Pages.Games
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<button>
-</button>
-<div class="modal">
+
+<div class="btn" id="Open-CBS">Choose Deck Image</div>
+<div class="modal" id="Modal-CBS">
     <div class="content">
-
+        <div class="exit"></div>
+        <h1>Choose a deck:</h1>
+        <div class="card-options">
+            @foreach (CardBackOption option in Model.CardBackOptions)
+            {
+                <div class="playing-card back @option.CSSClassName @(option.IsActive ? "active" : "") " option="@option.CSSClassName"></div>
+            }
+        </div>
+        <div class="row">
+            <div class="btn" id="Accept-CBS">Accept</div>
+            <div class="btn" id="Cancel-CBS">Cancel</div>
+        </div>
     </div>
 </div>
 
 <environment include="Development">
     <script type="text/javascript" src="~/js/Games/Solitaire/card-deck.js"></script>
+    <script type="text/javascript" src="~/js/Games/Solitaire/CardBackSelector.js"></script>
 </environment>
 <environment include="Production">
     <script type="text/javascript" src="~/js/Games/Solitaire/card-deck.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/Games/Solitaire/CardBackSelector.min.js" asp-append-version="true"></script>
 </environment>

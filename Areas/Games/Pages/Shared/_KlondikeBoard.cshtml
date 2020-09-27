@@ -1,4 +1,5 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model ChapelStudiosWWW.Pages.Games.SolitaireModel
 
 
 <div id="DrawPile">
@@ -32,15 +33,16 @@
     document.addEventListener("DOMContentLoaded", function () {
 
         const gameOptions = {
-            cardBack: "peak"
+            cardBack: "@Model.ActiveCardBackClassName"
             , drawCount: 3
         }
 
-        const test = new KlondikeGameBoard(gameOptions);
+        const Board = new KlondikeGameBoard(gameOptions);
+        const ImageSelector = new CardBackSelector(gameOptions.cardBack, cardBackOptions, Board.UpdateCardBack);
 
         //test.Moves.__cheatmode__ = true;
 
-        test.DealCards();
+        //Board.DealCards();
 
     });
 </script>

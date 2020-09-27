@@ -161,7 +161,7 @@ class Deck {
         cards.forEach(card => {
             card.classList.remove(this.CardBackImage);
             card.classList.add(imgName);
-            this.CardBackImage = imgName;
-        })
+        });
+        this.CardBackImage = imgName;
     }
 }
