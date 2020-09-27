@@ -1,16 +1,19 @@
 ﻿'use strict'
 
 var CSTools = CSTools || {};
+
+
 CSTools.GrammerHelper = {
     GetOrdinalSuffix: (input) => {
+        const last = input % 10;
         let result = "th";
-        if (input === 1) {
+        if (last === 1) {
             result = "st";
         }
-        else if (input === 2) {
+        else if (last === 2) {
             result = "nd";
         }
-        else if (input === 3) {
+        else if (last === 3) {
             result = "rd";
         }
         return result
