@@ -192,7 +192,7 @@ class ResetDrawPile extends BonusMove {
     constructor(addBonusMoveFunction) {
         super();
 
-        addBonusMoveFunctione(new BonusStopper());
+        addBonusMoveFunction(new BonusStopper());
         let hands = document.querySelectorAll("#Hands .hand:not(.base)");
         for (let i = hands.length; i > 0; i--) {
             let hand = hands[i - 1];
