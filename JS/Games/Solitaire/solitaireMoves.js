@@ -267,14 +267,14 @@ class HandleEmptyHand extends BonusMove {
             this.Execute = HandleEmptyHand.RemoveHand;
             this.Undo = () => {
                 console.log(`${mode} undone`)
-                HandleEmptyHand.CreateHand;
+                HandleEmptyHand.CreateHand();
             }
         }
         else if (mode === "create") {
             this.Execute = HandleEmptyHand.CreateHand;
             this.Undo = () => {
                 console.log(`${mode} undone`)
-                HandleEmptyHand.RemoveHand;
+                HandleEmptyHand.RemoveHand();
             }
         }
 
