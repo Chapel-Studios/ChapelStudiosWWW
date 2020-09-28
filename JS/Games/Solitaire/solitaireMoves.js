@@ -189,14 +189,10 @@ class BonusStopper extends BonusMove {
 }
 
 class ResetDrawPile extends BonusMove {
-    cardStack;
-    AddBonusMove;
-
     constructor(addBonusMoveFunction) {
         super();
-        this.AddBonusMove = addBonusMoveFunction;
 
-        this.AddBonusMove(new BonusStopper());
+        addBonusMoveFunctione(new BonusStopper());
         let hands = document.querySelectorAll("#Hands .hand:not(.base)");
         for (let i = hands.length; i > 0; i--) {
             let hand = hands[i - 1];
@@ -205,11 +201,11 @@ class ResetDrawPile extends BonusMove {
             for (let x = cards.length; x > 0; x--) {
                 let card = cards[x - 1];
 
-                this.AddBonusMove(new CardFlip(card));
-                this.AddBonusMove(new FreeMove(card, hand, CSTools.HTMLHelper.GetDeepestChild("#DrawPile .handle")));
+                addBonusMoveFunction(new CardFlip(card));
+                addBonusMoveFunction(new FreeMove(card, hand, CSTools.HTMLHelper.GetDeepestChild("#DrawPile .handle")));
             }
 
-            this.AddBonusMove(new HandleEmptyHand("clear"));
+            addBonusMoveFunction(new HandleEmptyHand("clear"));
         }
     }
 
