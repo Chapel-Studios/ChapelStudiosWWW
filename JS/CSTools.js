@@ -59,4 +59,17 @@ CSTools.HTMLHelper = {
         img.src = imgURL;
         this._preloadedImages.push(img);
     }
+    , _clickCount: 0
+    , DoubleClickHandler: (onSingleClick, onDoubleClick, event) => {
+        CSTools.HTMLHelper._clickCount++;
+        if (CSTools.HTMLHelper._clickCount >= 2) {
+            onDoubleClick(event);
+        }
+        else {
+            setTimeout(function () {
+                CSTools.HTMLHelper._clickCount = 0;
+            }, 350);
+            onSingleClick(event);
+        }
+    }
 }
