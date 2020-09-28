@@ -30,6 +30,7 @@
 </environment>
 
 <script type="text/javascript">
+    var Board;
     document.addEventListener("DOMContentLoaded", function () {
 
         const gameOptions = {
@@ -37,10 +38,10 @@
             , drawCount: 3
         }
 
-        const Board = new KlondikeGameBoard(gameOptions);
+        Board = new KlondikeGameBoard(gameOptions);
         const ImageSelector = new CardBackSelector(gameOptions.cardBack, Board.UpdateCardBack);
 
-        //test.Moves.__cheatmode__ = true;
+        //Board.Moves.__cheatmode__ = true;
 
         //Board.DealCards();
 

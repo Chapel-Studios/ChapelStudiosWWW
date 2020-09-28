@@ -266,14 +266,12 @@ class HandleEmptyHand extends BonusMove {
         if (mode === "clear") {
             this.Execute = HandleEmptyHand.RemoveHand;
             this.Undo = () => {
-                console.log(`${mode} undone`)
                 HandleEmptyHand.CreateHand();
             }
         }
         else if (mode === "create") {
             this.Execute = HandleEmptyHand.CreateHand;
             this.Undo = () => {
-                console.log(`${mode} undone`)
                 HandleEmptyHand.RemoveHand();
             }
         }
@@ -364,8 +362,7 @@ class SolitaireMoveList {
         if (!this.IsMoveStartValid(mouseEvent)) return false;
 
         let currentMove = this.CurrentMove || this._newMove(mouseEvent);
-        let isValid = currentMove.ValidatePickUp();
-        if (isValid) {
+        if (currentMove.ValidatePickUp()) {
             this.Moves.push(currentMove);
             this.UpdateMove(mouseEvent);
             currentMove.Start(this.Dragbox);
@@ -382,15 +379,15 @@ class SolitaireMoveList {
         let y = 0;
 
         if (currentMove) {
-            console.log("currentMove exists");
+            //console.log("currentMove exists");
             if (currentMove.IsActive) {
-                console.log("currentMove isActive");
+                //console.log("currentMove isActive");
                 this.Dragbox.hidden = true;
-                console.log("dragbox hidden");
+                //console.log("dragbox hidden");
 
                 let target = document.elementFromPoint(event.clientX, event.clientY);
                 this.Dragbox.hidden = false;
-                console.log("dragbox shown");
+                //console.log("dragbox shown");
 
                 // ToDo: We should probably update this to verify the target includes the gameboard for edge cases
                 currentMove.CurrentDropZone = CSTools.HTMLHelper.GetParentID(target)
@@ -415,14 +412,14 @@ class SolitaireMoveList {
         this.Dragbox.style.left = `${mouseMoveEvent.pageX - x}px`;
         this.Dragbox.style.top = `${mouseMoveEvent.pageY - y}px`;
 
-        console.log("End:", this.Dragbox.style.left, this.Dragbox.style.top);
+        //console.log("End:", this.Dragbox.style.left, this.Dragbox.style.top);
     }
 
     FinishMove = (mouseUpEvent) => {
         mouseUpEvent.stopPropagation();
         let currentMove = this.CurrentMove;
         if (currentMove && currentMove.IsActive) {
-            currentMove.Desination = this._CreateDestination(currentMove.CurrentDropZone);
+            currentMove.Destination = this._CreateDestination(currentMove.CurrentDropZone);
 
             let isValid = currentMove.ValidateDrop();
             if (!isValid && this.__cheatmode__) {
@@ -446,7 +443,7 @@ class SolitaireMoveList {
         if (lastMove) {
             const lastWasBonus = lastMove.IsBonusMove;
             if (lastMove) {
-                console.log(`${lastMove.constructor.name} Undone`);
+                //console.log(`${lastMove.constructor.name} Undone`);
                 lastMove.Undo();
                 this.Moves.pop();
             }
