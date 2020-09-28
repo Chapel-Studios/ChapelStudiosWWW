@@ -79,49 +79,6 @@ class KlondikeGameBoard {
         this.Deck.Shuffle();
     }
 
-    _resetDrawPile = () => {
-        let cards = document.querySelectorAll("#Hands .playing-card");
-        for (let i = cards.length; i > 0; i-- ){
-            let card = cards[i - 1];
-            if (!card.classList.contains("empty")) {
-                card.classList.add("back");
-                card.classList.remove("show");
-                card.onmousedown = null;
-                card.onmouseup = null;
-    
-                CSTools.HTMLHelper.GetDeepestChild("#DrawPile .handle").appendChild(card);
-            }
-        }
-
-        document.querySelectorAll("#Hands .hand:not(.base)").forEach(hand => {
-            hand.remove();
-        });
-    }
-
-    Draw = (count = 1) => {
-        let newHandFragment = document.importNode(this._handTemplate.content, true);
-        let newHand = newHandFragment.querySelector(".hand");
-
-        for(let i = 0; i < count; i++) {
-            let card = CSTools.HTMLHelper.GetDeepestChild("#DrawPile .playing-card");
-        
-            if (!card.classList.contains("empty")) {
-                card.classList.remove("back");
-                card.classList.add("show");
-
-                newHand.appendChild(card);
-            }
-            else if (i == 0) {
-                this._resetDrawPile();
-                i = count;
-            }
-        }
-
-        if (newHand.children.length > 0) {
-            CSTools.HTMLHelper.GetDeepestChild("#Hands .hand").appendChild(newHandFragment);
-        }
-    }
-
     InitialBindings = () => {
         // Draw Functions
         this._drawPile.addEventListener("click", () => {
