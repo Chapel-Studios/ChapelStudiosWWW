@@ -59,83 +59,104 @@ class HeldStack {
     }
 }
 
-class DragMove {
+class Move {
     Origin;
-    OffsetX;
-    OffsetY;
     Stack;
-    CurrentDropZone;
-    Desination;
-    Result = null;
-    IsBonusMove = false;
+    Destination;
 
     get IsActive() {
         return this.Stack.Length > 0 && this.Result === null;
     }
 
-    constructor (mouseDownEvent, needsOrigin = true) {
-        this.Stack = new HeldStack(mouseDownEvent.target.parentElement);
-        let elementRect  = this.Stack.BottomCardElement.getBoundingClientRect();
+    constructor() {
+    }
+}
+
+class ManualMove extends Move {
+    constructor(event) {
+        super();
+        this.Stack = new HeldStack(event.target.parentElement);
+        this.Origin = new MoveOrigin(this.Stack.BottomCardElement.parentElement);
+    }
+
+    Complete() {
+        this.Destination.HandleElement.appendChild(this.Stack.BottomCardElement);
+        this.Result = true;
+    }
+
+    Undo() {
+        this.Origin.HandleElement.appendChild(this.Stack.BottomCardElement);
+        this.Result = false;
+    }
+}
+
+class DragMove extends ManualMove {
+    OffsetX;
+    OffsetY;
+    CurrentDropZone;
+    Result = null;
+    IsBonusMove = false;
+
+    constructor(mouseDownEvent) {
+        super(mouseDownEvent);
+
+        let elementRect = this.Stack.BottomCardElement.getBoundingClientRect();
         this.OffsetX = mouseDownEvent.clientX - elementRect.left;
         this.OffsetY = mouseDownEvent.clientY - elementRect.top;
 
-        if (needsOrigin) {
-            this.Origin = new MoveOrigin(this.Stack.BottomCardElement.parentElement);
-        }
     }
 
-    ValidatePickUp () { 
+    ValidatePickUp() {
         return !this.Stack.BottomCardElement.classList.contains("back");
     }
 
-    ValidateDrop () { return false; }
+    ValidateDrop() { return false; }
 
     Start(dragBoxHandle) {
         dragBoxHandle.appendChild(this.Stack.BottomCardElement);
     }
 
-    Complete() {
-        this.Desination.HandleElement.appendChild(this.Stack.BottomCardElement);
-        this.Result = true;
-    }
-
-    Undo () {
-        this.Origin.HandleElement.appendChild(this.Stack.BottomCardElement);
-        this.Result = false;
-    }
-
 }
 
-class SimpleMove {
-    Stack;
-    Origin;
-    OriginZoneName;
-    Destination;
-
+class SimpleMove extends Move {
     get IsActive() {
         return false;
     }
 
     constructor(stack, origin, destination) {
+        super();
         this.Stack = stack;
         this.Origin = origin;
         this.Destination = destination;
-        this.OriginZoneName = CSTools.HTMLHelper.GetParentID(origin);
+    }
 
+    Execute = () => {
         this.Destination.appendChild(this.Stack);
     }
 
     Undo = () => {
+        let originZoneName = CSTools.HTMLHelper.GetParentID(origin);
         if (this.Origin.parentElement === null) {
-            if (this.OriginZoneName === "Hands") {
+            if (originZoneName === "Hands") {
                 CSTools.HTMLHelper.GetDeepestChild("#Hands .hand").appendChild(this.Origin);
             }
             else {
                 // ToDo: maybe remove if there isn't a usecase? Catch-all is nice though....
-                CSTools.HTMLHelper.GetDeepestChild(`#${OriginZoneName} .handle`).appendChild(this.Origin);
+                CSTools.HTMLHelper.GetDeepestChild(`#${originZoneName} .handle`).appendChild(this.Origin);
             }
         }
         this.Origin.appendChild(this.Stack);
+    }
+}
+
+class FillRunMove extends ManualMove {
+    constructor(mouseDblClickEvent) {
+        super(mouseDblClickEvent);
+    }
+
+    Validate = () => {
+        return this.Destination.TopValue === this.Stack.BottomValue - 1
+            && this.Destination.TopSuit === this.Stack.BottomSuit;
     }
 }
 
@@ -144,6 +165,8 @@ class FreeMove extends SimpleMove {
 
     constructor(stack, origin, destination) {
         super(stack, origin, destination);
+
+        this.Execute();
     }
 }
 

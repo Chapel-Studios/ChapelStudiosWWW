@@ -170,11 +170,12 @@ class KlondikeGameBoard {
         this._layout();
         this.DrawCount = options.drawCount;
         this.Moves = new KlondikeMoveList(this._dragBox, this.CheckForWin, this._handTemplate);
-        this.Deck = new Deck(this._drawPile, 
-                            this.Moves.StartMove,
-                            this.Moves.FinishMove,
-                            [ ".stack", ".run" ],
-                            options.cardBack
+        this.Deck = new Deck(
+            this._drawPile,
+            CSTools.HTMLHelper.DoubleClickHandler.bind(null, this.Moves.StartMove, this.Moves.DblClickMove),
+            this.Moves.FinishMove,
+            [ ".stack", ".run" ],
+            options.cardBack
         );
         this.WinSong = new Audio("../../Assets/Audio/ContraStageClear.mp3");
         this.WinSong.volume = 0.2;

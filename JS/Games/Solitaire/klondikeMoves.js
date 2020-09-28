@@ -1,20 +1,32 @@
 'use strict'
 
+
 function DetermineZoneType(zoneName, suit) {
     if (zoneName === suit) return "Run";
     else if (zoneName.includes("Stack")) return "Stack";
     else return zoneName;
 }
 
+function DetermineZoneTypeByOrigin(moveOrigin) {
+    return DetermineZoneType(moveOrigin.ZoneName, moveOrigin.HandleElement.parentElement.getAttribute("suit"))
+}
 
-
-class KlondikeMoveOrigin extends MoveOrigin {
-    constructor(handleElement) {
-        super(handleElement);
-        let suit = handleElement.parentElement.getAttribute("suit");
-        this.ZoneType = DetermineZoneType(this.ZoneName, suit);
+function HandleOriginPostComplete(move) {
+    if (move.Origin.ZoneType === "Hands") {
+        let lastHand = CSTools.HTMLHelper.GetDeepestChild(`#${move.Origin.ZoneName} .hand`);
+        if (lastHand.childNodes.length === 0) {
+            move.AddBonusMove(new HandleEmptyHand("clear"));
+        }
+    }
+    else if (move.Origin.ZoneType === "Stack") {
+        let bottomCard = CSTools.HTMLHelper.GetDeepestChild(`#${move.Origin.ZoneName} .playing-card`);
+        if (bottomCard.classList.contains("back")) {
+            move.AddBonusMove(new KlondikeFlipStackCard(bottomCard));
+        }
     }
 }
+
+
 
 class KlondikeMoveDestination extends MoveDestination {
 
@@ -43,12 +55,27 @@ class KlondikeFlipStackCard extends CardFlip {
     }
 }
 
+class KlondikeFillRunMove extends FillRunMove {
+    AddBonusMove;
+
+    constructor(mouseDblClickEvent, addBonusMoveFunction) {
+        super(mouseDblClickEvent);
+        this.Origin.ZoneType = DetermineZoneTypeByOrigin(this.Origin);
+        this.AddBonusMove = addBonusMoveFunction;
+    }
+
+    Complete = () => {
+        super.Complete();
+        HandleOriginPostComplete(this);
+    }
+}
+
 class KlondikeDragMove extends DragMove {
     AddBonusMove;
 
     constructor(mouseDownEvent, addBonusMoveFunction) {
-        super(mouseDownEvent, false);
-        this.Origin = new KlondikeMoveOrigin(this.Stack.BottomCardElement.parentElement);
+        super(mouseDownEvent);
+        this.Origin.ZoneType = DetermineZoneTypeByOrigin(this.Origin);
         this.AddBonusMove = addBonusMoveFunction;
     }
 
@@ -62,13 +89,13 @@ class KlondikeDragMove extends DragMove {
     ValidateDrop () {
         // ToDo: update this to allow runs to be dropping in any order
         // If zone matches suit we are dropping in a run
-        if (this.Desination.ZoneName === this.Stack.BottomSuit) {
-            return (this.Stack.Length === 1 && this.Desination.TopValue === this.Stack.BottomValue - 1);
+        if (this.Destination.ZoneName === this.Stack.BottomSuit) {
+            return (this.Stack.Length === 1 && this.Destination.TopValue === this.Stack.BottomValue - 1);
         }
 
-        if (this.Desination.ZoneType === "Stack") {
-            return ((this.Desination.TopValue === this.Stack.BottomValue + 1 && this.Desination.TopIsRed != this.Stack.BottomIsRed)
-                    || (this.Desination.TopValue === 0 && this.Stack.BottomValue === 13));
+        if (this.Destination.ZoneType === "Stack") {
+            return ((this.Destination.TopValue === this.Stack.BottomValue + 1 && this.Destination.TopIsRed != this.Stack.BottomIsRed)
+                    || (this.Destination.TopValue === 0 && this.Stack.BottomValue === 13));
         }
 
         return super.ValidateDrop();
@@ -76,7 +103,7 @@ class KlondikeDragMove extends DragMove {
 
     Complete () {
         // CSS Work-Around (ToDo: Fixed in CSS4!)
-        if (this.Desination.ZoneType === "Stack") {
+        if (this.Destination.ZoneType === "Stack") {
             if (this.Stack.BottomValue === 13) {
                 this.Stack.BottomCardElement.classList.add("bottom-card");
             }
@@ -86,19 +113,7 @@ class KlondikeDragMove extends DragMove {
         }
 
         super.Complete();
-
-        if (this.Origin.ZoneType === "Hands") {
-            let lastHand = CSTools.HTMLHelper.GetDeepestChild(`#${this.Origin.ZoneName} .hand`);
-            if (lastHand.childNodes.length === 0) {
-                this.AddBonusMove(new HandleEmptyHand("clear"));
-            }
-        }
-        else if (this.Origin.ZoneType === "Stack") {
-            let bottomCard = CSTools.HTMLHelper.GetDeepestChild(`#${this.Origin.ZoneName} .playing-card`);
-            if (bottomCard.classList.contains("back")) {
-                this.AddBonusMove(new KlondikeFlipStackCard(bottomCard));
-            }
-        }
+        HandleOriginPostComplete(this);
     }
 }
 
@@ -114,5 +129,23 @@ class KlondikeMoveList extends SolitaireMoveList {
 
     _CreateDestination = (zoneName) => {
         return new KlondikeMoveDestination(zoneName);
+    }
+
+    DblClickMove = (mouseDblClickEvent) => {
+        mouseDblClickEvent.stopPropagation();
+        if (!this.IsMoveStartValid(mouseDblClickEvent)) return false;
+
+        let move = new KlondikeFillRunMove(mouseDblClickEvent, this.AddBonusMove);
+        move.Destination = this._CreateDestination(move.Stack.BottomSuit);
+
+        const isValid = move.Validate();
+        if (!isValid && this.__cheatmode__) {
+            console.log("Cheating is bad! This is for testing!");
+            isValid = true;
+        }
+        if (isValid) {
+            move.Complete();
+            this.Moves.push(move);
+        }
     }
 }
