@@ -128,6 +128,7 @@ class SimpleMove extends Move {
         this.Stack = stack;
         this.Origin = origin;
         this.Destination = destination;
+        this.OriginZoneName = CSTools.HTMLHelper.GetParentID(this.Origin);
     }
 
     Execute = () => {
@@ -135,17 +136,13 @@ class SimpleMove extends Move {
     }
 
     Undo = () => {
-        let originZoneName = CSTools.HTMLHelper.GetParentID(origin);
-        if (this.Origin.parentElement === null) {
-            if (originZoneName === "Hands") {
-                CSTools.HTMLHelper.GetDeepestChild("#Hands .hand").appendChild(this.Origin);
-            }
-            else {
-                // ToDo: maybe remove if there isn't a usecase? Catch-all is nice though....
-                CSTools.HTMLHelper.GetDeepestChild(`#${originZoneName} .handle`).appendChild(this.Origin);
-            }
+        if (this.OriginZoneName === "Hands") {
+            CSTools.HTMLHelper.GetDeepestChild("#Hands .hand").appendChild(this.Stack);
         }
-        this.Origin.appendChild(this.Stack);
+        else {
+            // ToDo: maybe remove if there isn't a usecase? Catch-all is nice though....
+            CSTools.HTMLHelper.GetDeepestChild(`#${this.OriginZoneName} .handle`).appendChild(this.Stack);
+        }
     }
 }
 
