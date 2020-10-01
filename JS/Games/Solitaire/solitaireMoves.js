@@ -336,8 +336,7 @@ class SolitaireMoveList {
     }
 
     IsMoveStartValid(mouseEvent) {
-        return !((mouseEvent.button !== 0)
-            || (mouseEvent.target.parentElement.classList.contains("back")))
+        return mouseEvent.button === 0;
     }
 
     _newMove = (mouseEvent) => {
