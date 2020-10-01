@@ -89,6 +89,7 @@ class KlondikeDragMove extends DragMove {
     }
 
     ValidateDrop () {
+        if (this.Destination.ZoneName === this.Origin.ZoneName) return false;
         // ToDo: update this to allow runs to be dropping in any order
         // If zone matches suit we are dropping in a run
         if (this.Destination.ZoneName === this.Stack.BottomSuit) {
