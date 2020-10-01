@@ -75,6 +75,7 @@ class KlondikeGameBoard {
     ResetGame = () => {
         this.WinSong.load();
         this.Deck.PickUp();
+        this.Moves.ClearHistory();
         this.Deck.Shuffle();
     }
 

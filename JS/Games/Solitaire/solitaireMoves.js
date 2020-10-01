@@ -452,4 +452,8 @@ class SolitaireMoveList {
     NewDraw = (drawCount) => {
         this.Moves.push(new DrawMove(drawCount, this.AddBonusMove, this.UndoLastMove))
     }
+
+    ClearHistory() {
+        this.Moves = [];
+    }
 }
