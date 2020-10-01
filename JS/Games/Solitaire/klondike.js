@@ -80,7 +80,7 @@ class KlondikeGameBoard {
 
     InitialBindings = () => {
         // Draw Functions
-        this._drawPile.addEventListener("click", () => {
+        this._drawPile.querySelector(".drawpile-handle").addEventListener("click", () => {
             if (document.querySelectorAll("#DrawPile .playing-card").length != 53) {
                 this.Moves.NewDraw(this.DrawCount);
             }

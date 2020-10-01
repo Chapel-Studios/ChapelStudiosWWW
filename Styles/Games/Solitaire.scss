@@ -493,33 +493,15 @@ main {
 
 #DrawPile {
     grid-area: draw;
+    position: relative;
 
-    .playing-card {
-        top: -1.25px;
-        left: -0.5px;
+    .drawpile-handle {
+        z-index: 3;
+        height: 100%;
+        width: 100%;
+        position: absolute;
     }
-#DrawPile {
-    grid-area: draw;
-
-    .playing-card {
-        top: -1.25px;
-        left: -0.5px;
-    }
-#DrawPile {
-    grid-area: draw;
-
-    .playing-card {
-        top: -1.25px;
-        left: -0.5px;
-    }
-#DrawPile {
-    grid-area: draw;
-
-    .playing-card {
-        top: -1.25px;
-        left: -0.5px;
-    }
-}}}}
+}
 
 #Hands {
     grid-area: hand;
