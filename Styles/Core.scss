@@ -194,6 +194,11 @@ a {
         Background: $HighlightBackground;
     }
 
+    &.inactive::before {
+        background-color: rgba(44,44,44, 0.75);
+        cursor: not-allowed;
+    }
+
     &::before {
         content: '';
         position: absolute;
@@ -204,7 +209,7 @@ a {
         border-radius: 25px;
     }
 
-    &:hover {
+    &:not(.inactive):hover {
         top: 2px;
         text-decoration: none;
 

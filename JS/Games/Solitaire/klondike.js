@@ -95,9 +95,7 @@ class KlondikeGameBoard {
             this.ResetGame();
         });
 
-        document.getElementById("Undo").addEventListener('click', () => {
-            this.Moves.UndoLastMove();
-        });
+        //document.getElementById("Undo").addEventListener('click', CSTools.HTMLHelper.ButtonActivityHandler(this.Moves.UndoLastMove));
 
         // Win Screen functionality
         this._winScreen.addEventListener('click', () => {

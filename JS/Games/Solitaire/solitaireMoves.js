@@ -312,8 +312,10 @@ class CardFlip extends BonusMove {
 class SolitaireMoveList {
     Dragbox;
     Moves;
+    _isUndoEnabled = true;
     CheckForWin;
     __cheatmode__ = false;
+    ButtonElement = document.getElementById("Undo");
 
     get CurrentMove() {
         if (this.LastMove) {
@@ -329,10 +331,30 @@ class SolitaireMoveList {
         return null;
     }
 
+    _handleUndoEnablement() {
+        if (this.Moves.length === 0
+            && this._isUndoEnabled
+        ) {
+            this._isUndoEnabled = false;
+            this.ButtonElement.classList.add("inactive");
+        }
+        else if (this.Moves.length > 0
+            && !this._isUndoEnabled
+        ) {
+            this._isUndoEnabled = true;
+            this.ButtonElement.classList.remove("inactive");
+        }
+    }
+
     constructor(dragBoxHandle, winCheckCallback) {
-        this.Moves = [];
         this.Dragbox = dragBoxHandle;
         this.CheckForWin = winCheckCallback;
+
+        this.Moves = [];
+        this._handleUndoEnablement();
+        this.ButtonElement.addEventListener('click', (event) => {
+            CSTools.HTMLHelper.ButtonActivityHandler(this.UndoLastMove, event)
+        });
     }
 
     IsMoveStartValid(mouseEvent) {
@@ -353,7 +375,7 @@ class SolitaireMoveList {
 
         let currentMove = this.CurrentMove || this._newMove(mouseEvent);
         if (currentMove.ValidatePickUp()) {
-            this.Moves.push(currentMove);
+            this.AddMove(currentMove);
             this.UpdateMove(mouseEvent);
             currentMove.Start(this.Dragbox);
             // Register Drag Event
@@ -435,21 +457,32 @@ class SolitaireMoveList {
             if (lastMove) {
                 //console.log(`${lastMove.constructor.name} Undone`);
                 lastMove.Undo();
-                this.Moves.pop();
+                this.RemoveMove();
             }
             if (lastWasBonus) this.UndoLastMove();
         }
     }
 
-    AddBonusMove = (newMove) => {
-        this.Moves.push(newMove)
+    RemoveMove = () => {
+        this.Moves.pop();
+        this._handleUndoEnablement();
+    }
+
+    AddMove = (newMove) => {
+        this.Moves.push(newMove);
+        this._handleUndoEnablement();
     }
 
     NewDraw = (drawCount) => {
-        this.Moves.push(new DrawMove(drawCount, this.AddBonusMove, this.UndoLastMove))
+        this.AddMove(new DrawMove(drawCount, this.AddMove, this.UndoLastMove))
     }
 
     ClearHistory() {
         this.Moves = [];
+        this._handleUndoEnablement();
+    }
+
+    Deal = () => {
+
     }
 }

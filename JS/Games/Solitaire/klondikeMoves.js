@@ -127,7 +127,7 @@ class KlondikeMoveList extends SolitaireMoveList {
     }
 
     _newMove = (mouseEvent) => {
-        return new KlondikeDragMove(mouseEvent, this.AddBonusMove);
+        return new KlondikeDragMove(mouseEvent, this.AddMove);
     }
 
     _CreateDestination = (zoneName) => {
@@ -138,7 +138,7 @@ class KlondikeMoveList extends SolitaireMoveList {
         mouseDblClickEvent.stopPropagation();
         if (!this.IsMoveStartValid(mouseDblClickEvent)) return false;
 
-        let move = new KlondikeFillRunMove(mouseDblClickEvent, this.AddBonusMove);
+        let move = new KlondikeFillRunMove(mouseDblClickEvent, this.AddMove);
         move.Destination = this._CreateDestination(move.Stack.BottomSuit);
 
         const isValid = move.Validate();
@@ -148,7 +148,7 @@ class KlondikeMoveList extends SolitaireMoveList {
         }
         if (isValid) {
             move.Complete();
-            this.Moves.push(move);
+            this.AddMove(move);
         }
     }
 }

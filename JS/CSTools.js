@@ -72,4 +72,9 @@ CSTools.HTMLHelper = {
             onSingleClick(event);
         }
     }
+    , ButtonActivityHandler: (enabledFunction, event) => {
+        if (!event.target.classList.contains("inactive")) {
+            enabledFunction(event);
+        }
+    }
 }
