@@ -11,7 +11,7 @@ main {
 #Gameboard {
     margin: 5vh auto 13vw;
     display: grid;
-    grid-template: "menu" minmax(calc(50px + 0.5vw), 10vh) "play"minmax(calc(26vw + 5em), 1fr);
+    grid-template: "menu" minmax(calc(50px + 0.5vw), 10vh) "play" minmax(calc(26vw + 5em), 1fr);
     width: 90vw;
 
     .modal {

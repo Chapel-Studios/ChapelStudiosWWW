@@ -125,7 +125,11 @@ class KlondikeGameBoard {
     constructor (options) {
         this._layout();
         this.DrawCount = options.drawCount;
-        this.Moves = new KlondikeMoveList(this._dragBox, this.CheckForWin, this._handTemplate);
+        this.Moves = new KlondikeMoveList(
+            this._dragBox,
+            this.CheckForWin,
+            this._handTemplate
+        );
         this.Deck = new Deck(
             this._drawPile,
             CSTools.HTMLHelper.DoubleClickHandler.bind(null, this.Moves.StartMove, this.Moves.DblClickMove),
