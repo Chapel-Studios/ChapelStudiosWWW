@@ -20,7 +20,9 @@ function HandleOriginPostComplete(move) {
     }
     else if (move.Origin.ZoneType === "Stack") {
         let bottomCard = CSTools.HTMLHelper.GetDeepestChild(`#${move.Origin.ZoneName} .playing-card`);
-        if (bottomCard.classList.contains("back")) {
+        if (!(bottomCard.classList.contains("show")
+            || bottomCard.classList.contains("empty"))
+        ) {
             move.AddBonusMove(new KlondikeFlipStackCard(bottomCard));
         }
     }

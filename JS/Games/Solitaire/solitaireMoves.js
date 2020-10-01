@@ -107,7 +107,7 @@ class DragMove extends ManualMove {
     }
 
     ValidatePickUp() {
-        return !this.Stack.BottomCardElement.classList.contains("back");
+        return this.Stack.BottomCardElement.classList.contains("show");
     }
 
     ValidateDrop() { return false; }
@@ -301,11 +301,9 @@ class CardFlip extends BonusMove {
     Flip = () => {
         if (this.Card.classList.contains("show")) {
             this.Card.classList.remove("show");
-            this.Card.classList.add("back");
         }
         else {
             this.Card.classList.add("show");
-            this.Card.classList.remove("back");
         }
     }
 

@@ -35,7 +35,7 @@ class Card {
         let card = clone.querySelector(".playing-card");
 
         // Add card back image class
-        card.classList.add(backImage);
+        card.querySelector(".back").classList.add(backImage);
         
         // Set Attributes
         let suitAttr = document.createAttribute("suit");
@@ -135,7 +135,6 @@ class Deck {
         // Have to go in reverse order to ensure elements are removed from the Dom Correctly
         for (let i = cards.length - 1; i > -1; i--) {
             let card = cards[i];
-            card.classList.add("back");
             card.classList.remove("show");
             card.classList.remove("bottom-card");
             this.Cards.push(card);
@@ -159,8 +158,9 @@ class Deck {
     SetBackImage = (imgName) => {
         const cards = this.GetCards();
         cards.forEach(card => {
-            card.classList.remove(this.CardBackImage);
-            card.classList.add(imgName);
+            let back = card.querySelector(".back");
+            back.classList.remove(this.CardBackImage);
+            back.classList.add(imgName);
         });
         this.CardBackImage = imgName;
     }

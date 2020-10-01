@@ -10,7 +10,9 @@
         <div class="card-options">
             @foreach (CardBackOption option in Model.CardBackOptions)
             {
-                <div class="playing-card back @option.CSSClassName @(option.IsActive ? "active" : "") " option="@option.CSSClassName"></div>
+                <div class="playing-card@(option.IsActive ? " active" : "") " option="@option.CSSClassName">
+                    <div class="back @option.CSSClassName"></div>
+                </div>
             }
         </div>
         <div class="row">

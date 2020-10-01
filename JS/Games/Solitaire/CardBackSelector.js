@@ -18,8 +18,8 @@
         optionNodes.forEach(node => {
             node.onclick = (event) => {
                 document.querySelector(".card-options .playing-card.active").classList.remove("active");
-                event.target.classList.add("active");
-                this.currentImage = event.target.attributes["option"].value;
+                event.target.parentElement.classList.add("active");
+                this.currentImage = event.target.parentElement.attributes["option"].value;
             }
         });
 

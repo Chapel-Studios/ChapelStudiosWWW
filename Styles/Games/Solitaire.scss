@@ -41,9 +41,8 @@ main {
             align-self: center;
             margin: 1vw 0;
 
-            .active {
-                border-color: #552244;
-                border-width: 5px;
+            .active .back {
+                border: 5px solid #552244;
             }
         }
     }
@@ -88,10 +87,10 @@ main {
             &.show {
                 // CSS Work-Around (ToDo: Fixed in 4!)
                 &.bottom-card > .handle {
-                    padding-top: 2vw;
+                    padding-top: 2vw !important;
                 }
 
-                .handle {
+                .handle .handle {
                     padding-top: 1vw;
                 }
             }
@@ -102,12 +101,16 @@ main {
             }
         }
     }
+
+    .playing-card {
+        top: -0.25px;
+        left: 0.35px;
+    }
 }
 
 .playing-card {
     height: 11.2vw; //12.6vw; // 5:7
     width: 8vw; //9vw;
-    border: 1px solid #000;
     border-radius: 10px;
     position: relative;
     left: -1px;
@@ -117,6 +120,7 @@ main {
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
+    perspective: 1000px;
 
     &[is-red=true] {
         color: red;
@@ -128,28 +132,32 @@ main {
 
     &[suit="Hearts"] {
 
-        & > div > div > .suit {
+        & > div > div > div > .suit,
+        & > .center > .suit {
             background-image: url($basepath + "Hearts.png");
         }
     }
 
     &[suit="Diamonds"] {
 
-        & > div > div > .suit {
+        & > div > div > div > .suit,
+        & > .center > .suit {
             background-image: url($basepath + "Diamonds.png");
         }
     }
 
     &[suit="Spades"] {
 
-        & > div > div > .suit {
+        & > div > div > div > .suit,
+        & > .center > .suit {
             background-image: url($basepath + "Spades.png");
         }
     }
 
     &[suit="Clubs"] {
 
-        & > div > div > .suit {
+        & > div > div > div > .suit,
+        & > .center > .suit {
             background-image: url($basepath + "Clubs.png");
         }
     }
@@ -158,13 +166,38 @@ main {
         left: 0px;
         top: 0px;
         cursor: unset;
+        border: 1px solid #000;
     }
 
-    &.show {
+    &.show .display {
+        transform: rotateY(180deg);
+    }
+
+    .display {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: 0.8s;
+        border: 1px solid #000;
+        border-radius: inherit;
+    }
+
+    .front, .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .front {
         background-color: #fff;
+        transform: rotateY(180deg);
     }
 
-    &.back {
+    .back {
         background-size: cover;
 
         &.beach {
@@ -544,10 +577,10 @@ main {
     }
 }
 
-@-moz-document url-prefix() {
+/*@-moz-document url-prefix() {
     #Playfield .playing-card {
         left: -0.5px;
     }
 }
-
+*/
 @import '_WinAnimation';

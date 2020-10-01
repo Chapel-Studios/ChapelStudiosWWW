@@ -39,7 +39,7 @@ class KlondikeGameBoard {
             let center = newSection.querySelector(".center");
             let suitAttr = document.createAttribute("suit");
             suitAttr.value = suit.name;
-            center.parentElement.parentElement.setAttributeNode(suitAttr);
+            center.parentElement.setAttributeNode(suitAttr);
             let centerCountAttr = document.createAttribute("count");
             centerCountAttr.value = 1;
             center.setAttributeNode(centerCountAttr);
@@ -62,7 +62,6 @@ class KlondikeGameBoard {
                 let card = CSTools.HTMLHelper.GetDeepestChild("#DrawPile .playing-card:not(.empty)");
                 // Flip Top Cards
                 if (i == n) {
-                    card.classList.remove("back");
                     card.classList.add("show");
                     // CSS Work-Around (ToDo: Fixed in 4!)
                     card.classList.add("bottom-card");
