@@ -51,7 +51,7 @@ class KlondikeFlipStackCard extends CardFlip {
     }
 
     Undo = () => {
-        super.Undo();
+        this.Flip();
         // CSS Work-Around (ToDo: Fixed in 4!)
         this.Card.classList.remove("bottom-card");
     }
