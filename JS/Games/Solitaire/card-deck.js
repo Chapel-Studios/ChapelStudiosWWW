@@ -96,6 +96,7 @@ class Deck {
             new Suit("Clubs", "")
         ];
     }
+
     PlacementHandle;
     PlacementHandleId;
     Cards = [];
