@@ -5,7 +5,7 @@
     Modal = document.getElementById("Modal-CBS");
     GameBoard = document.getElementById("Gameboard");
 
-    constructor(startingImage, cardBackOptions, changeCardBackCallback) {
+    constructor(startingImage, changeCardBackCallback) {
         this.OGImage = startingImage;
         this.currentImage = startingImage;
         this.updateCardBack = changeCardBackCallback;
