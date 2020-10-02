@@ -96,7 +96,6 @@ class KlondikeGameBoard {
             this.ResetGame();
         });
 
-        //document.getElementById("Undo").addEventListener('click', CSTools.HTMLHelper.ButtonActivityHandler(this.Moves.UndoLastMove));
         document.getElementById("Mute").addEventListener('click', () => {
             this.AudioController.Mute(event.target.checked);
         });
@@ -111,7 +110,6 @@ class KlondikeGameBoard {
     CheckForWin = () => {
         if (document.querySelectorAll(".run .playing-card.show").length == 52) {
             // Win is confirmed
-            //this.ResetGame();
             this.Celebrate();
         }
     }
