@@ -53,9 +53,11 @@
 
 <environment include="Development">
     <script type="text/javascript" src="~/js/Games/Solitaire/solitaireMoves.js"></script>
+    <script type="text/javascript" src="~/js/Games/AudioController.js"></script>
 </environment>
 <environment include="Production">
     <script type="text/javascript" src="~/js/Games/Solitaire/solitaireMoves.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/Games/AudioController.min.js" asp-append-version="true"></script>
 </environment>
 
 <div class="banner">
@@ -69,6 +71,11 @@
         <div class="btn" id="Reset">Reset</div>
         <div class="btn" id="Undo">Undo</div>
         <partial name="_CardDeck" />
+        <label class="checkbox">
+            Mute
+            <input type="checkbox" id="Mute"></input>
+            <span class="check"></span>
+        </label>
     </div>
     <div id="Playfield">
         <div id="WinScreen" hidden>

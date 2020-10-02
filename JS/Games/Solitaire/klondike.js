@@ -13,7 +13,7 @@ class KlondikeGameBoard {
     Deck;
     Moves;
     DrawCount;
-    WinSong;
+    AudioController;
 
     _layout = () => {
         function createSection(templateID, newID, addEmpty){
@@ -73,7 +73,8 @@ class KlondikeGameBoard {
     }
 
     ResetGame = () => {
-        this.WinSong.load();
+        this._winScreen.hidden = true;
+        this.AudioController.Stop();
         this.Deck.PickUp();
         this.Moves.ClearHistory();
         this.Deck.Shuffle();
@@ -96,6 +97,9 @@ class KlondikeGameBoard {
         });
 
         //document.getElementById("Undo").addEventListener('click', CSTools.HTMLHelper.ButtonActivityHandler(this.Moves.UndoLastMove));
+        document.getElementById("Mute").addEventListener('click', () => {
+            this.AudioController.Mute(event.target.checked);
+        });
 
         // Win Screen functionality
         this._winScreen.addEventListener('click', () => {
@@ -114,7 +118,7 @@ class KlondikeGameBoard {
 
     Celebrate = () => {
         this._winScreen.hidden = false;
-        this.WinSong.play();
+        this.AudioController.Play("winSong");
     }
 
     UpdateCardBack = (cardBack) => {
@@ -136,9 +140,7 @@ class KlondikeGameBoard {
             [ ".stack", ".run" ],
             options.cardBack
         );
-        this.WinSong = new Audio("../../Assets/Audio/ContraStageClear.mp3");
-        this.WinSong.volume = 0.2;
-        this.WinSong.load();
+        this.AudioController = new AudioController(new AudioTrack("winSong", "../../Assets/Audio/ContraStageClear.mp3"));
         this.InitialBindings();
     }
 }
