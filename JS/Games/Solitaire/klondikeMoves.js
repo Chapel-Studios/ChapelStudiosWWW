@@ -149,6 +149,7 @@ class KlondikeMoveList extends SolitaireMoveList {
         if (isValid) {
             move.Complete();
             this.AddMove(move);
+            this.CheckForWin();
         }
     }
 }
