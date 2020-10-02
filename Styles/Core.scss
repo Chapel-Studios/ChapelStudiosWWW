@@ -166,7 +166,8 @@ a {
 .row {
     display: grid;
     grid-auto-flow: column;
-    place-content: center flex-start;
+    justify-content: space-around;
+    align-items: center;
     grid-gap: 1em;
     padding: 0 1em;
 }
