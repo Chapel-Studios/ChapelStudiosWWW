@@ -177,6 +177,74 @@ a {
     grid-auto-flow: row;
 }
 
+label.checkbox {
+    display: flex;
+    cursor: pointer;
+    font-family: $TitleFont;
+    color: $HighlightBackground;
+    font-size: 1rem;
+    Background: $HighlightLink;
+    position: relative;
+    padding: 0.5em 3.5em 0.5em 1em;
+    height: 1.5em;
+    line-height: 1.5em;
+    border-radius: 25px;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+
+    .check {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: calc(100% - 4px);
+        width: 2.5em;
+        border: solid 2px $SoftBlack;
+        border-radius: 0 25px 25px 0;
+        background-color: $MainTextColour;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 40%;
+            left: 45%;
+            width: 0.65em;
+            height: 1.5em;
+            border: solid $SoftBlack;
+            border-width: 0;
+            transform: translate(-50%, -50%) rotateZ(45deg) scale(0);
+        }
+    }
+
+    input:checked + span::after {
+        border-width: 0 0.25em 0.25em 0;
+        transform: translate(-50%, -50%) rotateZ(45deg) scale(1);
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 25px;
+    }
+
+    &:not(.inactive):hover {
+        top: 2px;
+        text-decoration: none;
+
+        &::before {
+            background-color: rgba(44,44,44, 0.2);
+        }
+    }
+}
+
 .btn {
     display: inline-block;
     margin-top: 1em;
