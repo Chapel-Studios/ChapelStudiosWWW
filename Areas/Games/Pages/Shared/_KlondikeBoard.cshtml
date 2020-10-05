@@ -35,8 +35,9 @@
     document.addEventListener("DOMContentLoaded", function () {
 
         const gameOptions = {
-            cardBack: "@Model.ActiveCardBackClassName"
+            cardBack: "peak"
             , drawCount: 3
+            , ...CSTools.StorageAssistant.LoadOptions(["cardBack", "drawCount"])
         }
 
         Board = new KlondikeGameBoard(gameOptions);
