@@ -188,6 +188,7 @@ label.checkbox {
     padding: 0.5em 3.5em 0.5em 1em;
     height: 1.5em;
     line-height: 1.5em;
+    border: solid 1px $SoftBlack;
     border-radius: 25px;
 
     input {
@@ -201,9 +202,9 @@ label.checkbox {
         position: absolute;
         top: 0;
         right: 0;
-        height: calc(100% - 4px);
+        height: 100%;
         width: 2.5em;
-        border: solid 2px $SoftBlack;
+        border-left: solid 1px $SoftBlack;
         border-radius: 0 25px 25px 0;
         background-color: $MainTextColour;
 
