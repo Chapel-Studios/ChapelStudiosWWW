@@ -78,3 +78,15 @@ CSTools.HTMLHelper = {
         }
     }
 }
+
+CSTools.StorageAssistant = {
+    LoadOptions: (optionsArray) => optionsArray.reduce((result, option) => {
+        const data = localStorage.getItem(option);
+        return data === null
+            ? result
+            : { ...result, [option]: data }
+    }, {})
+    , SaveOptions: optionsArray => {
+        optionsArray.forEach(([option, data]) => localStorage.setItem(option, data));
+    }
+}
