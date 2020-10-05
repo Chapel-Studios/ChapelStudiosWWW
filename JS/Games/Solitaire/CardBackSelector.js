@@ -14,8 +14,7 @@
     }
 
     setInitialBindings = () => {
-        let optionNodes = document.querySelectorAll(".card-options .playing-card");
-        optionNodes.forEach(node => {
+        this.Modal.querySelectorAll(".card-options .playing-card").forEach(node => {
             node.onclick = (event) => {
                 document.querySelector(".card-options .playing-card.active").classList.remove("active");
                 event.target.parentElement.classList.add("active");
@@ -48,6 +47,10 @@
             event.stopPropagation();
         }
 
+        if (this.Modal.querySelector(".playing-card.active").length === 0) {
+            this.Modal.querySelector(`.playing-card.${this.currentImage}`).classList.add("active");
+        }
+
     }
 
     Reset = () => {
@@ -75,5 +78,6 @@
     Close = () => {
         this.Modal.classList.remove("open");
         this.GameBoard.classList.remove("bind-position");
+        CSTools.StorageAssistant.SaveOptions([["cardBack", this.currentImage]]);
     }
 }
