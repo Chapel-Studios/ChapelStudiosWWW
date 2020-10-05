@@ -96,7 +96,9 @@ class KlondikeGameBoard {
             this.ResetGame();
         });
 
-        document.getElementById("Mute").addEventListener('click', () => {
+        const mute = document.getElementById("Mute");
+        mute.checked = this.AudioController.IsMuted;
+        mute.addEventListener('change', () => {
             this.AudioController.Mute(event.target.checked);
         });
 

@@ -17,9 +17,10 @@ class AudioController {
     Playlist;
     _ActiveAudioTrack;
     _CurrentVolumeLevel = 0.5;
-    _IsMuted = false;
+    IsMuted = false;
 
     constructor(songOrPlaylist) {
+        this.IsMuted = localStorage.getItem('isMuted');
         this.Playlist = [];
 
         if (typeof songOrPlaylist === Array) {
@@ -74,7 +75,8 @@ class AudioController {
     }
 
     Mute(isMuted) {
-        this._IsMuted = isMuted || !this._IsMuted;
-        this._ActiveAudioTrack.AudioElement.muted = this._IsMuted;
+        this.IsMuted = isMuted || !this.IsMuted;
+        this._ActiveAudioTrack.AudioElement.muted = this.IsMuted;
+        localStorage.setItem('isMuted', this.IsMuted);
     }
 }
