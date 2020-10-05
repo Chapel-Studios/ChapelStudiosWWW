@@ -1,4 +1,5 @@
 ﻿$basepath: "../../assets/Images/Games/Cards/";
+$SoftBlack: rgba(0, 0, 0, 0.75);
 
 main {
     position: unset;
@@ -54,6 +55,10 @@ main {
 
         & > * {
             margin: 0;
+        }
+
+        .btn {
+            border-color: $SoftBlack
         }
     }
 }
