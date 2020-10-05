@@ -316,6 +316,7 @@ class SolitaireMoveList {
     CheckForWin;
     __cheatmode__ = false;
     ButtonElement = document.getElementById("Undo");
+    GameBoard = document.getElementById("Gameboard");
 
     get CurrentMove() {
         if (this.LastMove) {
@@ -379,7 +380,7 @@ class SolitaireMoveList {
             this.UpdateMove(mouseEvent);
             currentMove.Start(this.Dragbox);
             // Register Drag Event
-            document.onmousemove = this.UpdateMove;
+            this.GameBoard.onmousemove = this.UpdateMove;
         }
     }
 
@@ -447,7 +448,7 @@ class SolitaireMoveList {
                 currentMove.Undo();
             }
         }
-        document.onmousemove = null;
+        this.GameBoard.onmousemove = null;
     }
 
     UndoLastMove = () => {
