@@ -245,11 +245,40 @@ label.checkbox {
     }
 }
 
+label.labeled-text {
+    display: flex;
+    font-family: $TitleFont;
+    font-size: 1rem;
+    position: relative;
+    border-radius: 25px;
+    border: solid 1px $SoftBlack;
+    white-space: nowrap;
+
+    .label, .text {
+        min-width: 2.5em;
+        padding: 0.5em 1em;
+    }
+
+    .label {
+        background-color: $HighlightLink;
+        border-radius: 25px 0 0 25px;
+        color: $HighlightBackground;
+    }
+
+    .text {
+        border-left: solid 1px $SoftBlack;
+        border-radius: 0 25px 25px 0;
+        background-color: $MainTextColour;
+        color: $SoftBlack;
+    }
+}
+
 .btn {
     display: inline-block;
     margin-top: 1em;
     margin-bottom: 1em;
     font-family: $TitleFont;
+    border: solid 1px $MainTextColour;
     border-radius: 25px;
     padding: 0.5em 1em;
     position: relative;

@@ -9,11 +9,15 @@ class KlondikeGameBoard {
     _gameboard = document.getElementById("Playfield");
     _suitImageTemplate = document.getElementById("SuitImageTemplate");
     _winScreen = document.getElementById("WinScreen");
+    _winRatioDisplay = document.getElementById("WinInfo");
         
     Deck;
     Moves;
     DrawCount;
     AudioController;
+    Wins;
+    Loses;
+    IsActive;
 
     _layout = () => {
         function createSection(templateID, newID, addEmpty){
@@ -69,7 +73,7 @@ class KlondikeGameBoard {
                 CSTools.HTMLHelper.GetDeepestChild(`#Stack${n + 1} .handle`).appendChild(card);
             }
         }
-
+        this.IsActive = true;
     }
 
     ResetGame = () => {
@@ -78,6 +82,9 @@ class KlondikeGameBoard {
         this.Deck.PickUp();
         this.Moves.ClearHistory();
         this.Deck.Shuffle();
+        if (this.IsActive) {
+            this.UpdateWins(false);
+        }
     }
 
     InitialBindings = () => {
@@ -117,6 +124,8 @@ class KlondikeGameBoard {
     }
 
     Celebrate = () => {
+        this.IsActive = false;
+        this.UpdateWins(true);
         this._winScreen.hidden = false;
         this.AudioController.Play("winSong");
     }
@@ -125,9 +134,30 @@ class KlondikeGameBoard {
         this.Deck.SetBackImage(cardBack);
     }
 
-    constructor (options) {
-        this._layout();
+    UpdateWins = (isWin) => {
+        if (isWin) {
+            this.Wins++;
+            localStorage.setItem('klondike-wins', this.Wins);
+        }
+        else {
+            this.Loses++;
+            localStorage.setItem('klondike-loses', this.Loses);
+        }
+        this.UpdateWinsDisplay();
+    }
+
+    UpdateWinsDisplay = () => {
+        const total = this.Wins + this.Loses;
+        this._winRatioDisplay.innerHTML = `${this.Wins}/${total}  |  ${total === 0 ? 0 : parseFloat((this.Wins / total * 100).toFixed(2))}%`;
+    }
+
+    constructor(options) {
+        this.IsActive = false;
+        this.Wins = parseInt(localStorage.getItem('klondike-wins')) || 0;
+        this.Loses = parseInt(localStorage.getItem('klondike-loses')) || 0;
         this.DrawCount = options.drawCount;
+
+        this._layout();
         this.Moves = new KlondikeMoveList(
             this._dragBox,
             this.CheckForWin,
@@ -141,6 +171,8 @@ class KlondikeGameBoard {
             options.cardBack
         );
         this.AudioController = new AudioController(new AudioTrack("winSong", "../../Assets/Audio/ContraStageClear.mp3"));
+
+        this.UpdateWinsDisplay();
         this.InitialBindings();
     }
 }
