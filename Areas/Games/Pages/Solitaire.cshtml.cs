@@ -11,8 +11,14 @@ namespace ChapelStudiosWWW.Pages.Games
 {
     public class CardBackOption
     {
+        public static string GetUrl(string id)
+        {
+            return $"../../assets/Images/Games/Cards/Backs/cardback_{id}.jpg";
+        }
         public string CSSClassName { get; set; }
         public bool IsActive { get; set; }
+
+        public string Url { get { return GetUrl(this.CSSClassName); } }
 
         public CardBackOption(string name)
         {

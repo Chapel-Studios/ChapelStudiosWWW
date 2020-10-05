@@ -54,10 +54,11 @@ CSTools.HTMLHelper = {
         if (!node.parentElement) return false;
         return CSTools.HTMLHelper.GetParentID(node.parentElement);
     }
+    , _preloadedImages: []
     , PreloadImage: (imgURL) => {
         let img = new Image();
         img.src = imgURL;
-        this._preloadedImages.push(img);
+        CSTools.HTMLHelper._preloadedImages.push(img);
     }
     , _clickCount: 0
     , DoubleClickHandler: (onSingleClick, onDoubleClick, event) => {

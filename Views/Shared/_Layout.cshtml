@@ -11,9 +11,11 @@
     <title>@ViewData["Title"] - Chapel Studios</title>
     <environment include="Development">
         <link rel="stylesheet" href="~/css/core.css" />
+        <script src="~/js/CSTools.js"></script>
     </environment>
     <environment include="Production">
         <link rel="stylesheet" href="~/css/core.css" asp-append-version="true" />
+        <script src="~/js/CSTools.min.js" asp-append-version="true"></script>
     </environment>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -61,10 +63,8 @@
     </footer>
     <environment include="Development">
         <script src="~/js/core.js"></script>
-        <script src="~/js/CSTools.js"></script>
     </environment>
     <environment include="Production">
-        <script src="~/js/CSTools.min.js" asp-append-version="true"></script>
         <script src="~/js/core.min.js" asp-append-version="true"></script>
     </environment>
     @RenderSection("Scripts", required: false)
