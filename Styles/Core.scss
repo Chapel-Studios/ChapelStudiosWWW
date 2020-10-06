@@ -175,6 +175,9 @@ a {
 .col {
     display: grid;
     grid-auto-flow: row;
+    grid-gap: 1em;
+    justify-content: center;
+    align-items: safe center;
 }
 
 label.checkbox {
