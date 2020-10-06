@@ -141,7 +141,7 @@ class KlondikeMoveList extends SolitaireMoveList {
         let move = new KlondikeFillRunMove(mouseDblClickEvent, this.AddMove);
         move.Destination = this._CreateDestination(move.Stack.BottomSuit);
 
-        const isValid = move.Validate();
+        let isValid = move.Validate();
         if (!isValid && this.__cheatmode__) {
             console.log("Cheating is bad! This is for testing!");
             isValid = true;
