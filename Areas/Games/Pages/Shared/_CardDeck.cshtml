@@ -10,7 +10,7 @@
         <div class="card-options">
             @foreach (CardBackOption option in Model.CardBackOptions)
             {
-                <div class="playing-card@(option.IsActive ? " active" : "") " option="@option.CSSClassName">
+                <div class="playing-card@(option.IsActive ? " active" : "")" option="@option.CSSClassName">
                     <div class="back @option.CSSClassName"></div>
                     <script>
                         CSTools.HTMLHelper.PreloadImage("@option.Url");

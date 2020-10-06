@@ -16,9 +16,10 @@ namespace ChapelStudiosWWW.Pages.Games
         {
             this.Style = style;
             this.CardBackOptions = new List<CardBackOption>() {
+                // ToDo: pull this from DB
+                // Also, pull active for registered users
                 new CardBackOption("beach"),
-                // ToDo: pull this from DB for registered users or cookie from non-registered users
-                new CardBackOption("peak") { IsActive = true },
+                new CardBackOption("peak"),
                 new CardBackOption("hill"),
                 new CardBackOption("sky"),
                 new CardBackOption("tulip")
