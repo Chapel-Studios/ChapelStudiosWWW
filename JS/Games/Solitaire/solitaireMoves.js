@@ -408,6 +408,7 @@ class SolitaireMoveList {
                 // If there is no target we are off the gameboard
                 if (!currentMove.CurrentDropZone) {
                     currentMove.Undo();
+                    this.Moves.pop();
                 };
             }
 
