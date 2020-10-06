@@ -1,32 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ChapelStudiosWWW.Utilities;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using ChapelStudiosWWW.Areas.Games.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.VisualBasic.CompilerServices;
 
 namespace ChapelStudiosWWW.Pages.Games
 {
-    public class CardBackOption
-    {
-        public static string GetUrl(string id)
-        {
-            return $"../../assets/Images/Games/Cards/Backs/cardback_{id}.jpg";
-        }
-        public string CSSClassName { get; set; }
-        public bool IsActive { get; set; }
-
-        public string Url { get { return GetUrl(this.CSSClassName); } }
-
-        public CardBackOption(string name)
-        {
-            this.CSSClassName = name;
-            this.IsActive = false;
-        }
-    }
-
     public class SolitaireModel : PageModel
     {
         public string Style { get; set; }
