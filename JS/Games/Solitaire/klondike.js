@@ -165,7 +165,9 @@ class KlondikeGameBoard {
         );
         this.Deck = new Deck(
             this._drawPile,
-            CSTools.HTMLHelper.DoubleClickHandler.bind(null, this.Moves.StartMove, this.Moves.DblClickMove),
+            (event) => {
+                CSTools.HTMLHelper.DoubleClickHandler(this.Moves.StartMove, this.Moves.DblClickMove, event);
+            },
             this.Moves.FinishMove,
             [ ".stack", ".run" ],
             options.cardBack
