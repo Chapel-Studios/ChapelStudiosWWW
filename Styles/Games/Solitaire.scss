@@ -131,7 +131,10 @@ main {
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
-    perspective: 1000px;
+    
+    &:not(.empty) {
+        perspective: 1000px;
+    }
 
     &[is-red=true] {
         color: red;
