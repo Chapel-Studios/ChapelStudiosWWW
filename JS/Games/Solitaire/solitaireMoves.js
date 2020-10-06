@@ -392,20 +392,11 @@ class SolitaireMoveList {
         let y = 0;
 
         if (currentMove) {
-            //console.log("currentMove exists");
             if (currentMove.IsActive) {
-                //console.log("currentMove isActive");
-                this.Dragbox.hidden = true;
-                //console.log("dragbox hidden");
-
-                let target = document.elementFromPoint(event.clientX, event.clientY);
-                this.Dragbox.hidden = false;
-                //console.log("dragbox shown");
-
+                currentMove.CurrentDropZone = CSTools.HTMLHelper.GetParentID(document.elementsFromPoint(event.clientX, event.clientY)[1])
                 // ToDo: We should probably update this to verify the target includes the gameboard for edge cases
-                currentMove.CurrentDropZone = CSTools.HTMLHelper.GetParentID(target)
-
-                // If there is no target we are off the gameboard
+                // If there is no target we are off the gameboard for sure, but this isn't fool proof by any means
+                // Need to actually check against the rect of the gameboard
                 if (!currentMove.CurrentDropZone) {
                     currentMove.Undo();
                     this.Moves.pop();
