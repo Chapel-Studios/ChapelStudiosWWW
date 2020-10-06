@@ -446,6 +446,7 @@ class SolitaireMoveList {
             }
             else {
                 currentMove.Undo();
+                this.Moves.pop();
             }
         }
         this.GameBoard.onmousemove = null;
