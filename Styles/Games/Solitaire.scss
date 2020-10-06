@@ -94,6 +94,8 @@ main {
             }
 
             &.show {
+                left: 0;
+
                 // CSS Work-Around (ToDo: Fixed in 4!)
                 &.bottom-card > .handle {
                     padding-top: 2vw !important;
