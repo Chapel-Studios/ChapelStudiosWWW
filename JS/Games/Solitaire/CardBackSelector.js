@@ -47,8 +47,8 @@
             event.stopPropagation();
         }
 
-        if (this.Modal.querySelector(".playing-card.active").length === 0) {
-            this.Modal.querySelector(`.playing-card.${this.currentImage}`).classList.add("active");
+        if (!this.Modal.querySelector(".playing-card.active")) {
+            this.Modal.querySelector(`.playing-card[option=${this.currentImage}]`).classList.add("active");
         }
 
     }
