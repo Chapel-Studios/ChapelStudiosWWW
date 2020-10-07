@@ -59,8 +59,8 @@
     }
 
     resetActiveImage = () => {
-        this.Modal.querySelector(`.${this.currentImage}`).classList.remove("active");
-        this.Modal.querySelector(`.${this.OGImage}`).classList.add("active");
+        this.Modal.querySelector(`.playing-card[option=${this.currentImage}]`).classList.remove("active");
+        this.Modal.querySelector(`.playing-card[option=${this.OGImage}]`).classList.add("active");
         this.currentImage = this.OGImage;
     }
 
