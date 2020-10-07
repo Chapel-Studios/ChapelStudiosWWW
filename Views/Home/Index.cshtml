@@ -14,8 +14,12 @@
     <h1 class="section_title">Game Design</h1>
     <div class="section_text">
         <p>Chapel Studios was founded on a dream of designing engaging games with interactive plots. By allowing players to choose how and where they interact with our games we create environments that feel immersive and personal. </p>
+        <p>Try one of our free browser games below!</p>
     </div>
-    <a href="" class="section_tag">Click Here to Learn More</a>
+    <div class="section_tag-holder row">
+        <a asp-controller="games" asp-action="Minesweeper" class="section_tag">Minesweeper</a>
+        <a asp-area="games" asp-page="/Solitaire" asp-route-style="Klondike" class="section_tag">Klondike Solitaire</a>
+    </div>
 </section>
 <a class="anchor" id="webDev"></a>
 <section>

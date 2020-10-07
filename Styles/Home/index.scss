@@ -89,6 +89,15 @@ a.anchor {
     color: $MainTextColour;
 }
 
+.section_tag-holder {
+    grid-area: tag;
+    justify-content: center;
+
+    .section_tag {
+        grid-area: unset;
+    }
+}
+
 .section_tag {
     grid-area: tag;
     background-color: $HighlightBackground;
