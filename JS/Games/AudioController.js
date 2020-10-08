@@ -61,6 +61,7 @@ class AudioController {
 
         this._UpdateCurrentVolume();
         
+        this._ActiveAudioTrack.AudioElement.muted = this.IsMuted;
         this._ActiveAudioTrack.AudioElement.play();
     }
 
