@@ -52,6 +52,7 @@ main {
         grid-area: menu;
         background-color: rgba($color: #111111, $alpha: 0.5);
         width: 100%;
+        padding: 0 15%;
 
         & > * {
             margin: 0;
@@ -122,6 +123,8 @@ main {
 .playing-card {
     height: 11.2vw; //12.6vw; // 5:7
     width: 8vw; //9vw;
+    min-height: 96.6px;
+    min-width: 69px;
     border-radius: 10px;
     position: relative;
     left: -1px;
@@ -579,5 +582,22 @@ main {
     }
 }
 */
+
+@media (max-width: 1000px) {
+    #Gameboard .menu {
+        padding: 0;
+
+        & > * {
+            font-size: 0.75rem
+        }
+    }
+    #Playfield {
+        padding-left: 1.5%;
+        padding-right: 1.5%;
+    }
+    .playing-card .center.face .suit {
+        height: 7.5vw;
+    }
+}
 
 @import '_WinAnimation';
