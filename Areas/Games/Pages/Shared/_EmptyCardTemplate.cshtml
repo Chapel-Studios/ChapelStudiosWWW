@@ -1,0 +1,11 @@
+﻿@model ChapelStudiosWWW.Areas.Games.Models.CreateSolitaireSectionOptionsSet
+
+<div class="playing-card empty handle" card-value=0 suit="@(Model.IsCenterNeeded ? $"{Model.Suit}" : "none")">
+    <div class="center"@(Model.IsCenterNeeded ? " count=1" : "")>
+        @if (Model.IsCenterNeeded)
+        {
+            <div class="suit"></div>
+        }
+    </div>
+    <div class="handle"></div>
+</div>

@@ -25,6 +25,16 @@
     </div>
 </div>
 
+<template id="CardTemplate">
+    <partial name="_CardTemplate" />
+</template>
+<template id="SuitImageTemplate">
+    <div class="suit"></div>
+</template>
+<template id="EmptyCard">
+    <partial name="_EmptyCardTemplate" model="new ChapelStudiosWWW.Areas.Games.Models.CreateSolitaireSectionOptionsSet(false)" />
+</template>
+
 <environment include="Development">
     <script type="text/javascript" src="~/js/Games/Solitaire/card-deck.js"></script>
     <script type="text/javascript" src="~/js/Games/Solitaire/CardBackSelector.js"></script>
