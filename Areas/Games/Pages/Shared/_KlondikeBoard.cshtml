@@ -1,5 +1,4 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model ChapelStudiosWWW.Pages.Games.SolitaireModel
 
 
 <div id="DrawPile">
@@ -11,15 +10,18 @@
         <div class="playing-card empty handle"></div>
     </div>
 </div>
-
-
-<template id="RunTemplate">
-    <div class="run"></div>
-</template>
-<template id="StackTemplate">
-    <div class="stack"></div>
-</template>
-
+@foreach (string suit in new string[] { "Hearts", "Diamonds", "Clubs", "Spades" })
+{
+    <div class="run" style="grid-area: @suit" id="@suit">
+        <partial name="_EmptyCardTemplate" model="new ChapelStudiosWWW.Areas.Games.Models.CreateSolitaireSectionOptionsSet(true, suit)"/>
+    </div>
+}
+@for (int x = 1; x < 8; x++)
+{
+    <div class="stack" style="grid-area: @($"Stack{x}") " id="@($"Stack{x}")">
+        <partial name="_EmptyCardTemplate" model="new ChapelStudiosWWW.Areas.Games.Models.CreateSolitaireSectionOptionsSet(false)"/>
+    </div>
+}
 
 <environment include="Development">
     <script type="text/javascript" src="~/js/Games/Solitaire/klondikeMoves.js"></script>

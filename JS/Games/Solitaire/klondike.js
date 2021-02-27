@@ -19,45 +19,6 @@ class KlondikeGameBoard {
     Loses;
     IsActive;
 
-    _layout = () => {
-        function createSection(templateID, newID, addEmpty){
-            let template = document.getElementById(templateID);
-            let clone = document.importNode(template.content, true);
-            if (addEmpty) {
-                let empty = document.importNode(document.getElementById("EmptyCard").content, true);
-                let divs = clone.querySelectorAll("div");
-                divs[divs.length - 1].appendChild(empty);
-            }
-
-            let top = clone.querySelector("*");
-            top.id = newID;
-            top.setAttribute("style", `grid-area: ${newID};`);
-
-            return clone;
-        }
-
-        // Create Run Sections
-        Deck.GetSuitsList().forEach(suit => {
-            let newSection = createSection("RunTemplate", suit.name, true);
-            let imgClone =  document.importNode(this._suitImageTemplate.content, true);
-            let center = newSection.querySelector(".center");
-            let suitAttr = document.createAttribute("suit");
-            suitAttr.value = suit.name;
-            center.parentElement.setAttributeNode(suitAttr);
-            let centerCountAttr = document.createAttribute("count");
-            centerCountAttr.value = 1;
-            center.setAttributeNode(centerCountAttr);
-            center.appendChild(imgClone);
-            this._gameboard.appendChild(newSection);
-        });
-
-        // Create Stack Sections
-        [...Array(8).keys()].slice(1).forEach(i => {
-            let newSection = createSection("StackTemplate", `Stack${i}`, true);
-            this._gameboard.appendChild(newSection);
-        });
-    }
-
     DealCards = () => {
         // Fill Stacks
         for (let i = 0; i < 7; i++) {
@@ -157,7 +118,6 @@ class KlondikeGameBoard {
         this.Loses = parseInt(localStorage.getItem('klondike-loses')) || 0;
         this.DrawCount = options.drawCount;
 
-        this._layout();
         this.Moves = new KlondikeMoveList(
             this._dragBox,
             this.CheckForWin,

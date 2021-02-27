@@ -276,8 +276,9 @@ class HandleEmptyHand extends BonusMove {
     Execute() { }
 
     static CreateHand() {
-        const node = document.importNode(HandleEmptyHand.HandFragment, true);
-        CSTools.HTMLHelper.GetDeepestChild("#Hands .hand").appendChild(node);
+        const newHand = document.createElement("div");
+        newHand.className = "hand";
+        CSTools.HTMLHelper.GetDeepestChild("#Hands .hand").appendChild(newHand);
         
     }
 

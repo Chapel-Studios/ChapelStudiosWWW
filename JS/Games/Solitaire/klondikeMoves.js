@@ -14,7 +14,7 @@ function DetermineZoneTypeByOrigin(moveOrigin) {
 function HandleOriginPostComplete(move) {
     if (move.Origin.ZoneType === "Hands") {
         let lastHand = CSTools.HTMLHelper.GetDeepestChild(`#${move.Origin.ZoneName} .hand`);
-        if (lastHand.childNodes.length === 0) {
+        if (!lastHand.querySelector(".playing-card")) {
             move.AddBonusMove(new HandleEmptyHand("clear"));
         }
     }

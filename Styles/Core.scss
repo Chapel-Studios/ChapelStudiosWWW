@@ -166,7 +166,7 @@ a {
 .row {
     display: grid;
     grid-auto-flow: column;
-    justify-content: space-around;
+    justify-items: center;
     align-items: center;
     grid-gap: 1em;
     padding: 0 1em;
@@ -290,6 +290,7 @@ label.labeled-text {
     cursor: pointer;
     color: $HighlightBackground;
     Background: $HighlightLink;
+    white-space: nowrap;
 
     &.inverted {
         color: $HighlightLink;
