@@ -15,6 +15,7 @@ namespace ChapelStudiosWWW.Areas.Games.Controllers
             return View();
         }
 
+        [Route("Games/Minesweeper")]
         public IActionResult MineSweeper(string mode)
         {
             return View(new MineSweeperViewModel (mode, GetScoreBoard()));

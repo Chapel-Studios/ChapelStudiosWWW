@@ -56,15 +56,17 @@ namespace ChapelStudiosWWW
                     googleOptions.ClientId = googleAuthNSection["ClientId"];
                     googleOptions.ClientSecret = googleAuthNSection["ClientSecret"];
                 });
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                app.UseMigrationsEndPoint();
             }
             else
             {
@@ -82,13 +84,11 @@ namespace ChapelStudiosWWW
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
 
                 endpoints.MapAreaControllerRoute(
                     name: "Games",
-                    pattern: "{controller=Index}/{action=Index}/{id?}",
+                    pattern: "Games/{action=Minesweeper}",
                     areaName: "Games");
 
                 endpoints.MapRazorPages();
